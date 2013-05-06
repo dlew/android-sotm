@@ -13,7 +13,9 @@ import android.util.JsonReader;
 import android.util.JsonToken;
 import android.util.SparseIntArray;
 
+import com.idunnolol.sotm.R;
 import com.idunnolol.utils.Log;
+import com.idunnolol.utils.ResourceUtils;
 
 public class Db {
 
@@ -74,7 +76,7 @@ public class Db {
 						CardSet set = readSet(reader);
 						mCardSets.add(set);
 						for (Card card : set.getCards()) {
-							mCards.put(card.getName(), card);
+							mCards.put(card.getId(), card);
 						}
 					}
 					reader.endArray();
@@ -96,8 +98,12 @@ public class Db {
 		reader.beginObject();
 		while (reader.hasNext()) {
 			String name = reader.nextName();
-			if (name.equals("name")) {
-				set.setName(reader.nextString());
+
+			if (name.equals("id")) {
+				set.setId(reader.nextString());
+			}
+			else if (name.equals("name")) {
+				set.setNameResId(ResourceUtils.getIdentifier(R.string.class, reader.nextString()));
 			}
 			else if (name.equals("cards")) {
 				reader.beginArray();
@@ -117,6 +123,7 @@ public class Db {
 
 	private Card readCard(JsonReader reader) throws IOException {
 		// Parse all data ahead of time
+		String id = null;
 		String name = null;
 		String type = null;
 		boolean isAlternate = false;
@@ -125,7 +132,10 @@ public class Db {
 		while (reader.hasNext()) {
 			String jsonName = reader.nextName();
 
-			if (jsonName.equals("name")) {
+			if (jsonName.equals("id")) {
+				id = reader.nextString();
+			}
+			else if (jsonName.equals("name")) {
 				name = reader.nextString();
 			}
 			else if (jsonName.equals("type")) {
@@ -158,7 +168,8 @@ public class Db {
 		}
 
 		// Common code
-		card.setName(name);
+		card.setId(id);
+		card.setNameResId(ResourceUtils.getIdentifier(R.string.class, name));
 
 		return card;
 	}

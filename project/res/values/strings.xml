@@ -3,13 +3,85 @@
 
     <string name="app_name">Sentinels Randomizer</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
 
     <!-- Picker fragment -->
     <string name="action_randomize">Randomize</string>
     <string name="header_heroes">Heroes</string>
     <string name="header_villain">Villain</string>
     <string name="header_environment">Environment</string>
+
+    <!-- Cards -->
     <string name="card_random">Random</string>
+    <string name="card_absolute_zero">Absolute Zero</string>
+    <string name="card_bunker">Bunker</string>
+    <string name="card_fanatic">Fanatic</string>
+    <string name="card_haka">Haka</string>
+    <string name="card_legacy">Legacy</string>
+    <string name="card_ra">Ra</string>
+    <string name="card_tachyon">Tachyon</string>
+    <string name="card_tempest">Tempest</string>
+    <string name="card_the_visionary">The Visionary</string>
+    <string name="card_the_wraith">The Wraith</string>
+    <string name="card_baron_blade">Baron Blade</string>
+    <string name="card_citizen_dawn">Citizen Dawn</string>
+    <string name="card_grand_warlord_voss">Grand Warlord Voss</string>
+    <string name="card_omnitron">Omnitron</string>
+    <string name="card_insula_primalis">Insula Primalis</string>
+    <string name="card_megalopolis">Megalopolis</string>
+    <string name="card_ruins_of_atlantis">Ruins of Atlantis</string>
+    <string name="card_wagner_mars_base">Wagner Mars Base</string>
+    <string name="card_expatriette">Expatriette</string>
+    <string name="card_mister_fixer">Mister Fixer</string>
+    <string name="card_plague_rat">Plague Rat</string>
+    <string name="card_spite">Spite</string>
+    <string name="card_the_chairman">The Chairman</string>
+    <string name="card_the_matriarch">The Matriarch</string>
+    <string name="card_pike_industrial_complex">Pike Industrial Complex</string>
+    <string name="card_rook_city">Rook City</string>
+    <string name="card_the_argent_adept">The Argent Adept</string>
+    <string name="card_nightmist">Nightmist</string>
+    <string name="card_akashbhuta">Akash\'bhuta</string>
+    <string name="card_apostate">Apostate</string>
+    <string name="card_gloomweaver">GloomWeaver</string>
+    <string name="card_the_ennead">The Ennead</string>
+    <string name="card_realm_of_discord">Realm of Discord</string>
+    <string name="card_tomb_of_anubis">Tomb of Anubis</string>
+    <string name="card_chrono_ranger">Chrono Ranger</string>
+    <string name="card_omnitron_x">Omnitron-X</string>
+    <string name="card_the_dreamer">The Dreamer</string>
+    <string name="card_la_capitan">La Capitan</string>
+    <string name="card_kismet">Kismet</string>
+    <string name="card_iron_legacy">Iron Legacy</string>
+    <string name="card_time_cataclysm">Time Cataclysm</string>
+    <string name="card_the_block">The Block</string>
+    <string name="card_unity">Unity</string>
+    <string name="card_the_scholar">The Scholar</string>
+    <string name="card_ambuscade">Ambuscade</string>
+    <string name="card_miss_information">Miss Information</string>
+    <string name="card_silver_gulch_1883">Silver Gulch 1883</string>
+    <string name="card_the_final_wasteland">The Final Wasteland</string>
+    <string name="card_young_legacy">Young Legacy</string>
+    <string name="card_rook_city_wraith">Rook City Wraith</string>
+    <string name="card_ra_horus_of_two_horizons">Ra: Horus of Two Horizons</string>
+    <string name="card_redeemer_fanatic">Redeemer Fanatic</string>
+    <string name="card_dark_visionary">Dark Visionary</string>
+    <string name="card_the_eternal_haka">The Eternal Haka</string>
+    <string name="card_freedom_six_tachyon">Freedom Six Tachyon</string>
+    <string name="card_freedom_six_wraith_price_of_freedom">Freedom Six Wraith: Price of Freedom</string>
+    <string name="card_freedom_six_unity">Freedom Six Unity</string>
+    <string name="card_freedom_six_bunker_engine_of_war">Freedom Six Bunker: Engine of War</string>
+    <string name="card_freedom_six_absolute_zero">Freedom Six Absolute Zero</string>
+    <string name="card_freedom_six_tempest">Freedom Six Tempest</string>
+    <string name="card_americas_greatest_legacy">America\'s Greatest Legacy</string>
+    <string name="card_cosmic_omnitron">Cosmic Omnitron</string>
+    <string name="card_mad_bomber_blade">Mad Bomber Blade</string>
+
+    <!-- Sets -->
+    <string name="set_base_set">Base Set</string>
+    <string name="set_rook_city">Rook City</string>
+    <string name="set_infernal_relics">Infernal Relics</string>
+    <string name="set_shattered_timelines">Shattered Timelines</string>
+    <string name="set_mini_expansions">Mini-Expansions</string>
+    <string name="set_promos">Promos</string>
 
 </resources>

@@ -1,10 +1,10 @@
 package com.idunnolol.sotm;
 
+import android.app.Application;
+
 import com.idunnolol.sotm.data.Configuration;
 import com.idunnolol.sotm.data.Db;
 import com.idunnolol.utils.Log;
-
-import android.app.Application;
 
 public class SentinelsApp extends Application {
 

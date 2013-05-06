@@ -1,300 +1,368 @@
 {
-  "comments": "id == name for now, since all names are unique",
   "sets": [
     {
-      "name": "Base Set",
+      "id": "Base Set",
+      "name": "set_base_set",
       "cards": [
         {
           "type": "hero",
-          "name": "Absolute Zero"
+          "id": "Absolute Zero",
+          "name": "card_absolute_zero"
         },
         {
           "type": "hero",
-          "name": "Bunker"
+          "id": "Bunker",
+          "name": "card_bunker"
         },
         {
           "type": "hero",
-          "name": "Fanatic"
+          "id": "Fanatic",
+          "name": "card_fanatic"
         },
         {
           "type": "hero",
-          "name": "Haka"
+          "id": "Haka",
+          "name": "card_haka"
         },
         {
           "type": "hero",
-          "name": "Legacy"
+          "id": "Legacy",
+          "name": "card_legacy"
         },
         {
           "type": "hero",
-          "name": "Ra"
+          "id": "Ra",
+          "name": "card_ra"
         },
         {
           "type": "hero",
-          "name": "Tachyon"
+          "id": "Tachyon",
+          "name": "card_tachyon"
         },
         {
           "type": "hero",
-          "name": "Tempest"
+          "id": "Tempest",
+          "name": "card_tempest"
         },
         {
           "type": "hero",
-          "name": "The Visionary"
+          "id": "The Visionary",
+          "name": "card_the_visionary"
         },
         {
           "type": "hero",
-          "name": "The Wraith"
+          "id": "The Wraith",
+          "name": "card_the_wraith"
         },
         {
           "type": "villain",
-          "name": "Baron Blade"
+          "id": "Baron Blade",
+          "name": "card_baron_blade"
         },
         {
           "type": "villain",
-          "name": "Citizen Dawn"
+          "id": "Citizen Dawn",
+          "name": "card_citizen_dawn"
         },
         {
           "type": "villain",
-          "name": "Grand Warlord Voss"
+          "id": "Grand Warlord Voss",
+          "name": "card_grand_warlord_voss"
         },
         {
           "type": "villain",
-          "name": "Omnitron"
+          "id": "Omnitron",
+          "name": "card_omnitron"
         },
         {
           "type": "environment",
-          "name": "Insula Primalis"
+          "id": "Insula Primalis",
+          "name": "card_insula_primalis"
         },
         {
           "type": "environment",
-          "name": "Megalopolis"
+          "id": "Megalopolis",
+          "name": "card_megalopolis"
         },
         {
           "type": "environment",
-          "name": "Ruins of Atlantis"
+          "id": "Ruins of Atlantis",
+          "name": "card_ruins_of_atlantis"
         },
         {
           "type": "environment",
-          "name": "Wagner Mars Base"
+          "id": "Wagner Mars Base",
+          "name": "card_wagner_mars_base"
         }
       ]
     },
     {
-      "name": "Rook City",
+      "id": "Rook City",
+      "name": "set_rook_city",
       "cards": [
         {
           "type": "hero",
-          "name": "Expatriette"
+          "id": "Expatriette",
+          "name": "card_expatriette"
         },
         {
           "type": "hero",
-          "name": "Mister Fixer"
+          "id": "Mister Fixer",
+          "name": "card_mister_fixer"
         },
         {
           "type": "villain",
-          "name": "Plague Rat"
+          "id": "Plague Rat",
+          "name": "card_plague_rat"
         },
         {
           "type": "villain",
-          "name": "Spite"
+          "id": "Spite",
+          "name": "card_spite"
         },
         {
           "type": "villain",
-          "name": "The Chairman"
+          "id": "The Chairman",
+          "name": "card_the_chairman"
         },
         {
           "type": "villain",
-          "name": "The Matriarch"
+          "id": "The Matriarch",
+          "name": "card_the_matriarch"
         },
         {
           "type": "environment",
-          "name": "Pike Industrial Complex"
+          "id": "Pike Industrial Complex",
+          "name": "card_pike_industrial_complex"
         },
         {
           "type": "environment",
-          "name": "Rook City"
+          "id": "Rook City",
+          "name": "card_rook_city"
         }
       ]
     },
     {
-      "name": "Infernal Relics",
+      "id": "Infernal Relics",
+      "name": "set_infernal_relics",
       "cards": [
         {
           "type": "hero",
-          "name": "The Argent Adept"
+          "id": "The Argent Adept",
+          "name": "card_the_argent_adept"
         },
         {
           "type": "hero",
-          "name": "Nightmist"
+          "id": "Nightmist",
+          "name": "card_nightmist"
         },
         {
           "type": "villain",
-          "name": "Akash'bhuta"
+          "id": "Akash'bhuta",
+          "name": "card_akashbhuta"
         },
         {
           "type": "villain",
-          "name": "Apostate"
+          "id": "Apostate",
+          "name": "card_apostate"
         },
         {
           "type": "villain",
-          "name": "GloomWeaver"
+          "id": "GloomWeaver",
+          "name": "card_gloomweaver"
         },
         {
           "type": "villain",
-          "name": "The Ennead"
+          "id": "The Ennead",
+          "name": "card_the_ennead"
         },
         {
           "type": "environment",
-          "name": "Realm of Discord"
+          "id": "Realm of Discord",
+          "name": "card_realm_of_discord"
         },
         {
           "type": "environment",
-          "name": "Tomb of Anubis"
+          "id": "Tomb of Anubis",
+          "name": "card_tomb_of_anubis"
         }
       ]
     },
     {
-      "name": "Shattered Timelines",
+      "id": "Shattered Timelines",
+      "name": "set_shattered_timelines",
       "cards": [
         {
           "type": "hero",
-          "name": "Chrono Ranger"
+          "id": "Chrono Ranger",
+          "name": "card_chrono_ranger"
         },
         {
           "type": "hero",
-          "name": "Omnitron-X"
+          "id": "Omnitron-X",
+          "name": "card_omnitron_x"
         },
         {
           "type": "villain",
-          "name": "The Dreamer"
+          "id": "The Dreamer",
+          "name": "card_the_dreamer"
         },
         {
           "type": "villain",
-          "name": "La Capitan"
+          "id": "La Capitan",
+          "name": "card_la_capitan"
         },
         {
           "type": "villain",
-          "name": "Kismet"
+          "id": "Kismet",
+          "name": "card_kismet"
         },
         {
           "type": "villain",
-          "name": "Iron Legacy"
+          "id": "Iron Legacy",
+          "name": "card_iron_legacy"
         },
         {
           "type": "environment",
-          "name": "Time Cataclysm"
+          "id": "Time Cataclysm",
+          "name": "card_time_cataclysm"
         },
         {
           "type": "environment",
-          "name": "The Block"
+          "id": "The Block",
+          "name": "card_the_block"
         }
       ]
     },
     {
-      "name": "Mini-Expansions",
+      "id": "Mini-Expansions",
+      "name": "set_mini_expansions",
       "cards": [
         {
           "type": "hero",
-          "name": "Unity"
+          "id": "Unity",
+          "name": "card_unity"
         },
         {
           "type": "hero",
-          "name": "The Scholar"
+          "id": "The Scholar",
+          "name": "card_the_scholar"
         },
         {
           "type": "villain",
-          "name": "Ambuscade"
+          "id": "Ambuscade",
+          "name": "card_ambuscade"
         },
         {
           "type": "villain",
-          "name": "Miss Information"
+          "id": "Miss Information",
+          "name": "card_miss_information"
         },
         {
           "type": "environment",
-          "name": "Silver Gulch 1883"
+          "id": "Silver Gulch 1883",
+          "name": "card_silver_gulch_1883"
         },
         {
           "type": "environment",
-          "name": "The Final Wasteland"
+          "id": "The Final Wasteland",
+          "name": "card_the_final_wasteland"
         }
       ]
     },
     {
-      "name": "Promos",
+      "id": "Promos",
+      "name": "set_promos",
       "cards": [
         {
-          "type": "hero",
           "alternate": true,
-          "name": "Young Legacy"
+          "type": "hero",
+          "id": "Young Legacy",
+          "name": "card_young_legacy"
         },
         {
-          "type": "hero",
           "alternate": true,
-          "name": "Rook City Wraith"
+          "type": "hero",
+          "id": "Rook City Wraith",
+          "name": "card_rook_city_wraith"
         },
         {
-          "type": "hero",
           "alternate": true,
-          "name": "Ra: Horus of Two Horizons"
+          "type": "hero",
+          "id": "Ra: Horus of Two Horizons",
+          "name": "card_ra_horus_of_two_horizons"
         },
         {
-          "type": "hero",
           "alternate": true,
-          "name": "Redeemer Fanatic"
+          "type": "hero",
+          "id": "Redeemer Fanatic",
+          "name": "card_redeemer_fanatic"
         },
         {
-          "type": "hero",
           "alternate": true,
-          "name": "Dark Visionary"
+          "type": "hero",
+          "id": "Dark Visionary",
+          "name": "card_dark_visionary"
         },
         {
-          "type": "hero",
           "alternate": true,
-          "name": "The Eternal Haka"
+          "type": "hero",
+          "id": "The Eternal Haka",
+          "name": "card_the_eternal_haka"
         },
         {
-          "type": "hero",
           "alternate": true,
-          "name": "Freedom Six Tachyon"
+          "type": "hero",
+          "id": "Freedom Six Tachyon",
+          "name": "card_freedom_six_tachyon"
         },
         {
-          "type": "hero",
           "alternate": true,
-          "name": "Freedom Six Wraith: Price of Freedom"
+          "type": "hero",
+          "id": "Freedom Six Wraith: Price of Freedom",
+          "name": "card_freedom_six_wraith_price_of_freedom"
         },
         {
-          "type": "hero",
           "alternate": true,
-          "name": "Freedom Six Unity"
+          "type": "hero",
+          "id": "Freedom Six Unity",
+          "name": "card_freedom_six_unity"
         },
         {
-          "type": "hero",
           "alternate": true,
-          "name": "Freedom Six Bunker: Engine of War"
+          "type": "hero",
+          "id": "Freedom Six Bunker: Engine of War",
+          "name": "card_freedom_six_bunker_engine_of_war"
         },
         {
-          "type": "hero",
           "alternate": true,
-          "name": "Freedom Six Absolute Zero"
+          "type": "hero",
+          "id": "Freedom Six Absolute Zero",
+          "name": "card_freedom_six_absolute_zero"
         },
         {
-          "type": "hero",
           "alternate": true,
-          "name": "Freedom Six Tempest"
+          "type": "hero",
+          "id": "Freedom Six Tempest",
+          "name": "card_freedom_six_tempest"
         },
         {
-          "type": "hero",
           "alternate": true,
-          "name": "America's Greatest Legacy"
+          "type": "hero",
+          "id": "America's Greatest Legacy",
+          "name": "card_americas_greatest_legacy"
         },
         {
+          "alternate": true,
           "type": "villain",
-          "alternate": true,
-          "name": "Cosmic Omnitron"
+          "id": "Cosmic Omnitron",
+          "name": "card_cosmic_omnitron"
         },
         {
-          "type": "villain",
           "alternate": true,
-          "name": "Mad Bomber Blade"
+          "type": "villain",
+          "id": "Mad Bomber Blade",
+          "name": "card_mad_bomber_blade"
         }
       ]
     }

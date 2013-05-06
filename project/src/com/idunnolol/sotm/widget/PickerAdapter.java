@@ -158,14 +158,7 @@ public class PickerAdapter extends BaseAdapter {
 
 		TextView textView = (TextView) convertView;
 		Card card = (Card) getItem(position);
-		String text;
-		if (card == Card.RANDOM) {
-			text = mContext.getString(R.string.card_random);
-		}
-		else {
-			text = card.getName();
-		}
-
+		String text = mContext.getString(card.getNameResId());
 		textView.setText(text);
 
 		return convertView;
