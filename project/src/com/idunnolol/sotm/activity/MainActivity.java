@@ -2,9 +2,7 @@ package com.idunnolol.sotm.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.Menu;
 
-import com.idunnolol.sotm.R;
 import com.idunnolol.sotm.data.Card;
 import com.idunnolol.sotm.fragment.CardPickerDialogFragment.CardPickerDialogFragmentListener;
 import com.idunnolol.sotm.fragment.RandomizerListFragment;
@@ -26,12 +24,6 @@ public class MainActivity extends Activity implements CardPickerDialogFragmentLi
 		else {
 			mRandomizerListFragment = Ui.findFragment(this, RandomizerListFragment.TAG);
 		}
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
 	}
 
 	//////////////////////////////////////////////////////////////////////////
