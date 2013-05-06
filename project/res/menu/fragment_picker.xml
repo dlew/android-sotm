@@ -1,0 +1,9 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/action_randomize"
+        android:orderInCategory="10"
+        android:showAsAction="ifRoom"
+        android:title="@string/action_randomize"/>
+
+</menu>
