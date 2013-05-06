@@ -28,6 +28,8 @@ public class Card {
 
 	private int mPoints;
 
+	private boolean mEnabled;
+
 	// Indicates this is an "alternate" promo card, not a full set
 	private boolean mIsAlternate;
 
@@ -72,6 +74,14 @@ public class Card {
 
 	public void setPoints(int points) {
 		mPoints = points;
+	}
+
+	public boolean isEnabled() {
+		return mEnabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		mEnabled = enabled;
 	}
 
 	public boolean isIsAlternate() {

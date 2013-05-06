@@ -3,6 +3,7 @@
     {
       "id": "Base Set",
       "name": "set_base_set",
+      "enabledByDefault": true,
       "cards": [
         {
           "type": "hero",
@@ -99,6 +100,7 @@
     {
       "id": "Rook City",
       "name": "set_rook_city",
+      "enabledByDefault": true,
       "cards": [
         {
           "type": "hero",
@@ -145,6 +147,7 @@
     {
       "id": "Infernal Relics",
       "name": "set_infernal_relics",
+      "enabledByDefault": true,
       "cards": [
         {
           "type": "hero",
@@ -191,6 +194,7 @@
     {
       "id": "Shattered Timelines",
       "name": "set_shattered_timelines",
+      "enabledByDefault": true,
       "cards": [
         {
           "type": "hero",

@@ -36,6 +36,13 @@ public class Db {
 			sInstance.initNameConversions(context);
 			sInstance.initPoints(context);
 
+			// TODO: Restore disabled state
+			//
+			// Right now we just set default state each run
+			for (CardSet cardSet : sInstance.mCardSets) {
+				cardSet.setAllCardsEnabled(cardSet.isEnabledByDefault());
+			}
+
 			long end = System.nanoTime();
 			Log.i("Initialized db in " + ((end - start) / 100000) + " ms");
 		}
@@ -70,15 +77,14 @@ public class Db {
 		return sInstance.mCards.get(id);
 	}
 
-	public static Collection<Card> getCards() {
-		return sInstance.mCards.values();
-	}
-
-	public static Collection<Card> getCards(Type type) {
-		Collection<Card> cards = new ArrayList<Card>();
+	/**
+	 * Returns all cards of a particular type.  Only returns enabled cards.
+	 */
+	public static List<Card> getCards(Type type) {
+		List<Card> cards = new ArrayList<Card>();
 
 		for (Card card : sInstance.mCards.values()) {
-			if (card.getType() == type) {
+			if (card.getType() == type && card.isEnabled()) {
 				cards.add(card);
 			}
 		}
@@ -137,6 +143,9 @@ public class Db {
 			}
 			else if (name.equals("name")) {
 				set.setNameResId(ResourceUtils.getIdentifier(R.string.class, reader.nextString()));
+			}
+			else if (name.equals("enabledByDefault")) {
+				set.setEnabledByDefault(reader.nextBoolean());
 			}
 			else if (name.equals("cards")) {
 				reader.beginArray();

@@ -14,8 +14,6 @@ public class Randomizer {
 
 	private Random mRand;
 
-	private Card[] mAllCards = Db.getCards().toArray(new Card[0]);
-
 	// The base game setup; when we randomize, we fill in any cards set to RANDOM
 	private GameSetup mBaseGameSetup;
 
@@ -69,17 +67,15 @@ public class Randomizer {
 		return gameSetup;
 	}
 
-	// We theorize that the random selection process is fast, so we
-	// don't bother to separate card types when we randomize.
-	// This will probably change as the randomizer gets more
-	// intelligent.
 	private Card getRandomCard(Type type) {
+		List<Card> cards = Db.getCards(type);
+		int size = cards.size();
 		Card card;
 		do {
-			int index = mRand.nextInt(mAllCards.length);
-			card = mAllCards[index];
+			int index = mRand.nextInt(size);
+			card = cards.get(index);
 		}
-		while (card.getType() != type || (!mIncludeAlternates && card.isIsAlternate()));
+		while (!mIncludeAlternates && card.isIsAlternate());
 
 		return card;
 	}
