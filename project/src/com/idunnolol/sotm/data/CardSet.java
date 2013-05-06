@@ -1,7 +1,8 @@
 package com.idunnolol.sotm.data;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
+import java.util.List;
 
 public class CardSet {
 
@@ -9,7 +10,7 @@ public class CardSet {
 
 	private int mNameResId;
 
-	private Collection<Card> mCards = new HashSet<Card>();
+	private List<Card> mCards = new ArrayList<Card>();
 
 	public String getId() {
 		return mId;
@@ -31,7 +32,11 @@ public class CardSet {
 		mCards.add(card);
 	}
 
-	public Collection<Card> getCards() {
+	public List<Card> getCards() {
 		return mCards;
+	}
+
+	public int getCardCount() {
+		return mCards.size();
 	}
 }

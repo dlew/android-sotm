@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 
 import android.content.Context;
@@ -50,13 +50,17 @@ public class Db {
 
 	private Map<String, Card> mCards = new HashMap<String, Card>();
 
-	private Collection<CardSet> mCardSets = new HashSet<CardSet>();
+	private List<CardSet> mCardSets = new ArrayList<CardSet>();
 
 	private SparseIntArray mNumPlayerPoints = new SparseIntArray();
 
 	private SparseIntArray mDifficultyScale = new SparseIntArray();
 
 	private Map<String, String> mNameConversions = new HashMap<String, String>();
+
+	public static List<CardSet> getCardSets() {
+		return sInstance.mCardSets;
+	}
 
 	public static Card getCard(String id) {
 		if (id.equals(Card.RANDOM.getId())) {

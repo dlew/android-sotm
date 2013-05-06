@@ -2,18 +2,21 @@
 <resources>
 
     <string name="app_name">Sentinels Randomizer</string>
-    <string name="action_settings">Settings</string>
     <string name="cancel">Cancel</string>
 
-    <!-- Randomizer fragment -->
+    <!-- Randomizer activity/fragment -->
     <string name="title_randomizer">Randomizer</string>
     <string name="action_randomize">Randomize</string>
     <string name="action_reset">Reset</string>
+    <string name="action_configure">Configure Cards</string>
     <string name="header_heroes">Heroes</string>
     <string name="header_villain">Villain</string>
     <string name="header_environment">Environment</string>
     <string name="add_symbol">+</string>
     <string name="remove_symbol">-</string>
+
+    <!-- Configuration activity/fragment -->
+    <string name="title_configuration">Configure Cards</string>
 
     <!-- Cards -->
     <string name="card_random">Random</string>
