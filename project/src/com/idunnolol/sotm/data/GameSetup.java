@@ -15,6 +15,9 @@ public class GameSetup {
 	private static final String KEY_VILLAIN = "KEY_VILLAIN";
 	private static final String KEY_ENVIRONMENT = "KEY_ENVIRONMENT";
 
+	private static final int MIN_HEROES = 3;
+	private static final int MAX_HEROES = 5;
+
 	private List<Card> mHeroes = new ArrayList<Card>(5);
 
 	private Card mVillain;
@@ -22,8 +25,12 @@ public class GameSetup {
 	private Card mEnvironment;
 
 	public GameSetup() {
-		// Default setup is 2 random heroes, 1 random villain and 1 random environment
-		reset();
+		// Default setup is 3 random heroes, 1 random villain and 1 random environment
+		mHeroes.add(Card.RANDOM);
+		mHeroes.add(Card.RANDOM);
+		mHeroes.add(Card.RANDOM);
+		mVillain = Card.RANDOM;
+		mEnvironment = Card.RANDOM;
 	}
 
 	public GameSetup(GameSetup toCopy) {
@@ -37,9 +44,9 @@ public class GameSetup {
 	}
 
 	public void reset() {
-		mHeroes.clear();
-		mHeroes.add(Card.RANDOM);
-		mHeroes.add(Card.RANDOM);
+		for (int a = 0; a < mHeroes.size(); a++) {
+			mHeroes.set(a, Card.RANDOM);
+		}
 		mVillain = Card.RANDOM;
 		mEnvironment = Card.RANDOM;
 	}
@@ -62,6 +69,14 @@ public class GameSetup {
 
 	public void removeHero(int index) {
 		mHeroes.remove(index);
+	}
+
+	public boolean canRemoveHero() {
+		return mHeroes.size() > MIN_HEROES;
+	}
+
+	public boolean canAddHero() {
+		return mHeroes.size() < MAX_HEROES;
 	}
 
 	public void setVillain(Card card) {

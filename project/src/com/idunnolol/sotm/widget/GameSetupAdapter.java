@@ -3,6 +3,7 @@ package com.idunnolol.sotm.widget;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
@@ -11,6 +12,7 @@ import com.idunnolol.sotm.R;
 import com.idunnolol.sotm.data.Card;
 import com.idunnolol.sotm.data.Card.Type;
 import com.idunnolol.sotm.data.GameSetup;
+import com.idunnolol.utils.Ui;
 
 public class GameSetupAdapter extends BaseAdapter {
 
@@ -23,12 +25,12 @@ public class GameSetupAdapter extends BaseAdapter {
 
 	private GameSetup mGameSetup;
 
-	private boolean mAllowEditing;
+	private GameSetupAdapterListener mListener;
 
-	public GameSetupAdapter(Context context, GameSetup gameSetup, boolean allowEditing) {
-		mGameSetup = gameSetup;
+	public GameSetupAdapter(Context context, GameSetup gameSetup, GameSetupAdapterListener listener) {
 		mContext = context;
-		mAllowEditing = allowEditing;
+		mGameSetup = gameSetup;
+		mListener = listener;
 	}
 
 	@Override
@@ -48,7 +50,7 @@ public class GameSetupAdapter extends BaseAdapter {
 
 	@Override
 	public boolean isEnabled(int position) {
-		return mAllowEditing && getItemRowType(position) == RowType.CARD;
+		return getItemRowType(position) == RowType.CARD;
 	}
 
 	public RowType getItemRowType(int position) {
@@ -148,14 +150,44 @@ public class GameSetupAdapter extends BaseAdapter {
 	}
 
 	private View getHeaderView(int position, View convertView, ViewGroup parent) {
+		HeaderViewHolder holder;
 		if (convertView == null) {
-			convertView = LayoutInflater.from(mContext).inflate(android.R.layout.simple_list_item_1, parent, false);
+			convertView = LayoutInflater.from(mContext).inflate(R.layout.row_header, parent, false);
+
+			holder = new HeaderViewHolder();
+			holder.mLabel = Ui.findView(convertView, R.id.label_text_view);
+			holder.mDivider = Ui.findView(convertView, R.id.divider);
+			holder.mAddButton = Ui.findView(convertView, R.id.add_button);
+			convertView.setTag(holder);
+
+			// For now, you can only add heroes; so assume that is what will happen
+			// if this button is visible and enabled.
+			holder.mAddButton.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					mListener.onAdd(Type.HERO);
+				}
+			});
+		}
+		else {
+			holder = (HeaderViewHolder) convertView.getTag();
 		}
 
-		TextView textView = (TextView) convertView;
-		textView.setText((Integer) getItem(position));
+		Type type = getType(position);
+		if (type != Type.HERO || !mGameSetup.canAddHero()) {
+			holder.mDivider.setVisibility(View.GONE);
+			holder.mAddButton.setVisibility(View.GONE);
+		}
+
+		holder.mLabel.setText((Integer) getItem(position));
 
 		return convertView;
+	}
+
+	private static class HeaderViewHolder {
+		private TextView mLabel;
+		private View mDivider;
+		private View mAddButton;
 	}
 
 	@SuppressWarnings("incomplete-switch")
@@ -184,6 +216,13 @@ public class GameSetupAdapter extends BaseAdapter {
 		textView.setText(resId);
 
 		return convertView;
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+	// Listener interface
+
+	public interface GameSetupAdapterListener {
+		public void onAdd(Type type);
 	}
 
 }

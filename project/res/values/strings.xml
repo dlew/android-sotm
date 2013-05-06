@@ -6,11 +6,13 @@
     <string name="cancel">Cancel</string>
 
     <!-- Randomizer fragment -->
+    <string name="title_randomizer">Randomizer</string>
     <string name="action_randomize">Randomize</string>
     <string name="action_reset">Reset</string>
     <string name="header_heroes">Heroes</string>
     <string name="header_villain">Villain</string>
     <string name="header_environment">Environment</string>
+    <string name="add_symbol">+</string>
 
     <!-- Cards -->
     <string name="card_random">Random</string>

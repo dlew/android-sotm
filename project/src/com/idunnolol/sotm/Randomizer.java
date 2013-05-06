@@ -54,6 +54,7 @@ public class Randomizer {
 				while (usedCards.contains(card));
 
 				gameSetup.setHero(a, card);
+				usedCards.add(card);
 			}
 		}
 

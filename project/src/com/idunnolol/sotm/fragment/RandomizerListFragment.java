@@ -15,8 +15,10 @@ import com.idunnolol.sotm.data.Card.Type;
 import com.idunnolol.sotm.data.GameSetup;
 import com.idunnolol.sotm.fragment.CardPickerDialogFragment.CardPickerDialogFragmentListener;
 import com.idunnolol.sotm.widget.GameSetupAdapter;
+import com.idunnolol.sotm.widget.GameSetupAdapter.GameSetupAdapterListener;
 
-public class RandomizerListFragment extends ListFragment implements CardPickerDialogFragmentListener {
+public class RandomizerListFragment extends ListFragment implements GameSetupAdapterListener,
+		CardPickerDialogFragmentListener {
 
 	public static final String TAG = RandomizerListFragment.class.getName();
 
@@ -79,7 +81,7 @@ public class RandomizerListFragment extends ListFragment implements CardPickerDi
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 
-		mAdapter = new GameSetupAdapter(getActivity(), mGameSetup, true);
+		mAdapter = new GameSetupAdapter(getActivity(), mGameSetup, this);
 		setListAdapter(mAdapter);
 	}
 
@@ -124,6 +126,16 @@ public class RandomizerListFragment extends ListFragment implements CardPickerDi
 		}
 
 		return super.onOptionsItemSelected(item);
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+	// GameSetupAdapterListener
+
+	@Override
+	public void onAdd(Type type) {
+		mGameSetup.addHero();
+		mBaseGameSetup = null;
+		mAdapter.notifyDataSetChanged();
 	}
 
 	//////////////////////////////////////////////////////////////////////////
