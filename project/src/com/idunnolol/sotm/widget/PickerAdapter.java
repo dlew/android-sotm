@@ -155,6 +155,7 @@ public class PickerAdapter extends BaseAdapter {
 		return convertView;
 	}
 
+	@SuppressWarnings("incomplete-switch")
 	private View getCardView(int position, View convertView, ViewGroup parent) {
 		if (convertView == null) {
 			convertView = LayoutInflater.from(mContext).inflate(android.R.layout.simple_list_item_1, parent, false);
@@ -162,7 +163,22 @@ public class PickerAdapter extends BaseAdapter {
 
 		TextView textView = (TextView) convertView;
 		Card card = (Card) getItem(position);
-		textView.setText(card.getNameResId());
+		int resId = card.getNameResId();
+		if (card == Card.RANDOM) {
+			switch (getType(position)) {
+			case HERO:
+				resId = R.string.card_random_hero;
+				break;
+			case VILLAIN:
+				resId = R.string.card_random_villain;
+				break;
+			case ENVIRONMENT:
+				resId = R.string.card_random_environment;
+				break;
+			}
+		}
+
+		textView.setText(resId);
 
 		return convertView;
 	}

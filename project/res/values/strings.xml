@@ -13,6 +13,9 @@
 
     <!-- Cards -->
     <string name="card_random">Random</string>
+    <string name="card_random_hero">Random Hero</string>
+    <string name="card_random_villain">Random Villain</string>
+    <string name="card_random_environment">Random Environment</string>
     <string name="card_absolute_zero">Absolute Zero</string>
     <string name="card_bunker">Bunker</string>
     <string name="card_fanatic">Fanatic</string>
