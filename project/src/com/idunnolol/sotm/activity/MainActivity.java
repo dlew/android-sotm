@@ -43,6 +43,7 @@ public class MainActivity extends Activity implements PickerListFragmentListener
 	@Override
 	public void onRandomize(GameSetup gameSetup) {
 		Randomizer randomizer = new Randomizer(gameSetup);
+		randomizer.setIncludeAlternatives(false);
 		GameSetup finalGameSetup = randomizer.randomize();
 		Log.i("Randomized game setup:\n" + finalGameSetup);
 	}

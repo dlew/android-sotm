@@ -12,15 +12,24 @@ import com.idunnolol.sotm.data.Card.Type;
 
 public class Randomizer {
 
-	private GameSetup mBaseGameSetup;
-
 	private Random mRand;
 
 	private Card[] mAllCards = Db.getCards().toArray(new Card[0]);
 
+	// The base game setup; when we randomize, we fill in any cards set to RANDOM
+	private GameSetup mBaseGameSetup;
+
+	// Whether or not to randomly pick alternate cards (e.g. promos).  Some users
+	// may want to pick this on their own after selecting the "base" card.
+	private boolean mIncludeAlternates;
+
 	public Randomizer(GameSetup baseGameSetup) {
 		mBaseGameSetup = baseGameSetup;
 		mRand = new Random();
+	}
+
+	public void setIncludeAlternatives(boolean includeAlternatives) {
+		mIncludeAlternates = includeAlternatives;
 	}
 
 	public GameSetup randomize() {
@@ -69,7 +78,7 @@ public class Randomizer {
 			int index = mRand.nextInt(mAllCards.length);
 			card = mAllCards[index];
 		}
-		while (card.getType() != type);
+		while (card.getType() != type || (!mIncludeAlternates && card.isIsAlternate()));
 
 		return card;
 	}
