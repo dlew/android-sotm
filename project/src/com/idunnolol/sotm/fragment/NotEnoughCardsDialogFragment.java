@@ -27,7 +27,6 @@ public class NotEnoughCardsDialogFragment extends DialogFragment {
 		return fragment;
 	}
 
-	@SuppressWarnings("incomplete-switch")
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		Type type = Type.values()[getArguments().getInt(ARG_TYPE)];

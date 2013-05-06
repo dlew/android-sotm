@@ -96,7 +96,6 @@ public class GameSetupAdapter extends BaseAdapter {
 		return 5 + mGameSetup.getHeroCount();
 	}
 
-	@SuppressWarnings("incomplete-switch")
 	@Override
 	public Object getItem(int position) {
 		RowType rowType = getItemRowType(position);
@@ -189,7 +188,6 @@ public class GameSetupAdapter extends BaseAdapter {
 		private View mAddButton;
 	}
 
-	@SuppressWarnings("incomplete-switch")
 	private View getCardView(final int position, View convertView, ViewGroup parent) {
 		CardViewHolder holder;
 		if (convertView == null) {

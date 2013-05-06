@@ -11,13 +11,12 @@ public class Card {
 	/**
 	 * Represents the special "random" card
 	 */
-	public static final Card RANDOM = new Card(Type.RANDOM, "Random", R.string.card_random, 0);
+	public static final Card RANDOM = new Card(null, "Random", R.string.card_random, 0);
 
 	public static enum Type {
 		HERO,
 		VILLAIN,
 		ENVIRONMENT,
-		RANDOM
 	}
 
 	private Type mType;
@@ -42,6 +41,7 @@ public class Card {
 		mId = id;
 		mNameResId = nameResId;
 		mPoints = points;
+		mEnabled = true;
 	}
 
 	public Type getType() {

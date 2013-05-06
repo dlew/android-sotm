@@ -25,6 +25,11 @@
     <string name="message_no_villains">You don\'t have any villains enabled; please add some.</string>
     <string name="message_no_environments">You don\'t have any environments enabled; please add some.</string>
 
+    <!-- Card picker dialog fragment -->
+    <string name="title_hero">Pick a Hero</string>
+    <string name="title_villain">Pick a Villain</string>
+    <string name="title_environment">Pick an Environment</string>
+
     <!-- Cards -->
     <string name="card_random">Random</string>
     <string name="card_random_hero">Random Hero</string>

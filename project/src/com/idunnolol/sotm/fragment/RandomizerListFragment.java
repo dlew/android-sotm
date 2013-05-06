@@ -196,7 +196,6 @@ public class RandomizerListFragment extends ListFragment implements GameSetupAda
 	//////////////////////////////////////////////////////////////////////////
 	// CardPickerDialogFragmentListener
 
-	@SuppressWarnings("incomplete-switch")
 	@Override
 	public void onCardSelected(Card card) {
 		switch (mSelectCardType) {

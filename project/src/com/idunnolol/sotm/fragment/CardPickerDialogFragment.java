@@ -51,6 +51,19 @@ public class CardPickerDialogFragment extends DialogFragment {
 		mAdapter = new CardAdapter(getActivity(), cards);
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+		switch (getType()) {
+		case HERO:
+			builder.setTitle(R.string.title_hero);
+			break;
+		case VILLAIN:
+			builder.setTitle(R.string.title_villain);
+			break;
+		case ENVIRONMENT:
+			builder.setTitle(R.string.title_environment);
+			break;
+		}
+
 		builder.setSingleChoiceItems(mAdapter, 0, new OnClickListener() {
 			public void onClick(DialogInterface dialog, int which) {
 				dismissAllowingStateLoss();
