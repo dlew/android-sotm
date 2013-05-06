@@ -2,7 +2,6 @@ package com.idunnolol.sotm;
 
 import android.app.Application;
 
-import com.idunnolol.sotm.data.Configuration;
 import com.idunnolol.sotm.data.Db;
 import com.idunnolol.utils.Log;
 
@@ -17,6 +16,5 @@ public class SentinelsApp extends Application {
 		Log.configure(TAG, true);
 
 		Db.init(this);
-		Configuration.init();
 	}
 }

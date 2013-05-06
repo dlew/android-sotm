@@ -14,6 +14,7 @@ import android.util.JsonToken;
 import android.util.SparseIntArray;
 
 import com.idunnolol.sotm.R;
+import com.idunnolol.sotm.data.Card.Type;
 import com.idunnolol.utils.Log;
 import com.idunnolol.utils.ResourceUtils;
 
@@ -28,9 +29,12 @@ public class Db {
 	public static void init(Context context) {
 		try {
 			long start = System.nanoTime();
+
+			// Read in data from assets
 			sInstance.initCards(context);
 			sInstance.initNameConversions(context);
 			sInstance.initPoints(context);
+
 			long end = System.nanoTime();
 			Log.i("Initialized db in " + ((end - start) / 100000) + " ms");
 		}
@@ -52,6 +56,10 @@ public class Db {
 	private SparseIntArray mDifficultyScale = new SparseIntArray();
 
 	private Map<String, String> mNameConversions = new HashMap<String, String>();
+
+	public static Collection<Card> getCards() {
+		return sInstance.mCards.values();
+	}
 
 	//////////////////////////////////////////////////////////////////////////
 	// Read data
@@ -122,54 +130,39 @@ public class Db {
 	}
 
 	private Card readCard(JsonReader reader) throws IOException {
-		// Parse all data ahead of time
-		String id = null;
-		String name = null;
-		String type = null;
-		boolean isAlternate = false;
+		Card card = new Card();
 
 		reader.beginObject();
 		while (reader.hasNext()) {
 			String jsonName = reader.nextName();
 
 			if (jsonName.equals("id")) {
-				id = reader.nextString();
+				card.setId(reader.nextString());
 			}
 			else if (jsonName.equals("name")) {
-				name = reader.nextString();
+				String name = reader.nextString();
+				card.setNameResId(ResourceUtils.getIdentifier(R.string.class, name));
 			}
 			else if (jsonName.equals("type")) {
-				type = reader.nextString();
+				String type = reader.nextString();
+				if (type.equals("hero")) {
+					card.setType(Type.HERO);
+				}
+				else if (type.equals("villain")) {
+					card.setType(Type.VILLAIN);
+				}
+				else if (type.equals("environment")) {
+					card.setType(Type.ENVIRONMENT);
+				}
 			}
 			else if (jsonName.equals("alternate")) {
-				isAlternate = reader.nextBoolean();
+				card.setIsAlternate(reader.nextBoolean());
 			}
 			else {
 				reader.skipValue();
 			}
 		}
 		reader.endObject();
-
-		// Return as card 
-		Card card;
-		if (type.equals("hero")) {
-			Hero hero = new Hero();
-			hero.setIsAlternate(isAlternate);
-			card = hero;
-		}
-		else if (type.equals("villain")) {
-			card = new Villain();
-		}
-		else if (type.equals("environment")) {
-			card = new Environment();
-		}
-		else {
-			throw new RuntimeException("Found card with no known type: " + type);
-		}
-
-		// Common code
-		card.setId(id);
-		card.setNameResId(ResourceUtils.getIdentifier(R.string.class, name));
 
 		return card;
 	}

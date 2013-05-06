@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.idunnolol.sotm.R;
 import com.idunnolol.sotm.data.Card;
-import com.idunnolol.sotm.data.Configuration;
+import com.idunnolol.sotm.data.GameSetup;
 
 public class PickerAdapter extends BaseAdapter {
 
@@ -24,12 +24,13 @@ public class PickerAdapter extends BaseAdapter {
 		ENVIRONMENT
 	}
 
-	private Configuration mConfiguration = Configuration.getInstance();
-
 	private Context mContext;
 	private LayoutInflater mInflater;
 
-	public PickerAdapter(Context context) {
+	private GameSetup mGameSetup;
+
+	public PickerAdapter(Context context, GameSetup gameSetup) {
+		mGameSetup = gameSetup;
 		mContext = context;
 		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
@@ -61,9 +62,9 @@ public class PickerAdapter extends BaseAdapter {
 		case HEROES:
 			return 0;
 		case VILLAIN:
-			return mConfiguration.getHeroCount() + 1;
+			return mGameSetup.getHeroCount() + 1;
 		case ENVIRONMENT:
-			return mConfiguration.getHeroCount() + 3;
+			return mGameSetup.getHeroCount() + 3;
 		default:
 			throw new RuntimeException();
 		}
@@ -84,7 +85,7 @@ public class PickerAdapter extends BaseAdapter {
 	@Override
 	public int getCount() {
 		// 3 headers, 1 villain, 1 environment, and N heroes
-		return 5 + mConfiguration.getHeroCount();
+		return 5 + mGameSetup.getHeroCount();
 	}
 
 	@Override
@@ -108,11 +109,11 @@ public class PickerAdapter extends BaseAdapter {
 			case HEROES:
 				int sectionStart = getSectionStart(section);
 				int heroIndex = position - sectionStart - 1;
-				return mConfiguration.getHeroes().get(heroIndex);
+				return mGameSetup.getHeroes().get(heroIndex);
 			case VILLAIN:
-				return mConfiguration.getVillain();
+				return mGameSetup.getVillain();
 			case ENVIRONMENT:
-				return mConfiguration.getEnvironment();
+				return mGameSetup.getEnvironment();
 			}
 			break;
 		}

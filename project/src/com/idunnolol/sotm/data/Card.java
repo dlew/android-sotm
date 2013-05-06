@@ -7,7 +7,16 @@ public class Card {
 	/**
 	 * Represents the special "random" card
 	 */
-	public static final Card RANDOM = new Card("Random", R.string.card_random, 0);
+	public static final Card RANDOM = new Card(Type.RANDOM, "Random", R.string.card_random, 0);
+
+	public static enum Type {
+		HERO,
+		VILLAIN,
+		ENVIRONMENT,
+		RANDOM
+	}
+
+	private Type mType;
 
 	private String mId;
 
@@ -15,14 +24,26 @@ public class Card {
 
 	private int mPoints;
 
+	// Indicates this is an "alternate" promo card, not a full set
+	private boolean mIsAlternate;
+
 	public Card() {
 		// Default constructor
 	}
 
-	public Card(String id, int nameResId, int points) {
+	public Card(Type type, String id, int nameResId, int points) {
+		mType = type;
 		mId = id;
 		mNameResId = nameResId;
 		mPoints = points;
+	}
+
+	public Type getType() {
+		return mType;
+	}
+
+	public void setType(Type type) {
+		mType = type;
 	}
 
 	public String getId() {
@@ -47,6 +68,14 @@ public class Card {
 
 	public void setPoints(int points) {
 		mPoints = points;
+	}
+
+	public boolean isIsAlternate() {
+		return mIsAlternate;
+	}
+
+	public void setIsAlternate(boolean isAlternate) {
+		mIsAlternate = isAlternate;
 	}
 
 }
