@@ -1,6 +1,8 @@
 package com.idunnolol.sotm.fragment;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -14,6 +16,7 @@ import com.idunnolol.sotm.R;
 import com.idunnolol.sotm.data.Card;
 import com.idunnolol.sotm.data.Card.Type;
 import com.idunnolol.sotm.data.Db;
+import com.idunnolol.sotm.data.GameSetup;
 import com.idunnolol.sotm.widget.CardAdapter;
 
 public class CardPickerDialogFragment extends DialogFragment {
@@ -21,11 +24,13 @@ public class CardPickerDialogFragment extends DialogFragment {
 	public static final String TAG = CardPickerDialogFragment.class.getName();
 
 	private static final String ARG_TYPE = "ARG_TYPE";
+	private static final String ARG_GAME_SETUP = "ARG_GAME_SETUP";
 
-	public static CardPickerDialogFragment newInstance(Type type) {
+	public static CardPickerDialogFragment newInstance(Type type, GameSetup gameSetup) {
 		CardPickerDialogFragment fragment = new CardPickerDialogFragment();
 		Bundle args = new Bundle();
 		args.putInt(ARG_TYPE, type.ordinal());
+		args.putBundle(ARG_GAME_SETUP, gameSetup.toBundle());
 		fragment.setArguments(args);
 		return fragment;
 	}
@@ -47,12 +52,22 @@ public class CardPickerDialogFragment extends DialogFragment {
 
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
+		Type type = getType();
+		GameSetup gameSetup = new GameSetup(getArguments().getBundle(ARG_GAME_SETUP));
+
+		// We disable heroes that are already selected.  We don't bother with villains
+		// or environments; I don't care if someone re-selects what they already had.
+		Set<Card> disabledCards = new HashSet<Card>();
+		if (type == Type.HERO) {
+			disabledCards.addAll(gameSetup.getHeroes());
+		}
+
 		Collection<Card> cards = Db.getCards(getType());
-		mAdapter = new CardAdapter(getActivity(), cards);
+		mAdapter = new CardAdapter(getActivity(), cards, disabledCards);
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-		switch (getType()) {
+		switch (type) {
 		case HERO:
 			builder.setTitle(R.string.title_hero);
 			break;

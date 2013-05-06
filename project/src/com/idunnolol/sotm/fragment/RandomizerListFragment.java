@@ -133,7 +133,7 @@ public class RandomizerListFragment extends ListFragment implements GameSetupAda
 			int start = mAdapter.getTypeStart(mSelectCardType);
 			mSelectCardIndex = position - start - 1;
 
-			CardPickerDialogFragment dialogFragment = CardPickerDialogFragment.newInstance(mSelectCardType);
+			CardPickerDialogFragment dialogFragment = CardPickerDialogFragment.newInstance(mSelectCardType, mGameSetup);
 			dialogFragment.show(getActivity().getFragmentManager(), CardPickerDialogFragment.TAG);
 		}
 	}
