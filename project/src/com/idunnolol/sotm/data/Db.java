@@ -5,10 +5,15 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.preference.PreferenceManager;
 import android.util.JsonReader;
 import android.util.JsonToken;
 import android.util.SparseIntArray;
@@ -35,11 +40,20 @@ public class Db {
 			sInstance.initNameConversions(context);
 			sInstance.initPoints(context);
 
-			// TODO: Restore disabled state
-			//
-			// Right now we just set default state each run
-			for (CardSet cardSet : sInstance.mCardSets) {
-				cardSet.setAllCardsEnabled(cardSet.isEnabledByDefault());
+			// If we have saved card state settings, use them; otherwise use
+			// the defaults
+			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+			if (prefs.contains(PREFERENCE_CARD_STATE)) {
+				Set<String> enabledIds = prefs.getStringSet(PREFERENCE_CARD_STATE, null);
+				for (String id : enabledIds) {
+					sInstance.mCards.get(id).setEnabled(true);
+				}
+			}
+			else {
+				for (CardSet cardSet : sInstance.mCardSets) {
+					cardSet.setAllCardsEnabled(cardSet.isEnabledByDefault());
+				}
+				saveCardStates(context);
 			}
 
 			long end = System.nanoTime();
@@ -53,6 +67,8 @@ public class Db {
 
 	//////////////////////////////////////////////////////////////////////////
 	// Data
+
+	private static final String PREFERENCE_CARD_STATE = "com.idunnolol.sotm.cards.state";
 
 	private Map<String, Card> mCards = new HashMap<String, Card>();
 
@@ -89,6 +105,25 @@ public class Db {
 		}
 
 		return cards;
+	}
+
+	public static void saveCardStates(Context context) {
+		long start = System.nanoTime();
+
+		Set<String> enabledIds = new HashSet<String>();
+		for (Card card : sInstance.mCards.values()) {
+			if (card.isEnabled()) {
+				enabledIds.add(card.getId());
+			}
+		}
+
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+		Editor editor = prefs.edit();
+		editor.putStringSet(PREFERENCE_CARD_STATE, enabledIds);
+		editor.apply();
+
+		long end = System.nanoTime();
+		Log.d("Saved card states in " + ((end - start) / 100000) + " ms");
 	}
 
 	//////////////////////////////////////////////////////////////////////////

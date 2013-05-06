@@ -3,6 +3,7 @@ package com.idunnolol.sotm.activity;
 import android.app.Activity;
 import android.os.Bundle;
 
+import com.idunnolol.sotm.data.Db;
 import com.idunnolol.sotm.fragment.CardConfigListFragment;
 
 public class CardConfigActivity extends Activity {
@@ -16,6 +17,13 @@ public class CardConfigActivity extends Activity {
 			getFragmentManager().beginTransaction().add(android.R.id.content, fragment, CardConfigListFragment.TAG)
 					.commit();
 		}
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+
+		Db.saveCardStates(this);
 	}
 
 }
