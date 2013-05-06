@@ -18,6 +18,13 @@
     <!-- Configuration activity/fragment -->
     <string name="title_configuration">Configure Cards</string>
 
+    <!-- Not enough cards dialog fragment -->
+    <string name="button_configure">Configure</string>
+    <string name="message_not_enough_heroes">You don\'t have enough heroes enabled; please add some more.</string>
+    <string name="message_no_heroes">You don\'t have any heroes enabled; please add some.</string>
+    <string name="message_no_villains">You don\'t have any villains enabled; please add some.</string>
+    <string name="message_no_environments">You don\'t have any environments enabled; please add some.</string>
+
     <!-- Cards -->
     <string name="card_random">Random</string>
     <string name="card_random_hero">Random Hero</string>

@@ -1,5 +1,8 @@
 package com.idunnolol.sotm.fragment;
 
+import java.util.List;
+
+import android.app.DialogFragment;
 import android.app.ListFragment;
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,6 +15,7 @@ import com.idunnolol.sotm.R;
 import com.idunnolol.sotm.Randomizer;
 import com.idunnolol.sotm.data.Card;
 import com.idunnolol.sotm.data.Card.Type;
+import com.idunnolol.sotm.data.Db;
 import com.idunnolol.sotm.data.GameSetup;
 import com.idunnolol.sotm.fragment.CardPickerDialogFragment.CardPickerDialogFragmentListener;
 import com.idunnolol.sotm.widget.GameSetupAdapter;
@@ -62,6 +66,35 @@ public class RandomizerListFragment extends ListFragment implements GameSetupAda
 	}
 
 	@Override
+	public void onResume() {
+		super.onResume();
+
+		// Check that all selected cards are still enabled
+		// (May have been disabled in card config activity)
+		boolean hasChanged = false;
+		List<Card> heroes = mGameSetup.getHeroes();
+		for (int a = 0; a < heroes.size(); a++) {
+			if (!heroes.get(a).isEnabled()) {
+				mGameSetup.setHero(a, Card.RANDOM);
+				hasChanged = true;
+			}
+		}
+		if (!mGameSetup.getVillain().isEnabled()) {
+			mGameSetup.setVillain(Card.RANDOM);
+			hasChanged = true;
+		}
+		if (!mGameSetup.getEnvironment().isEnabled()) {
+			mGameSetup.setEnvironment(Card.RANDOM);
+			hasChanged = true;
+		}
+
+		if (hasChanged) {
+			mBaseGameSetup = null;
+			mAdapter.notifyDataSetChanged();
+		}
+	}
+
+	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 
@@ -90,11 +123,19 @@ public class RandomizerListFragment extends ListFragment implements GameSetupAda
 		super.onListItemClick(l, v, position, id);
 
 		mSelectCardType = mAdapter.getType(position);
-		int start = mAdapter.getTypeStart(mSelectCardType);
-		mSelectCardIndex = position - start - 1;
 
-		CardPickerDialogFragment dialogFragment = CardPickerDialogFragment.newInstance(mSelectCardType);
-		dialogFragment.show(getActivity().getFragmentManager(), CardPickerDialogFragment.TAG);
+		// Check that we even have something to select from
+		if (Db.getCards(mSelectCardType).size() == 0) {
+			DialogFragment df = NotEnoughCardsDialogFragment.newInstance(mSelectCardType);
+			df.show(getActivity().getFragmentManager(), NotEnoughCardsDialogFragment.TAG);
+		}
+		else {
+			int start = mAdapter.getTypeStart(mSelectCardType);
+			mSelectCardIndex = position - start - 1;
+
+			CardPickerDialogFragment dialogFragment = CardPickerDialogFragment.newInstance(mSelectCardType);
+			dialogFragment.show(getActivity().getFragmentManager(), CardPickerDialogFragment.TAG);
+		}
 	}
 
 	//////////////////////////////////////////////////////////////////////////
@@ -115,8 +156,15 @@ public class RandomizerListFragment extends ListFragment implements GameSetupAda
 			}
 
 			Randomizer randomizer = new Randomizer(mBaseGameSetup);
-			mGameSetup.updateFrom(randomizer.randomize());
-			mAdapter.notifyDataSetChanged();
+			if (randomizer.canRandomize()) {
+				mGameSetup.updateFrom(randomizer.randomize());
+				mAdapter.notifyDataSetChanged();
+			}
+			else {
+				mBaseGameSetup = null;
+				DialogFragment df = NotEnoughCardsDialogFragment.newInstance(randomizer.getFirstLackingType());
+				df.show(getActivity().getFragmentManager(), NotEnoughCardsDialogFragment.TAG);
+			}
 			return true;
 		case R.id.action_reset:
 			mGameSetup.reset();
