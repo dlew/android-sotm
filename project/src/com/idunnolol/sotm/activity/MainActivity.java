@@ -5,30 +5,26 @@ import android.os.Bundle;
 import android.view.Menu;
 
 import com.idunnolol.sotm.R;
-import com.idunnolol.sotm.Randomizer;
 import com.idunnolol.sotm.data.Card;
-import com.idunnolol.sotm.data.GameSetup;
-import com.idunnolol.sotm.fragment.PickerListFragment;
 import com.idunnolol.sotm.fragment.CardPickerDialogFragment.CardPickerDialogFragmentListener;
-import com.idunnolol.sotm.fragment.PickerListFragment.PickerListFragmentListener;
-import com.idunnolol.utils.Log;
+import com.idunnolol.sotm.fragment.RandomizerListFragment;
 import com.idunnolol.utils.Ui;
 
-public class MainActivity extends Activity implements PickerListFragmentListener, CardPickerDialogFragmentListener {
+public class MainActivity extends Activity implements CardPickerDialogFragmentListener {
 
-	private PickerListFragment mPickerListFragment;
+	private RandomizerListFragment mRandomizerListFragment;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		if (savedInstanceState == null) {
-			mPickerListFragment = new PickerListFragment();
+			mRandomizerListFragment = new RandomizerListFragment();
 			getFragmentManager().beginTransaction()
-					.add(android.R.id.content, mPickerListFragment, PickerListFragment.TAG).commit();
+					.add(android.R.id.content, mRandomizerListFragment, RandomizerListFragment.TAG).commit();
 		}
 		else {
-			mPickerListFragment = Ui.findFragment(this, PickerListFragment.TAG);
+			mRandomizerListFragment = Ui.findFragment(this, RandomizerListFragment.TAG);
 		}
 	}
 
@@ -39,22 +35,11 @@ public class MainActivity extends Activity implements PickerListFragmentListener
 	}
 
 	//////////////////////////////////////////////////////////////////////////
-	// PickerListFragmentListener
-
-	@Override
-	public void onRandomize(GameSetup gameSetup) {
-		Randomizer randomizer = new Randomizer(gameSetup);
-		randomizer.setIncludeAlternatives(false);
-		GameSetup finalGameSetup = randomizer.randomize();
-		Log.i("Randomized game setup:\n" + finalGameSetup);
-	}
-
-	//////////////////////////////////////////////////////////////////////////
 	// CardPickerDialogFragmentListener
 
 	@Override
 	public void onCardSelected(Card card) {
-		mPickerListFragment.onCardSelected(card);
+		mRandomizerListFragment.onCardSelected(card);
 	}
 
 }

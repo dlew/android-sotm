@@ -12,7 +12,7 @@ import com.idunnolol.sotm.data.Card;
 import com.idunnolol.sotm.data.Card.Type;
 import com.idunnolol.sotm.data.GameSetup;
 
-public class PickerAdapter extends BaseAdapter {
+public class GameSetupAdapter extends BaseAdapter {
 
 	private enum RowType {
 		HEADER,
@@ -23,9 +23,12 @@ public class PickerAdapter extends BaseAdapter {
 
 	private GameSetup mGameSetup;
 
-	public PickerAdapter(Context context, GameSetup gameSetup) {
+	private boolean mAllowEditing;
+
+	public GameSetupAdapter(Context context, GameSetup gameSetup, boolean allowEditing) {
 		mGameSetup = gameSetup;
 		mContext = context;
+		mAllowEditing = allowEditing;
 	}
 
 	@Override
@@ -45,7 +48,7 @@ public class PickerAdapter extends BaseAdapter {
 
 	@Override
 	public boolean isEnabled(int position) {
-		return getItemRowType(position) == RowType.CARD;
+		return mAllowEditing && getItemRowType(position) == RowType.CARD;
 	}
 
 	public RowType getItemRowType(int position) {

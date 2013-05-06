@@ -3,11 +3,17 @@ package com.idunnolol.sotm.data;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.os.Bundle;
+
 /**
  * Represents a setup of a game (i.e., which heroes are selected,
  * as well as villain and environment).
  */
 public class GameSetup {
+
+	private static final String KEY_HEROES = "KEY_HEROES";
+	private static final String KEY_VILLAIN = "KEY_VILLAIN";
+	private static final String KEY_ENVIRONMENT = "KEY_ENVIRONMENT";
 
 	private List<Card> mHeroes = new ArrayList<Card>(5);
 
@@ -17,16 +23,25 @@ public class GameSetup {
 
 	public GameSetup() {
 		// Default setup is 2 random heroes, 1 random villain and 1 random environment
-		mHeroes.add(Card.RANDOM);
-		mHeroes.add(Card.RANDOM);
-		mVillain = Card.RANDOM;
-		mEnvironment = Card.RANDOM;
+		reset();
 	}
 
 	public GameSetup(GameSetup toCopy) {
 		mHeroes.addAll(toCopy.mHeroes);
 		mVillain = toCopy.mVillain;
 		mEnvironment = toCopy.mEnvironment;
+	}
+
+	public GameSetup(Bundle bundle) {
+		fromBundle(bundle);
+	}
+
+	public void reset() {
+		mHeroes.clear();
+		mHeroes.add(Card.RANDOM);
+		mHeroes.add(Card.RANDOM);
+		mVillain = Card.RANDOM;
+		mEnvironment = Card.RANDOM;
 	}
 
 	public List<Card> getHeroes() {
@@ -63,6 +78,38 @@ public class GameSetup {
 
 	public Card getEnvironment() {
 		return mEnvironment;
+	}
+
+	public void updateFrom(GameSetup other) {
+		mHeroes.clear();
+		mHeroes.addAll(other.mHeroes);
+		mVillain = other.mVillain;
+		mEnvironment = other.mEnvironment;
+	}
+
+	public Bundle toBundle() {
+		Bundle bundle = new Bundle();
+
+		ArrayList<String> heroes = new ArrayList<String>();
+		for (Card card : mHeroes) {
+			heroes.add(card.getId());
+		}
+
+		bundle.putStringArrayList(KEY_HEROES, heroes);
+		bundle.putString(KEY_VILLAIN, mVillain.getId());
+		bundle.putString(KEY_ENVIRONMENT, mEnvironment.getId());
+
+		return bundle;
+	}
+
+	public void fromBundle(Bundle bundle) {
+		mHeroes.clear();
+		for (String hero : bundle.getStringArrayList(KEY_HEROES)) {
+			mHeroes.add(Db.getCard(hero));
+		}
+
+		mVillain = Db.getCard(bundle.getString(KEY_VILLAIN));
+		mEnvironment = Db.getCard(bundle.getString(KEY_ENVIRONMENT));
 	}
 
 	@Override

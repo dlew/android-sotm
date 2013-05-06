@@ -5,8 +5,9 @@
     <string name="action_settings">Settings</string>
     <string name="cancel">Cancel</string>
 
-    <!-- Picker fragment -->
+    <!-- Randomizer fragment -->
     <string name="action_randomize">Randomize</string>
+    <string name="action_reset">Reset</string>
     <string name="header_heroes">Heroes</string>
     <string name="header_villain">Villain</string>
     <string name="header_environment">Environment</string>

@@ -5,5 +5,10 @@
         android:orderInCategory="10"
         android:showAsAction="ifRoom"
         android:title="@string/action_randomize"/>
+    <item
+        android:id="@+id/action_reset"
+        android:orderInCategory="20"
+        android:showAsAction="ifRoom"
+        android:title="@string/action_reset"/>
 
 </menu>

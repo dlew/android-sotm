@@ -59,6 +59,10 @@ public class Db {
 	private Map<String, String> mNameConversions = new HashMap<String, String>();
 
 	public static Card getCard(String id) {
+		if (id.equals(Card.RANDOM.getId())) {
+			return Card.RANDOM;
+		}
+
 		return sInstance.mCards.get(id);
 	}
 
