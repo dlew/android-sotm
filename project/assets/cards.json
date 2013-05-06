@@ -1,0 +1,302 @@
+{
+  "comments": "id == name for now, since all names are unique",
+  "sets": [
+    {
+      "name": "Base Set",
+      "cards": [
+        {
+          "type": "hero",
+          "name": "Absolute Zero"
+        },
+        {
+          "type": "hero",
+          "name": "Bunker"
+        },
+        {
+          "type": "hero",
+          "name": "Fanatic"
+        },
+        {
+          "type": "hero",
+          "name": "Haka"
+        },
+        {
+          "type": "hero",
+          "name": "Legacy"
+        },
+        {
+          "type": "hero",
+          "name": "Ra"
+        },
+        {
+          "type": "hero",
+          "name": "Tachyon"
+        },
+        {
+          "type": "hero",
+          "name": "Tempest"
+        },
+        {
+          "type": "hero",
+          "name": "The Visionary"
+        },
+        {
+          "type": "hero",
+          "name": "The Wraith"
+        },
+        {
+          "type": "villain",
+          "name": "Baron Blade"
+        },
+        {
+          "type": "villain",
+          "name": "Citizen Dawn"
+        },
+        {
+          "type": "villain",
+          "name": "Grand Warlord Voss"
+        },
+        {
+          "type": "villain",
+          "name": "Omnitron"
+        },
+        {
+          "type": "environment",
+          "name": "Insula Primalis"
+        },
+        {
+          "type": "environment",
+          "name": "Megalopolis"
+        },
+        {
+          "type": "environment",
+          "name": "Ruins of Atlantis"
+        },
+        {
+          "type": "environment",
+          "name": "Wagner Mars Base"
+        }
+      ]
+    },
+    {
+      "name": "Rook City",
+      "cards": [
+        {
+          "type": "hero",
+          "name": "Expatriette"
+        },
+        {
+          "type": "hero",
+          "name": "Mister Fixer"
+        },
+        {
+          "type": "villain",
+          "name": "Plague Rat"
+        },
+        {
+          "type": "villain",
+          "name": "Spite"
+        },
+        {
+          "type": "villain",
+          "name": "The Chairman"
+        },
+        {
+          "type": "villain",
+          "name": "The Matriarch"
+        },
+        {
+          "type": "environment",
+          "name": "Pike Industrial Complex"
+        },
+        {
+          "type": "environment",
+          "name": "Rook City"
+        }
+      ]
+    },
+    {
+      "name": "Infernal Relics",
+      "cards": [
+        {
+          "type": "hero",
+          "name": "The Argent Adept"
+        },
+        {
+          "type": "hero",
+          "name": "Nightmist"
+        },
+        {
+          "type": "villain",
+          "name": "Akash'bhuta"
+        },
+        {
+          "type": "villain",
+          "name": "Apostate"
+        },
+        {
+          "type": "villain",
+          "name": "GloomWeaver"
+        },
+        {
+          "type": "villain",
+          "name": "The Ennead"
+        },
+        {
+          "type": "environment",
+          "name": "Realm of Discord"
+        },
+        {
+          "type": "environment",
+          "name": "Tomb of Anubis"
+        }
+      ]
+    },
+    {
+      "name": "Shattered Timelines",
+      "cards": [
+        {
+          "type": "hero",
+          "name": "Chrono Ranger"
+        },
+        {
+          "type": "hero",
+          "name": "Omnitron-X"
+        },
+        {
+          "type": "villain",
+          "name": "The Dreamer"
+        },
+        {
+          "type": "villain",
+          "name": "La Capitan"
+        },
+        {
+          "type": "villain",
+          "name": "Kismet"
+        },
+        {
+          "type": "villain",
+          "name": "Iron Legacy"
+        },
+        {
+          "type": "environment",
+          "name": "Time Cataclysm"
+        },
+        {
+          "type": "environment",
+          "name": "The Block"
+        }
+      ]
+    },
+    {
+      "name": "Mini-Expansions",
+      "cards": [
+        {
+          "type": "hero",
+          "name": "Unity"
+        },
+        {
+          "type": "hero",
+          "name": "The Scholar"
+        },
+        {
+          "type": "villain",
+          "name": "Ambuscade"
+        },
+        {
+          "type": "villain",
+          "name": "Miss Information"
+        },
+        {
+          "type": "environment",
+          "name": "Silver Gulch 1883"
+        },
+        {
+          "type": "environment",
+          "name": "The Final Wasteland"
+        }
+      ]
+    },
+    {
+      "name": "Promos",
+      "cards": [
+        {
+          "type": "hero",
+          "alternate": true,
+          "name": "Young Legacy"
+        },
+        {
+          "type": "hero",
+          "alternate": true,
+          "name": "Rook City Wraith"
+        },
+        {
+          "type": "hero",
+          "alternate": true,
+          "name": "Ra: Horus of Two Horizons"
+        },
+        {
+          "type": "hero",
+          "alternate": true,
+          "name": "Redeemer Fanatic"
+        },
+        {
+          "type": "hero",
+          "alternate": true,
+          "name": "Dark Visionary"
+        },
+        {
+          "type": "hero",
+          "alternate": true,
+          "name": "The Eternal Haka"
+        },
+        {
+          "type": "hero",
+          "alternate": true,
+          "name": "Freedom Six Tachyon"
+        },
+        {
+          "type": "hero",
+          "alternate": true,
+          "name": "Freedom Six Wraith: Price of Freedom"
+        },
+        {
+          "type": "hero",
+          "alternate": true,
+          "name": "Freedom Six Unity"
+        },
+        {
+          "type": "hero",
+          "alternate": true,
+          "name": "Freedom Six Bunker: Engine of War"
+        },
+        {
+          "type": "hero",
+          "alternate": true,
+          "name": "Freedom Six Absolute Zero"
+        },
+        {
+          "type": "hero",
+          "alternate": true,
+          "name": "Freedom Six Tempest"
+        },
+        {
+          "type": "hero",
+          "alternate": true,
+          "name": "America's Greatest Legacy"
+        },
+        {
+          "type": "villain",
+          "alternate": true,
+          "name": "Cosmic Omnitron"
+        },
+        {
+          "type": "villain",
+          "alternate": true,
+          "name": "Mad Bomber Blade"
+        }
+      ]
+    }
+  ]
+}
