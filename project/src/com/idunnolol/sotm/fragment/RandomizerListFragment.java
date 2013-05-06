@@ -138,6 +138,13 @@ public class RandomizerListFragment extends ListFragment implements GameSetupAda
 		mAdapter.notifyDataSetChanged();
 	}
 
+	@Override
+	public void onRemove(Type type, int index) {
+		mGameSetup.removeHero(index);
+		mBaseGameSetup = null;
+		mAdapter.notifyDataSetChanged();
+	}
+
 	//////////////////////////////////////////////////////////////////////////
 	// CardPickerDialogFragmentListener
 

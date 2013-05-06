@@ -174,10 +174,9 @@ public class GameSetupAdapter extends BaseAdapter {
 		}
 
 		Type type = getType(position);
-		if (type != Type.HERO || !mGameSetup.canAddHero()) {
-			holder.mDivider.setVisibility(View.GONE);
-			holder.mAddButton.setVisibility(View.GONE);
-		}
+		int addVisibility = type == Type.HERO && mGameSetup.canAddHero() ? View.VISIBLE : View.GONE;
+		holder.mDivider.setVisibility(addVisibility);
+		holder.mAddButton.setVisibility(addVisibility);
 
 		holder.mLabel.setText((Integer) getItem(position));
 
@@ -191,12 +190,21 @@ public class GameSetupAdapter extends BaseAdapter {
 	}
 
 	@SuppressWarnings("incomplete-switch")
-	private View getCardView(int position, View convertView, ViewGroup parent) {
+	private View getCardView(final int position, View convertView, ViewGroup parent) {
+		CardViewHolder holder;
 		if (convertView == null) {
-			convertView = LayoutInflater.from(mContext).inflate(android.R.layout.simple_list_item_1, parent, false);
+			convertView = LayoutInflater.from(mContext).inflate(R.layout.row_card, parent, false);
+
+			holder = new CardViewHolder();
+			holder.mLabel = Ui.findView(convertView, R.id.label_text_view);
+			holder.mDivider = Ui.findView(convertView, R.id.divider);
+			holder.mRemoveButton = Ui.findView(convertView, R.id.remove_button);
+			convertView.setTag(holder);
+		}
+		else {
+			holder = (CardViewHolder) convertView.getTag();
 		}
 
-		TextView textView = (TextView) convertView;
 		Card card = (Card) getItem(position);
 		int resId = card.getNameResId();
 		if (card == Card.RANDOM) {
@@ -212,10 +220,30 @@ public class GameSetupAdapter extends BaseAdapter {
 				break;
 			}
 		}
+		holder.mLabel.setText(resId);
 
-		textView.setText(resId);
+		int removeVisibility = getType(position) == Type.HERO && mGameSetup.canRemoveHero() ? View.VISIBLE : View.GONE;
+		holder.mDivider.setVisibility(removeVisibility);
+		holder.mRemoveButton.setVisibility(removeVisibility);
+		if (removeVisibility == View.VISIBLE) {
+			// For now, you can only remove heroes; so assume that is what will happen
+			// if this button is visible and enabled.
+			holder.mRemoveButton.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					int start = getTypeStart(Type.HERO);
+					mListener.onRemove(Type.HERO, position - start - 1);
+				}
+			});
+		}
 
 		return convertView;
+	}
+
+	private static class CardViewHolder {
+		private TextView mLabel;
+		private View mDivider;
+		private View mRemoveButton;
 	}
 
 	//////////////////////////////////////////////////////////////////////////
@@ -223,6 +251,8 @@ public class GameSetupAdapter extends BaseAdapter {
 
 	public interface GameSetupAdapterListener {
 		public void onAdd(Type type);
+
+		public void onRemove(Type type, int index);
 	}
 
 }

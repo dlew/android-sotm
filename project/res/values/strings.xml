@@ -13,6 +13,7 @@
     <string name="header_villain">Villain</string>
     <string name="header_environment">Environment</string>
     <string name="add_symbol">+</string>
+    <string name="remove_symbol">-</string>
 
     <!-- Cards -->
     <string name="card_random">Random</string>
