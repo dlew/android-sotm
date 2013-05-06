@@ -1,5 +1,9 @@
 package com.idunnolol.sotm.data;
 
+import java.util.Comparator;
+
+import android.content.Context;
+
 import com.idunnolol.sotm.R;
 
 public class Card {
@@ -76,6 +80,19 @@ public class Card {
 
 	public void setIsAlternate(boolean isAlternate) {
 		mIsAlternate = isAlternate;
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+	// Comparators
+
+	public static Comparator<Card> getNameComparator(final Context context) {
+		return new Comparator<Card>() {
+			public int compare(Card lhs, Card rhs) {
+				String lhName = context.getString(lhs.getNameResId());
+				String rhName = context.getString(rhs.getNameResId());
+				return lhName.compareTo(rhName);
+			}
+		};
 	}
 
 }

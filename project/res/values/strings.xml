@@ -3,6 +3,7 @@
 
     <string name="app_name">Sentinels Randomizer</string>
     <string name="action_settings">Settings</string>
+    <string name="cancel">Cancel</string>
 
     <!-- Picker fragment -->
     <string name="action_randomize">Randomize</string>

@@ -3,6 +3,7 @@ package com.idunnolol.sotm.data;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -57,8 +58,24 @@ public class Db {
 
 	private Map<String, String> mNameConversions = new HashMap<String, String>();
 
+	public static Card getCard(String id) {
+		return sInstance.mCards.get(id);
+	}
+
 	public static Collection<Card> getCards() {
 		return sInstance.mCards.values();
+	}
+
+	public static Collection<Card> getCards(Type type) {
+		Collection<Card> cards = new ArrayList<Card>();
+
+		for (Card card : sInstance.mCards.values()) {
+			if (card.getType() == type) {
+				cards.add(card);
+			}
+		}
+
+		return cards;
 	}
 
 	//////////////////////////////////////////////////////////////////////////

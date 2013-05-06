@@ -7,12 +7,16 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 
 import com.idunnolol.sotm.R;
+import com.idunnolol.sotm.data.Card;
+import com.idunnolol.sotm.data.Card.Type;
 import com.idunnolol.sotm.data.GameSetup;
+import com.idunnolol.sotm.fragment.CardPickerDialogFragment.CardPickerDialogFragmentListener;
 import com.idunnolol.sotm.widget.PickerAdapter;
 
-public class PickerListFragment extends ListFragment {
+public class PickerListFragment extends ListFragment implements CardPickerDialogFragmentListener {
 
 	public static final String TAG = PickerListFragment.class.getName();
 
@@ -21,6 +25,11 @@ public class PickerListFragment extends ListFragment {
 	private PickerAdapter mAdapter;
 
 	private GameSetup mGameSetup;
+
+	// Which index we're currently selecting for the card dialog fragment
+	// TODO: onSaveInstanceState()
+	private Type mSelectCardType;
+	private int mSelectCardIndex;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -47,6 +56,18 @@ public class PickerListFragment extends ListFragment {
 		setListAdapter(mAdapter);
 	}
 
+	@Override
+	public void onListItemClick(ListView l, View v, int position, long id) {
+		super.onListItemClick(l, v, position, id);
+
+		mSelectCardType = mAdapter.getType(position);
+		int start = mAdapter.getTypeStart(mSelectCardType);
+		mSelectCardIndex = position - start - 1;
+
+		CardPickerDialogFragment dialogFragment = CardPickerDialogFragment.newInstance(mSelectCardType);
+		dialogFragment.show(getActivity().getFragmentManager(), CardPickerDialogFragment.TAG);
+	}
+
 	//////////////////////////////////////////////////////////////////////////
 	// Action bar
 
@@ -67,10 +88,32 @@ public class PickerListFragment extends ListFragment {
 		return super.onOptionsItemSelected(item);
 	}
 
+	//////////////////////////////////////////////////////////////////////////
+	// CardPickerDialogFragmentListener
+
+	@SuppressWarnings("incomplete-switch")
+	@Override
+	public void onCardSelected(Card card) {
+		switch (mSelectCardType) {
+		case HERO:
+			mGameSetup.setHero(mSelectCardIndex, card);
+			break;
+		case VILLAIN:
+			mGameSetup.setVillain(card);
+			break;
+		case ENVIRONMENT:
+			mGameSetup.setEnvironment(card);
+			break;
+		}
+
+		mAdapter.notifyDataSetChanged();
+	}
+
 	//////////////////////////////////////////////////////////////////////////	
 	// Interface
 
 	public interface PickerListFragmentListener {
 		public void onRandomize(GameSetup gameSetup);
 	}
+
 }

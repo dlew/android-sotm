@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.idunnolol.sotm.R;
 import com.idunnolol.sotm.data.Card;
+import com.idunnolol.sotm.data.Card.Type;
 import com.idunnolol.sotm.data.GameSetup;
 
 public class PickerAdapter extends BaseAdapter {
@@ -18,21 +19,13 @@ public class PickerAdapter extends BaseAdapter {
 		CARD
 	}
 
-	private enum Section {
-		HEROES,
-		VILLAIN,
-		ENVIRONMENT
-	}
-
 	private Context mContext;
-	private LayoutInflater mInflater;
 
 	private GameSetup mGameSetup;
 
 	public PickerAdapter(Context context, GameSetup gameSetup) {
 		mGameSetup = gameSetup;
 		mContext = context;
-		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
 
 	@Override
@@ -45,11 +38,21 @@ public class PickerAdapter extends BaseAdapter {
 		return getItemRowType(position).ordinal();
 	}
 
-	public RowType getItemRowType(int position) {
-		Section section = getSection(position);
-		int sectionStart = getSectionStart(section);
+	@Override
+	public boolean areAllItemsEnabled() {
+		return false;
+	}
 
-		if (position == sectionStart) {
+	@Override
+	public boolean isEnabled(int position) {
+		return getItemRowType(position) == RowType.CARD;
+	}
+
+	public RowType getItemRowType(int position) {
+		Type type = getType(position);
+		int typeStart = getTypeStart(type);
+
+		if (position == typeStart) {
 			return RowType.HEADER;
 		}
 		else {
@@ -57,9 +60,9 @@ public class PickerAdapter extends BaseAdapter {
 		}
 	}
 
-	private int getSectionStart(Section section) {
-		switch (section) {
-		case HEROES:
+	public int getTypeStart(Type type) {
+		switch (type) {
+		case HERO:
 			return 0;
 		case VILLAIN:
 			return mGameSetup.getHeroCount() + 1;
@@ -70,15 +73,15 @@ public class PickerAdapter extends BaseAdapter {
 		}
 	}
 
-	private Section getSection(int position) {
-		if (position < getSectionStart(Section.VILLAIN)) {
-			return Section.HEROES;
+	public Type getType(int position) {
+		if (position < getTypeStart(Type.VILLAIN)) {
+			return Type.HERO;
 		}
-		else if (position < getSectionStart(Section.ENVIRONMENT)) {
-			return Section.VILLAIN;
+		else if (position < getTypeStart(Type.ENVIRONMENT)) {
+			return Type.VILLAIN;
 		}
 		else {
-			return Section.ENVIRONMENT;
+			return Type.ENVIRONMENT;
 		}
 	}
 
@@ -88,27 +91,28 @@ public class PickerAdapter extends BaseAdapter {
 		return 5 + mGameSetup.getHeroCount();
 	}
 
+	@SuppressWarnings("incomplete-switch")
 	@Override
 	public Object getItem(int position) {
 		RowType rowType = getItemRowType(position);
-		Section section = getSection(position);
+		Type type = getType(position);
 
 		switch (rowType) {
 		case HEADER:
-			switch (section) {
-			case HEROES:
-				return mContext.getString(R.string.header_heroes);
+			switch (type) {
+			case HERO:
+				return R.string.header_heroes;
 			case VILLAIN:
-				return mContext.getString(R.string.header_villain);
+				return R.string.header_villain;
 			case ENVIRONMENT:
-				return mContext.getString(R.string.header_environment);
+				return R.string.header_environment;
 			}
 			break;
 		case CARD:
-			switch (section) {
-			case HEROES:
-				int sectionStart = getSectionStart(section);
-				int heroIndex = position - sectionStart - 1;
+			switch (type) {
+			case HERO:
+				int typeStart = getTypeStart(type);
+				int heroIndex = position - typeStart - 1;
 				return mGameSetup.getHeroes().get(heroIndex);
 			case VILLAIN:
 				return mGameSetup.getVillain();
@@ -142,25 +146,23 @@ public class PickerAdapter extends BaseAdapter {
 
 	private View getHeaderView(int position, View convertView, ViewGroup parent) {
 		if (convertView == null) {
-			convertView = mInflater.inflate(android.R.layout.simple_list_item_1, parent, false);
+			convertView = LayoutInflater.from(mContext).inflate(android.R.layout.simple_list_item_1, parent, false);
 		}
 
 		TextView textView = (TextView) convertView;
-		String text = (String) getItem(position);
-		textView.setText(text);
+		textView.setText((Integer) getItem(position));
 
 		return convertView;
 	}
 
 	private View getCardView(int position, View convertView, ViewGroup parent) {
 		if (convertView == null) {
-			convertView = mInflater.inflate(android.R.layout.simple_list_item_1, parent, false);
+			convertView = LayoutInflater.from(mContext).inflate(android.R.layout.simple_list_item_1, parent, false);
 		}
 
 		TextView textView = (TextView) convertView;
 		Card card = (Card) getItem(position);
-		String text = mContext.getString(card.getNameResId());
-		textView.setText(text);
+		textView.setText(card.getNameResId());
 
 		return convertView;
 	}
