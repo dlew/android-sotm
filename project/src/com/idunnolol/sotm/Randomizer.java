@@ -17,17 +17,9 @@ public class Randomizer {
 	// The base game setup; when we randomize, we fill in any cards set to RANDOM
 	private GameSetup mBaseGameSetup;
 
-	// Whether or not to randomly pick alternate cards (e.g. promos).  Some users
-	// may want to pick this on their own after selecting the "base" card.
-	private boolean mIncludeAlternates;
-
 	public Randomizer(GameSetup baseGameSetup) {
 		mBaseGameSetup = baseGameSetup;
 		mRand = new Random();
-	}
-
-	public void setIncludeAlternatives(boolean includeAlternatives) {
-		mIncludeAlternates = includeAlternatives;
 	}
 
 	/**
@@ -93,14 +85,7 @@ public class Randomizer {
 
 	private Card getRandomCard(Type type) {
 		List<Card> cards = Db.getCards(type);
-		int size = cards.size();
-		Card card;
-		do {
-			int index = mRand.nextInt(size);
-			card = cards.get(index);
-		}
-		while (!mIncludeAlternates && card.isIsAlternate());
-
-		return card;
+		int index = mRand.nextInt(cards.size());
+		return cards.get(index);
 	}
 }
