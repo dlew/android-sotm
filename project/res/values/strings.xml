@@ -7,6 +7,7 @@
     <!-- Randomizer activity/fragment -->
     <string name="title_randomizer">Randomizer</string>
     <string name="action_randomize">Randomize</string>
+    <string name="action_randomize_again">Try Again</string>
     <string name="action_reset">Reset</string>
     <string name="action_configure">Configure Cards</string>
     <string name="header_heroes">Heroes</string>

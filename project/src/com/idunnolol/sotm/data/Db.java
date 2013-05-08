@@ -16,6 +16,7 @@ import android.content.SharedPreferences.Editor;
 import android.preference.PreferenceManager;
 import android.util.JsonReader;
 import android.util.JsonToken;
+import android.util.Pair;
 import android.util.SparseIntArray;
 
 import com.idunnolol.sotm.R;
@@ -79,6 +80,9 @@ public class Db {
 	private SparseIntArray mDifficultyScale = new SparseIntArray();
 
 	private Map<String, String> mNameConversions = new HashMap<String, String>();
+
+	private int mMinDifficultyPoints;
+	private int mMaxDifficultyPoints;
 
 	public static List<CardSet> getCardSets() {
 		return sInstance.mCardSets;
@@ -163,6 +167,51 @@ public class Db {
 		while (lossPct == -1);
 
 		return 100 - lossPct;
+	}
+
+	/**
+	 * Calculates the range of point values that will satisfy the min/max win percents.
+	 */
+	public static Pair<Integer, Integer> getPointRange(int minWinPercent, int maxWinPercent) {
+		if (minWinPercent < 0) {
+			minWinPercent = 0;
+		}
+		if (maxWinPercent > 100) {
+			maxWinPercent = 100;
+		}
+
+		int start = sInstance.mMaxDifficultyPoints;
+		int end = sInstance.mMinDifficultyPoints;
+
+		// Search through the entire difficulty scale looking for
+		// the closest value to the min/max win percent.
+		int size = sInstance.mDifficultyScale.size();
+		int closestMin = 200;
+		int closestMax = 200;
+		for (int index = 0; index < size; index++) {
+			int points = sInstance.mDifficultyScale.keyAt(index);
+			int winPct = 100 - sInstance.mDifficultyScale.get(points);
+
+			int minDiff = Math.abs(minWinPercent - winPct);
+			if (minDiff < closestMin) {
+				start = points;
+				closestMin = minDiff;
+			}
+			else if (minDiff == closestMin && points > start) {
+				start = points;
+			}
+
+			int maxDiff = Math.abs(maxWinPercent - winPct);
+			if (maxDiff < closestMax) {
+				end = points;
+				closestMax = maxDiff;
+			}
+			else if (maxDiff == closestMax && points < end) {
+				end = points;
+			}
+		}
+
+		return new Pair<Integer, Integer>(end, start);
 	}
 
 	//////////////////////////////////////////////////////////////////////////
@@ -441,10 +490,14 @@ public class Db {
 	}
 
 	private void readDifficultyScale(JsonReader reader) throws IOException {
+		mMinDifficultyPoints = Integer.MAX_VALUE;
+		mMaxDifficultyPoints = Integer.MIN_VALUE;
+
 		reader.beginArray();
 		while (reader.hasNext()) {
 			int total = 0;
 			int lossPercent = 0;
+			boolean skipped = false;
 
 			// NOTE: This null-check can be removed if points JSON becomes compliant
 			if (reader.peek() != JsonToken.NULL) {
@@ -465,9 +518,19 @@ public class Db {
 			}
 			else {
 				reader.skipValue();
+				skipped = true;
 			}
 
-			mDifficultyScale.put(total, lossPercent);
+			if (!skipped) {
+				mDifficultyScale.put(total, lossPercent);
+
+				if (total < mMinDifficultyPoints) {
+					mMinDifficultyPoints = total;
+				}
+				if (total > mMaxDifficultyPoints) {
+					mMaxDifficultyPoints = total;
+				}
+			}
 		}
 		reader.endArray();
 	}

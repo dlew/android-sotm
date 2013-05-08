@@ -5,12 +5,21 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+import android.util.Pair;
+
 import com.idunnolol.sotm.data.Card;
-import com.idunnolol.sotm.data.GameSetup;
-import com.idunnolol.sotm.data.Db;
 import com.idunnolol.sotm.data.Card.Type;
+import com.idunnolol.sotm.data.Db;
+import com.idunnolol.sotm.data.GameSetup;
+import com.idunnolol.utils.Log;
 
 public class Randomizer {
+
+	// Plus/minus this value for difficulty
+	private static final int DIFFICULTY_FUZZ = 5;
+
+	// Randomization timeout in nanoseconds
+	private static final long RANDOMIZE_TIMEOUT = 100 * 1000000;
 
 	private Random mRand;
 
@@ -81,6 +90,69 @@ public class Randomizer {
 		}
 
 		return gameSetup;
+	}
+
+	/**
+	 * Here's how we do randomization with a target win %.  It is extremely
+	 * lazy and cheap.
+	 * 
+	 * First, we have a fuzzing range for the acceptable points.  This
+	 * is to introduce a bit of variety, otherwise you will commonly
+	 * end up with the same setups for various difficulties.
+	 * 
+	 * We randomly fill in the base set until we hit an acceptable point
+	 * value.  We keep retrying for a certain amount of time.  This method
+	 * is used because it's easy and I'm lazy.
+	 * 
+	 * If we fail to fill the random slots, then we fallback to the closest
+	 * game setup we found before failing.
+	 * 
+	 * @param targetWinPercent
+	 * @return
+	 */
+	public GameSetup randomize(int targetWinPercent) {
+		int minAcceptableWinPercent = targetWinPercent - DIFFICULTY_FUZZ;
+		int maxAcceptableWinPercent = targetWinPercent + DIFFICULTY_FUZZ;
+
+		Pair<Integer, Integer> pair = Db.getPointRange(minAcceptableWinPercent, maxAcceptableWinPercent);
+		int minPoints = pair.first;
+		int maxPoints = pair.second;
+
+		long start = System.nanoTime();
+		GameSetup currGameSetup;
+		int minDistance = Integer.MAX_VALUE;
+		GameSetup bestGameSetup = null;
+
+		int numTimes = 0;
+		do {
+			numTimes++;
+
+			currGameSetup = randomize();
+			int currPoints = currGameSetup.getPoints();
+
+			if (currPoints > maxPoints) {
+				if (currPoints - maxPoints < minDistance) {
+					minDistance = currPoints - maxPoints;
+					bestGameSetup = currGameSetup;
+				}
+			}
+			else if (currPoints < minPoints) {
+				if (minPoints - currPoints < minDistance) {
+					minDistance = minPoints - currPoints;
+					bestGameSetup = currGameSetup;
+				}
+			}
+			else {
+				bestGameSetup = currGameSetup;
+				break;
+			}
+		}
+		while (System.nanoTime() - start < RANDOMIZE_TIMEOUT);
+
+		Log.i("Range[" + minPoints + ", " + maxPoints + "] - found " + bestGameSetup.getPoints() + " (after "
+				+ numTimes + " tries)");
+
+		return bestGameSetup;
 	}
 
 	private Card getRandomCard(Type type) {

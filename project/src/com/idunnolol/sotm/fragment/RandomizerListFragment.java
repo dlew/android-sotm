@@ -155,6 +155,7 @@ public class RandomizerListFragment extends ListFragment implements GameSetupAda
 		mBaseGameSetup = null;
 		mAdapter.notifyDataSetChanged();
 		mListener.onGameSetupChanged(mGameSetup);
+		getActivity().invalidateOptionsMenu();
 	}
 
 	//////////////////////////////////////////////////////////////////////////
@@ -167,9 +168,18 @@ public class RandomizerListFragment extends ListFragment implements GameSetupAda
 	}
 
 	@Override
+	public void onPrepareOptionsMenu(Menu menu) {
+		super.onPrepareOptionsMenu(menu);
+
+		menu.findItem(R.id.action_randomize_again).setVisible(mBaseGameSetup != null);
+		menu.findItem(R.id.action_randomize).setVisible(mBaseGameSetup == null && mGameSetup.hasRandomCards());
+	}
+
+	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.action_randomize:
+		case R.id.action_randomize_again:
 			GameSetup baseGameSetup = mBaseGameSetup;
 			if (baseGameSetup == null) {
 				baseGameSetup = new GameSetup(mGameSetup);
