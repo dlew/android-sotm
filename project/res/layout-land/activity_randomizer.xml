@@ -1,21 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:baselineAligned="false"
     android:orientation="horizontal" >
 
     <fragment
-        android:id="@+id/randomizer_list_fragment"
-        android:name="com.idunnolol.sotm.fragment.RandomizerListFragment"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1" />
-
-    <fragment
         android:id="@+id/stats_fragment"
         android:name="com.idunnolol.sotm.fragment.StatsFragment"
         android:layout_width="160dp"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true" />
 
-</LinearLayout>
+    <fragment
+        android:id="@+id/randomizer_list_fragment"
+        android:name="com.idunnolol.sotm.fragment.RandomizerListFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/stats_fragment" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/randomizer_list_fragment"
+        android:scaleType="fitXY"
+        android:src="@drawable/bg_shadow_right"
+        tools:ignore="ContentDescription" />
+
+</RelativeLayout>
