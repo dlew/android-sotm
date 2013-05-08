@@ -3,6 +3,8 @@ package com.idunnolol.sotm.data;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.idunnolol.sotm.data.Card.Type;
+
 import android.os.Bundle;
 
 /**
@@ -93,6 +95,67 @@ public class GameSetup {
 
 	public Card getEnvironment() {
 		return mEnvironment;
+	}
+
+	/**
+	 * @return true if there is a random card in the setup, false if all cards are filled out
+	 */
+	public boolean hasRandomCards() {
+		for (Card card : mHeroes) {
+			if (card == Card.RANDOM) {
+				return true;
+			}
+		}
+
+		return mVillain == Card.RANDOM || mEnvironment == Card.RANDOM;
+	}
+
+	/**
+	 * Calculates the points that this setup represents.  If there
+	 * are random cards, it's just a rough estimate.
+	 * 
+	 * Random cards are calculated as the average of all their types
+	 * (as any one of them could be returned).
+	 */
+	public int getPoints() {
+		int points = 0;
+
+		int avgHero = Db.getAvgPoints(Type.HERO);
+
+		for (Card card : mHeroes) {
+			if (card == Card.RANDOM) {
+				points += avgHero;
+			}
+			else {
+				points += card.getPoints();
+			}
+		}
+
+		if (mVillain == Card.RANDOM) {
+			points += Db.getAvgPoints(Type.VILLAIN);
+		}
+		else {
+			points += mVillain.getPoints();
+		}
+
+		if (mEnvironment == Card.RANDOM) {
+			points += Db.getAvgPoints(Type.ENVIRONMENT);
+		}
+		else {
+			points += mEnvironment.getPoints();
+		}
+
+		// Factor in # of players
+		points += Db.getPointsForNumPlayers(mHeroes.size());
+
+		return points;
+	}
+
+	/**
+	 * @return The estimated chance of winning, as an int 0-100
+	 */
+	public int getWinPercent() {
+		return Db.getWinPercent(getPoints());
 	}
 
 	public void updateFrom(GameSetup other) {

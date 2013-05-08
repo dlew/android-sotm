@@ -2,6 +2,7 @@ package com.idunnolol.sotm.fragment;
 
 import java.util.List;
 
+import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.ListFragment;
 import android.os.Bundle;
@@ -30,6 +31,8 @@ public class RandomizerListFragment extends ListFragment implements GameSetupAda
 	private static final String INSTANCE_SELECTED_CARD_INDEX = "INSTANCE_SELECTED_CARD_INDEX";
 	private static final String INSTANCE_GAME_SETUP = "INSTANCE_GAME_SETUP";
 	private static final String INSTANCE_BASE_GAME_SETUP = "INSTANCE_BASE_GAME_SETUP";
+
+	private RandomizerListFragmentListener mListener;
 
 	private GameSetupAdapter mAdapter;
 
@@ -66,6 +69,21 @@ public class RandomizerListFragment extends ListFragment implements GameSetupAda
 	}
 
 	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+
+		mListener = (RandomizerListFragmentListener) activity;
+	}
+
+	@Override
+	public void onViewCreated(View view, Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+
+		mAdapter = new GameSetupAdapter(getActivity(), mGameSetup, this);
+		setListAdapter(mAdapter);
+	}
+
+	@Override
 	public void onResume() {
 		super.onResume();
 
@@ -89,8 +107,7 @@ public class RandomizerListFragment extends ListFragment implements GameSetupAda
 		}
 
 		if (hasChanged) {
-			mBaseGameSetup = null;
-			mAdapter.notifyDataSetChanged();
+			onGameSetupChanged();
 		}
 	}
 
@@ -108,14 +125,6 @@ public class RandomizerListFragment extends ListFragment implements GameSetupAda
 			outState.putInt(INSTANCE_SELECTED_CARD_TYPE, mSelectCardType.ordinal());
 		}
 		outState.putInt(INSTANCE_SELECTED_CARD_INDEX, mSelectCardIndex);
-	}
-
-	@Override
-	public void onViewCreated(View view, Bundle savedInstanceState) {
-		super.onViewCreated(view, savedInstanceState);
-
-		mAdapter = new GameSetupAdapter(getActivity(), mGameSetup, this);
-		setListAdapter(mAdapter);
 	}
 
 	@Override
@@ -138,6 +147,16 @@ public class RandomizerListFragment extends ListFragment implements GameSetupAda
 		}
 	}
 
+	public GameSetup getGameSetup() {
+		return mGameSetup;
+	}
+
+	private void onGameSetupChanged() {
+		mBaseGameSetup = null;
+		mAdapter.notifyDataSetChanged();
+		mListener.onGameSetupChanged(mGameSetup);
+	}
+
 	//////////////////////////////////////////////////////////////////////////
 	// Action bar
 
@@ -151,14 +170,16 @@ public class RandomizerListFragment extends ListFragment implements GameSetupAda
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.action_randomize:
-			if (mBaseGameSetup == null) {
-				mBaseGameSetup = new GameSetup(mGameSetup);
+			GameSetup baseGameSetup = mBaseGameSetup;
+			if (baseGameSetup == null) {
+				baseGameSetup = new GameSetup(mGameSetup);
 			}
 
-			Randomizer randomizer = new Randomizer(mBaseGameSetup);
+			Randomizer randomizer = new Randomizer(baseGameSetup);
 			if (randomizer.canRandomize()) {
 				mGameSetup.updateFrom(randomizer.randomize());
-				mAdapter.notifyDataSetChanged();
+				onGameSetupChanged();
+				mBaseGameSetup = baseGameSetup;
 			}
 			else {
 				mBaseGameSetup = null;
@@ -168,8 +189,7 @@ public class RandomizerListFragment extends ListFragment implements GameSetupAda
 			return true;
 		case R.id.action_reset:
 			mGameSetup.reset();
-			mBaseGameSetup = null;
-			mAdapter.notifyDataSetChanged();
+			onGameSetupChanged();
 			return true;
 		}
 
@@ -182,15 +202,13 @@ public class RandomizerListFragment extends ListFragment implements GameSetupAda
 	@Override
 	public void onAdd(Type type) {
 		mGameSetup.addHero();
-		mBaseGameSetup = null;
-		mAdapter.notifyDataSetChanged();
+		onGameSetupChanged();
 	}
 
 	@Override
 	public void onRemove(Type type, int index) {
 		mGameSetup.removeHero(index);
-		mBaseGameSetup = null;
-		mAdapter.notifyDataSetChanged();
+		onGameSetupChanged();
 	}
 
 	//////////////////////////////////////////////////////////////////////////
@@ -210,10 +228,14 @@ public class RandomizerListFragment extends ListFragment implements GameSetupAda
 			break;
 		}
 
-		// We assume something has changed; reset the base game setup
-		mBaseGameSetup = null;
+		onGameSetupChanged();
+	}
 
-		mAdapter.notifyDataSetChanged();
+	//////////////////////////////////////////////////////////////////////////
+	// Interface
+
+	public interface RandomizerListFragmentListener {
+		public void onGameSetupChanged(GameSetup gameSetup);
 	}
 
 }

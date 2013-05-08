@@ -126,6 +126,45 @@ public class Db {
 		Log.d("Saved card states in " + ((end - start) / 100000) + " ms");
 	}
 
+	public static int getPointsForNumPlayers(int numPlayers) {
+		return sInstance.mNumPlayerPoints.get(numPlayers, 0);
+	}
+
+	/**
+	 * Returns the average points v
+	 * @param type
+	 * @return
+	 */
+	public static int getAvgPoints(Type type) {
+		int total = 0;
+		List<Card> cards = getCards(type);
+		for (Card card : cards) {
+			total += card.getPoints();
+		}
+		return total / cards.size();
+	}
+
+	public static int getWinPercent(int points) {
+		// Round points to the nearest 5, as the scale is in 5s.  Round up.
+		int mod = points % 5;
+		if (mod >= 3) {
+			points += 5 - mod;
+		}
+		else {
+			points -= mod;
+		}
+
+		// Search, heading towards 0, until you find something on the difficulty scale
+		int lossPct = -1;
+		do {
+			lossPct = sInstance.mDifficultyScale.get(points, -1);
+			points += points > 0 ? -5 : 5;
+		}
+		while (lossPct == -1);
+
+		return 100 - lossPct;
+	}
+
 	//////////////////////////////////////////////////////////////////////////
 	// Read data
 
@@ -416,7 +455,7 @@ public class Db {
 						total = reader.nextInt();
 					}
 					else if (name.equals("losspct")) {
-						total = reader.nextInt();
+						lossPercent = reader.nextInt();
 					}
 					else {
 						reader.skipValue();
