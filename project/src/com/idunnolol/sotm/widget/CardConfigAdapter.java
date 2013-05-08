@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
-import android.graphics.Color;
+import android.content.res.Resources;
+import android.graphics.Typeface;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +30,9 @@ public class CardConfigAdapter extends BaseAdapter {
 
 	private List<Object> mItems;
 
+	private int mCachedHeaderBgColor;
+	private float mCachedHeaderTextSize;
+
 	public CardConfigAdapter(Context context) {
 		mContext = context;
 
@@ -37,6 +42,10 @@ public class CardConfigAdapter extends BaseAdapter {
 			mItems.add(cardSet);
 			mItems.addAll(cardSet.getCards());
 		}
+
+		Resources res = context.getResources();
+		mCachedHeaderBgColor = res.getColor(android.R.color.holo_blue_light);
+		mCachedHeaderTextSize = res.getDimensionPixelSize(R.dimen.text_size_row_header);
 	}
 
 	@Override
@@ -86,7 +95,10 @@ public class CardConfigAdapter extends BaseAdapter {
 
 			// Set different backgrounds based on the type
 			if (rowType == RowType.HEADER) {
-				convertView.setBackgroundColor(Color.RED);
+				convertView.setBackgroundColor(mCachedHeaderBgColor);
+				holder.mLabel.setTextAppearance(mContext, android.R.style.TextAppearance_Inverse);
+				holder.mLabel.setTypeface(Typeface.DEFAULT_BOLD);
+				holder.mLabel.setTextSize(TypedValue.COMPLEX_UNIT_PX, mCachedHeaderTextSize);
 			}
 		}
 		else {

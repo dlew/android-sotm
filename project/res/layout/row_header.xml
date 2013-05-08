@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="?android:attr/actionBarSize"
-    android:background="#F00"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:background="@android:color/holo_blue_light"
     android:orientation="horizontal" >
 
     <TextView
@@ -15,25 +15,26 @@
         android:ellipsize="end"
         android:gravity="center_vertical"
         android:singleLine="true"
+        android:textAppearance="@android:style/TextAppearance.Inverse"
         android:textIsSelectable="false"
-        android:textSize="24dp"
+        android:textSize="@dimen/text_size_row_header"
         android:textStyle="bold" />
 
     <View
         android:id="@+id/divider"
         android:layout_width="1dp"
         android:layout_height="match_parent"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
-        android:background="#0F0" />
+        android:background="?android:attr/listDivider" />
 
     <TextView
         android:id="@+id/add_button"
         android:layout_width="64dp"
         android:layout_height="match_parent"
+        android:background="?android:attr/listChoiceBackgroundIndicator"
         android:gravity="center"
         android:text="@string/add_symbol"
-        android:textSize="28dp"
+        android:textAppearance="@android:style/TextAppearance.Inverse"
+        android:textSize="@dimen/text_size_row_button"
         android:textStyle="bold" />
 
 </LinearLayout>
