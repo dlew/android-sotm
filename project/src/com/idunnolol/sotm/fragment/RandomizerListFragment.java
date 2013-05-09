@@ -34,6 +34,7 @@ public class RandomizerListFragment extends ListFragment implements GameSetupAda
 	private static final String INSTANCE_SELECTED_CARD_INDEX = "INSTANCE_SELECTED_CARD_INDEX";
 	private static final String INSTANCE_GAME_SETUP = "INSTANCE_GAME_SETUP";
 	private static final String INSTANCE_BASE_GAME_SETUP = "INSTANCE_BASE_GAME_SETUP";
+	private static final String INSTANCE_TARGET_WIN_PERCENT = "INSTANCE_TARGET_WIN_PERCENT";
 
 	private RandomizerListFragmentListener mListener;
 
@@ -63,6 +64,7 @@ public class RandomizerListFragment extends ListFragment implements GameSetupAda
 
 			if (savedInstanceState.containsKey(INSTANCE_BASE_GAME_SETUP)) {
 				mBaseGameSetup = savedInstanceState.getParcelable(INSTANCE_BASE_GAME_SETUP);
+				mTargetWinPercent = savedInstanceState.getInt(INSTANCE_TARGET_WIN_PERCENT);
 			}
 
 			if (savedInstanceState.containsKey(INSTANCE_SELECTED_CARD_TYPE)) {
@@ -123,6 +125,7 @@ public class RandomizerListFragment extends ListFragment implements GameSetupAda
 
 		if (mBaseGameSetup != null) {
 			outState.putParcelable(INSTANCE_BASE_GAME_SETUP, mBaseGameSetup);
+			outState.putInt(INSTANCE_TARGET_WIN_PERCENT, mTargetWinPercent);
 		}
 
 		if (mSelectCardType != null) {
