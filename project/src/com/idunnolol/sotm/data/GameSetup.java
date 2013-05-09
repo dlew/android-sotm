@@ -65,12 +65,10 @@ public class GameSetup {
 	/**
 	 * @return all alternative cards that are blocked because we've already selected one of them
 	 */
-	public Collection<Card> getAlternateHeroes() {
+	public Collection<Card> getHeroesAndAlternates() {
 		Collection<Card> alts = new HashSet<Card>();
-		for (Card card : mHeroes) {
-			if (card.hasAlternates()) {
-				alts.addAll(card.getAlternates());
-			}
+		for (Card hero : mHeroes) {
+			alts.addAll(Db.getCardAndAlternates(hero));
 		}
 		return alts;
 	}
@@ -147,8 +145,7 @@ public class GameSetup {
 		for (Card hero : heroList) {
 			if (!countedSet.contains(hero)) {
 				heroCount++;
-				countedSet.add(hero);
-				countedSet.addAll(hero.getAlternates());
+				countedSet.addAll(Db.getCardAndAlternates(hero));
 			}
 		}
 

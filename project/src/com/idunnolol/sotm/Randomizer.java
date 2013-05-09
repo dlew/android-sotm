@@ -43,10 +43,7 @@ public class Randomizer {
 
 		// Fill the initial used cards
 		for (Card hero : heroes) {
-			if (hero != Card.RANDOM) {
-				usedCards.add(hero);
-				usedCards.addAll(hero.getAlternates());
-			}
+			usedCards.addAll(Db.getCardAndAlternates(hero));
 		}
 
 		for (int a = 0; a < size; a++) {
@@ -59,8 +56,7 @@ public class Randomizer {
 				while (usedCards.contains(card));
 
 				gameSetup.setHero(a, card);
-				usedCards.add(card);
-				usedCards.addAll(card.getAlternates());
+				usedCards.addAll(Db.getCardAndAlternates(card));
 			}
 		}
 

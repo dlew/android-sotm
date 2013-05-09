@@ -14,7 +14,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.preference.PreferenceManager;
-import android.text.TextUtils;
 import android.util.JsonReader;
 import android.util.JsonToken;
 import android.util.Pair;
@@ -82,7 +81,7 @@ public class Db {
 
 	private Map<String, String> mNameConversions = new HashMap<String, String>();
 
-	private Map<String, String> mAlternates = new HashMap<String, String>();
+	private Map<Card, Set<Card>> mAlternates = new HashMap<Card, Set<Card>>();
 
 	private int mMinDifficultyPoints;
 	private int mMaxDifficultyPoints;
@@ -112,6 +111,14 @@ public class Db {
 		}
 
 		return cards;
+	}
+
+	public static Set<Card> getCardAndAlternates(Card card) {
+		if (sInstance.mAlternates.containsKey(card)) {
+			return sInstance.mAlternates.get(card);
+		}
+
+		return new HashSet<Card>();
 	}
 
 	public static void saveCardStates(Context context) {
@@ -245,6 +252,9 @@ public class Db {
 					}
 					reader.endArray();
 				}
+				else if (name.equals("alternates")) {
+					readAlternates(reader);
+				}
 				else {
 					reader.skipValue();
 				}
@@ -254,18 +264,24 @@ public class Db {
 		finally {
 			in.close();
 		}
+	}
 
-		// Process the alternates
-		for (String alt1 : mAlternates.keySet()) {
-			String alt2 = mAlternates.get(alt1);
+	private void readAlternates(JsonReader reader) throws IOException {
+		reader.beginArray();
+		while (reader.hasNext()) {
+			Set<Card> altSet = new HashSet<Card>();
 
-			Log.v("Linking alternates: " + alt1 + ", " + alt2);
+			reader.beginArray();
+			while (reader.hasNext()) {
+				altSet.add(mCards.get(reader.nextString()));
+			}
+			reader.endArray();
 
-			Card card1 = mCards.get(alt1);
-			Card card2 = mCards.get(alt2);
-
-			card1.addAlternate(card2);
+			for (Card card : altSet) {
+				mAlternates.put(card, altSet);
+			}
 		}
+		reader.endArray();
 	}
 
 	private CardSet readSet(JsonReader reader) throws IOException {
@@ -303,8 +319,6 @@ public class Db {
 	private Card readCard(JsonReader reader) throws IOException {
 		Card card = new Card();
 
-		String altId = null;
-
 		reader.beginObject();
 		while (reader.hasNext()) {
 			String jsonName = reader.nextName();
@@ -328,18 +342,11 @@ public class Db {
 					card.setType(Type.ENVIRONMENT);
 				}
 			}
-			else if (jsonName.equals("alternate")) {
-				altId = reader.nextString();
-			}
 			else {
 				reader.skipValue();
 			}
 		}
 		reader.endObject();
-
-		if (!TextUtils.isEmpty(altId)) {
-			mAlternates.put(card.getId(), altId);
-		}
 
 		return card;
 	}
