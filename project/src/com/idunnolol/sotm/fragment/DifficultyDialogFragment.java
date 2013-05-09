@@ -18,12 +18,13 @@ public class DifficultyDialogFragment extends DialogFragment {
 	public static final String TAG = DifficultyDialogFragment.class.getName();
 
 	public enum Difficulty {
-		RANDOM(0, R.string.difficulty_random),
+		RANDOM(-1, R.string.difficulty_random),
 		EASY(90, R.string.difficulty_easy),
 		MEDIUM(75, R.string.difficulty_medium),
 		HARD(50, R.string.difficulty_hard),
 		VERY_HARD(30, R.string.difficulty_very_hard),
-		IMPOSSIBLE(15, R.string.difficulty_impossible);
+		IMPOSSIBLE(15, R.string.difficulty_impossible),
+		PICK_YOUR_OWN(-1, R.string.difficulty_specify);
 
 		private int mTargetWinPercent;
 		private int mStrResId;
@@ -59,7 +60,7 @@ public class DifficultyDialogFragment extends DialogFragment {
 		List<CharSequence> items = new ArrayList<CharSequence>();
 
 		for (Difficulty difficulty : Difficulty.values()) {
-			if (difficulty == Difficulty.RANDOM) {
+			if (difficulty.getTargetWinPercent() == -1) {
 				items.add(getString(difficulty.getStrResId()));
 			}
 			else {

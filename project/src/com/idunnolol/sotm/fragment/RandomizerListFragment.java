@@ -21,11 +21,12 @@ import com.idunnolol.sotm.data.GameSetup;
 import com.idunnolol.sotm.fragment.CardPickerDialogFragment.CardPickerDialogFragmentListener;
 import com.idunnolol.sotm.fragment.DifficultyDialogFragment.Difficulty;
 import com.idunnolol.sotm.fragment.DifficultyDialogFragment.DifficultyDialogFragmentListener;
+import com.idunnolol.sotm.fragment.SpecifyDifficultyDialogFragment.SpecifyDifficultyDialogFragmentListener;
 import com.idunnolol.sotm.widget.GameSetupAdapter;
 import com.idunnolol.sotm.widget.GameSetupAdapter.GameSetupAdapterListener;
 
 public class RandomizerListFragment extends ListFragment implements GameSetupAdapterListener,
-		CardPickerDialogFragmentListener, DifficultyDialogFragmentListener {
+		CardPickerDialogFragmentListener, DifficultyDialogFragmentListener, SpecifyDifficultyDialogFragmentListener {
 
 	public static final String TAG = RandomizerListFragment.class.getName();
 
@@ -41,7 +42,7 @@ public class RandomizerListFragment extends ListFragment implements GameSetupAda
 	private GameSetup mGameSetup;
 
 	// We keep the base GameSetup around, in case we want to randomize multiple times in a row
-	private Difficulty mDifficulty;
+	private int mTargetWinPercent;
 	private GameSetup mBaseGameSetup;
 
 	// Which index we're currently selecting for the card dialog fragment
@@ -156,13 +157,12 @@ public class RandomizerListFragment extends ListFragment implements GameSetupAda
 
 	private void onGameSetupChanged() {
 		mBaseGameSetup = null;
-		mDifficulty = null;
 		mAdapter.notifyDataSetChanged();
 		mListener.onGameSetupChanged(mGameSetup);
 		getActivity().invalidateOptionsMenu();
 	}
 
-	private void randomize(Difficulty difficulty) {
+	private void randomize(int targetWinPercent) {
 		GameSetup baseGameSetup = mBaseGameSetup;
 		if (baseGameSetup == null) {
 			baseGameSetup = new GameSetup(mGameSetup);
@@ -170,16 +170,16 @@ public class RandomizerListFragment extends ListFragment implements GameSetupAda
 
 		Randomizer randomizer = new Randomizer(baseGameSetup);
 		if (randomizer.canRandomize()) {
-			if (difficulty == Difficulty.RANDOM) {
+			if (targetWinPercent == Difficulty.RANDOM.getTargetWinPercent()) {
 				mGameSetup.updateFrom(randomizer.randomize());
 			}
 			else {
-				mGameSetup.updateFrom(randomizer.randomize(difficulty.getTargetWinPercent()));
+				mGameSetup.updateFrom(randomizer.randomize(targetWinPercent));
 			}
 
 			onGameSetupChanged();
 			mBaseGameSetup = baseGameSetup;
-			mDifficulty = difficulty;
+			mTargetWinPercent = targetWinPercent;
 		}
 		else {
 			DialogFragment df = NotEnoughCardsDialogFragment.newInstance(randomizer.getFirstLackingType());
@@ -213,7 +213,7 @@ public class RandomizerListFragment extends ListFragment implements GameSetupAda
 			df.show(getActivity().getFragmentManager(), DifficultyDialogFragment.TAG);
 			return true;
 		case R.id.action_reroll:
-			randomize(mDifficulty);
+			randomize(mTargetWinPercent);
 			return true;
 		case R.id.action_reset:
 			mGameSetup.reset();
@@ -264,7 +264,21 @@ public class RandomizerListFragment extends ListFragment implements GameSetupAda
 
 	@Override
 	public void onDifficultyChosen(Difficulty difficulty) {
-		randomize(difficulty);
+		if (difficulty == Difficulty.PICK_YOUR_OWN) {
+			SpecifyDifficultyDialogFragment df = new SpecifyDifficultyDialogFragment();
+			df.show(getFragmentManager(), SpecifyDifficultyDialogFragment.TAG);
+		}
+		else {
+			randomize(difficulty.getTargetWinPercent());
+		}
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+	// SpecifyDifficultyDialogFragmentListener
+
+	@Override
+	public void onSpecificDifficultyChosen(int targetWinPercent) {
+		randomize(targetWinPercent);
 	}
 
 	//////////////////////////////////////////////////////////////////////////

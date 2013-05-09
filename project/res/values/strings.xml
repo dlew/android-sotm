@@ -2,7 +2,6 @@
 <resources>
 
     <string name="app_name">Sentinels Randomizer</string>
-    <string name="cancel">Cancel</string>
 
     <!-- Randomizer activity/fragment -->
     <string name="title_randomizer">Randomizer</string>
@@ -19,6 +18,10 @@
     <!-- Configuration activity/fragment -->
     <string name="title_configuration">Configure Cards</string>
 
+    <!-- Multi-use dialog button actions -->
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+
     <!-- Difficulty dialog fragment -->
     <string name="title_difficulty">Choose Game Difficulty</string>
     <string name="difficulty_random">Random</string>
@@ -27,7 +30,11 @@
     <string name="difficulty_hard">Hard</string>
     <string name="difficulty_very_hard">Very Hard</string>
     <string name="difficulty_impossible">Impossible</string>
+    <string name="difficulty_specify">Specify&#8230;</string>
     <string name="template_win_rate">%1$s (%2$s%% Win Rate)</string>
+
+    <!-- Specify difficulty dialog fragment -->
+    <string name="title_specify_difficulty">Pick Target Win Rate</string>
 
     <!-- Not enough cards dialog fragment -->
     <string name="button_configure">Configure</string>
