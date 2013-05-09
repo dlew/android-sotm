@@ -41,7 +41,7 @@
     <string name="difficulty_medium">Medium</string>
     <string name="difficulty_hard">Hard</string>
     <string name="difficulty_very_hard">Very Hard</string>
-    <string name="difficulty_impossible">Impossible</string>
+    <string name="difficulty_good_luck">Good Luck!</string>
     <string name="difficulty_specify">Specify&#8230;</string>
     <string name="template_win_rate">%1$s (%2$s%% Win Rate)</string>
 
