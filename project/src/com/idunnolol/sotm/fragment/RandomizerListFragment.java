@@ -140,14 +140,14 @@ public class RandomizerListFragment extends ListFragment implements GameSetupAda
 		// Check that we even have something to select from
 		if (Db.getCards(mSelectCardType).size() == 0) {
 			DialogFragment df = NotEnoughCardsDialogFragment.newInstance(mSelectCardType);
-			df.show(getActivity().getFragmentManager(), NotEnoughCardsDialogFragment.TAG);
+			df.show(getFragmentManager(), NotEnoughCardsDialogFragment.TAG);
 		}
 		else {
 			int start = mAdapter.getTypeStart(mSelectCardType);
 			mSelectCardIndex = position - start - 1;
 
 			CardPickerDialogFragment dialogFragment = CardPickerDialogFragment.newInstance(mSelectCardType, mGameSetup);
-			dialogFragment.show(getActivity().getFragmentManager(), CardPickerDialogFragment.TAG);
+			dialogFragment.show(getFragmentManager(), CardPickerDialogFragment.TAG);
 		}
 	}
 
@@ -183,7 +183,7 @@ public class RandomizerListFragment extends ListFragment implements GameSetupAda
 		}
 		else {
 			DialogFragment df = NotEnoughCardsDialogFragment.newInstance(baseGameSetup.getFirstLackingType());
-			df.show(getActivity().getFragmentManager(), NotEnoughCardsDialogFragment.TAG);
+			df.show(getFragmentManager(), NotEnoughCardsDialogFragment.TAG);
 		}
 	}
 
@@ -211,11 +211,11 @@ public class RandomizerListFragment extends ListFragment implements GameSetupAda
 		case R.id.action_randomize:
 			if (!mGameSetup.canRandomize()) {
 				DialogFragment df = NotEnoughCardsDialogFragment.newInstance(mGameSetup.getFirstLackingType());
-				df.show(getActivity().getFragmentManager(), NotEnoughCardsDialogFragment.TAG);
+				df.show(getFragmentManager(), NotEnoughCardsDialogFragment.TAG);
 			}
 			else {
 				DifficultyDialogFragment df = new DifficultyDialogFragment();
-				df.show(getActivity().getFragmentManager(), DifficultyDialogFragment.TAG);
+				df.show(getFragmentManager(), DifficultyDialogFragment.TAG);
 			}
 			return true;
 		case R.id.action_reroll:

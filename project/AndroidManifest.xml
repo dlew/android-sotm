@@ -14,9 +14,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        <activity
-            android:name="com.idunnolol.sotm.activity.RandomizerActivity"
-            android:label="@string/title_randomizer" >
+        <activity android:name="com.idunnolol.sotm.activity.RandomizerActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

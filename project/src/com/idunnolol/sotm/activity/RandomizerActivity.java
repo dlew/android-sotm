@@ -12,6 +12,7 @@ import com.idunnolol.sotm.data.GameSetup;
 import com.idunnolol.sotm.fragment.CardPickerDialogFragment.CardPickerDialogFragmentListener;
 import com.idunnolol.sotm.fragment.DifficultyDialogFragment.Difficulty;
 import com.idunnolol.sotm.fragment.DifficultyDialogFragment.DifficultyDialogFragmentListener;
+import com.idunnolol.sotm.fragment.AboutDialogFragment;
 import com.idunnolol.sotm.fragment.RandomizerListFragment;
 import com.idunnolol.sotm.fragment.RandomizerListFragment.RandomizerListFragmentListener;
 import com.idunnolol.sotm.fragment.SpecifyDifficultyDialogFragment.SpecifyDifficultyDialogFragmentListener;
@@ -27,6 +28,8 @@ public class RandomizerActivity extends Activity implements RandomizerListFragme
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		setTitle(R.string.title_randomizer);
 
 		setContentView(R.layout.activity_randomizer);
 
@@ -55,6 +58,10 @@ public class RandomizerActivity extends Activity implements RandomizerListFragme
 		switch (item.getItemId()) {
 		case R.id.action_configure:
 			startActivity(new Intent(this, CardConfigActivity.class));
+			return true;
+		case R.id.action_about:
+			AboutDialogFragment df = new AboutDialogFragment();
+			df.show(getFragmentManager(), AboutDialogFragment.TAG);
 			return true;
 		}
 

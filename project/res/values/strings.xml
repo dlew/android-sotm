@@ -3,12 +3,20 @@
 
     <string name="app_name">Sentinels Randomizer</string>
 
+    <!-- About fragment -->
+    <string name="title_about">About Sentinels Randomizer</string>
+    <string name="about_app">The Sentinels of the Multiverse randomizer app w/ scoring system by Daniel Lew</string>
+    <string name="about_explanation">The random setup selector is not exact; there is some fuzzing involved so you get more variety.  The available random cards may not allow for the target difficulty (if they\'re all too good or bad).  Win rate chances are estimated - obviously some combinations will fare better than others.</string>
+    <string name="about_tracker">Help improve the point system!  &lt;a href="https://docs.google.com/spreadsheet/viewform?formkey=dFVreEhkOWJYcmlvcDNMbWppejh5aGc6MQ#gid=0"&gt;Submit your games to the sentinel tracker!&lt;/a&gt;</string>
+    <string name="credit_points">Sentinels of the Multiverse &lt;a href="http://x.gray.org/sentinels-of-the-multiverse-difficulty-scores.html"&gt;Difficulty Score System&lt;/a&gt; by &lt;a href="http://plus.google.com/103850062796903816685/"&gt;Matthew Grey&lt;/a&gt;</string>
+
     <!-- Randomizer activity/fragment -->
     <string name="title_randomizer">Randomizer</string>
     <string name="action_randomize">Randomize</string>
     <string name="action_reroll">Reroll</string>
     <string name="action_reset">Reset</string>
     <string name="action_configure">Configure Cards</string>
+    <string name="action_about">About</string>
     <string name="header_heroes">Heroes</string>
     <string name="header_villain">Villain</string>
     <string name="header_environment">Environment</string>
