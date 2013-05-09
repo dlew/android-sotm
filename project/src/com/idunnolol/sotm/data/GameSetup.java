@@ -1,11 +1,13 @@
 package com.idunnolol.sotm.data;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-import com.idunnolol.sotm.data.Card.Type;
-
 import android.os.Bundle;
+import android.util.Pair;
+
+import com.idunnolol.sotm.data.Card.Type;
 
 /**
  * Represents a setup of a game (i.e., which heroes are selected,
@@ -111,42 +113,108 @@ public class GameSetup {
 	}
 
 	/**
+	 * We might not be able to randomize if there aren't enough options available
+	 */
+	public boolean canRandomize() {
+		return getFirstLackingType() == null;
+	}
+
+	/**
+	 * @return the first type without enough enabled cards, or null if we're good to go
+	 */
+	public Type getFirstLackingType() {
+		if (Db.getCards(Type.HERO).size() < getHeroCount()) {
+			return Type.HERO;
+		}
+		else if (Db.getCards(Type.VILLAIN).size() == 0) {
+			return Type.VILLAIN;
+		}
+		else if (Db.getCards(Type.ENVIRONMENT).size() == 0) {
+			return Type.ENVIRONMENT;
+		}
+
+		return null;
+	}
+
+	/**
 	 * Calculates the points that this setup represents.  If there
-	 * are random cards, it's just a rough estimate.
-	 * 
-	 * Random cards are calculated as the average of all their types
-	 * (as any one of them could be returned).
+	 * are random cards, it counts them as 0.
 	 */
 	public int getPoints() {
 		int points = 0;
 
-		int avgHero = Db.getAvgPoints(Type.HERO);
-
 		for (Card card : mHeroes) {
-			if (card == Card.RANDOM) {
-				points += avgHero;
-			}
-			else {
+			if (card != Card.RANDOM) {
 				points += card.getPoints();
 			}
 		}
 
-		if (mVillain == Card.RANDOM) {
-			points += Db.getAvgPoints(Type.VILLAIN);
-		}
-		else {
+		if (mVillain != Card.RANDOM) {
 			points += mVillain.getPoints();
 		}
 
-		if (mEnvironment == Card.RANDOM) {
-			points += Db.getAvgPoints(Type.ENVIRONMENT);
-		}
-		else {
+		if (mEnvironment != Card.RANDOM) {
 			points += mEnvironment.getPoints();
 		}
 
 		// Factor in # of players
 		points += Db.getPointsForNumPlayers(mHeroes.size());
+
+		return points;
+	}
+
+	/**
+	 * Gets the possible range of points (if all cards were filled in with
+	 * their highest/lowest scoring items).
+	 * 
+	 * If there are no random cards, the range is 0.
+	 */
+	public Pair<Integer, Integer> getPointRange() {
+		return new Pair<Integer, Integer>(getPoints(true), getPoints(false));
+	}
+
+	// Returns either the minimum or maximum points possible with this game setup.
+	private int getPoints(boolean minPoints) {
+		int points = getPoints();
+
+		List<Card> possibleHeroes = Db.getCards(Type.HERO);
+		Collections.sort(possibleHeroes, Card.POINT_COMPARATOR);
+		for (Card hero : mHeroes) {
+			if (hero == Card.RANDOM) {
+				if (minPoints) {
+					points += possibleHeroes.get(0).getPoints();
+					possibleHeroes.remove(0);
+				}
+				else {
+					points += possibleHeroes.get(possibleHeroes.size() - 1).getPoints();
+					possibleHeroes.remove(possibleHeroes.size() - 1);
+				}
+			}
+		}
+
+		if (mVillain == Card.RANDOM) {
+			List<Card> possibleVillains = Db.getCards(Type.VILLAIN);
+			Collections.sort(possibleVillains, Card.POINT_COMPARATOR);
+
+			if (minPoints) {
+				points += possibleVillains.get(0).getPoints();
+			}
+			else {
+				points += possibleVillains.get(possibleVillains.size() - 1).getPoints();
+			}
+		}
+
+		if (mEnvironment == Card.RANDOM) {
+			List<Card> possibleEnvironments = Db.getCards(Type.ENVIRONMENT);
+			Collections.sort(possibleEnvironments, Card.POINT_COMPARATOR);
+
+			if (minPoints) {
+				points += possibleEnvironments.get(0).getPoints();
+			}
+			else {
+				points += possibleEnvironments.get(possibleEnvironments.size() - 1).getPoints();
+			}
+		}
 
 		return points;
 	}

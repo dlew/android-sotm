@@ -31,30 +31,6 @@ public class Randomizer {
 		mRand = new Random();
 	}
 
-	/**
-	 * We might not be able to randomize if there aren't enough options available
-	 */
-	public boolean canRandomize() {
-		return getFirstLackingType() == null;
-	}
-
-	/**
-	 * @return the first type without enough enabled cards, or null if we're good to go
-	 */
-	public Type getFirstLackingType() {
-		if (Db.getCards(Type.HERO).size() < mBaseGameSetup.getHeroCount()) {
-			return Type.HERO;
-		}
-		else if (Db.getCards(Type.VILLAIN).size() == 0) {
-			return Type.VILLAIN;
-		}
-		else if (Db.getCards(Type.ENVIRONMENT).size() == 0) {
-			return Type.ENVIRONMENT;
-		}
-
-		return null;
-	}
-
 	public GameSetup randomize() {
 		GameSetup gameSetup = new GameSetup(mBaseGameSetup);
 

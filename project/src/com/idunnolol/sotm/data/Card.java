@@ -95,6 +95,13 @@ public class Card {
 	//////////////////////////////////////////////////////////////////////////
 	// Comparators
 
+	public static final Comparator<Card> POINT_COMPARATOR = new Comparator<Card>() {
+		@Override
+		public int compare(Card lhs, Card rhs) {
+			return lhs.getPoints() - rhs.getPoints();
+		}
+	};
+
 	public static Comparator<Card> getNameComparator(final Context context) {
 		return new Comparator<Card>() {
 			public int compare(Card lhs, Card rhs) {

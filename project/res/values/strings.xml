@@ -15,6 +15,10 @@
     <string name="add_symbol">+</string>
     <string name="remove_symbol">-</string>
 
+    <!-- Stats fragment -->
+    <string name="template_win_range">Possible Win Rates: &lt;b&gt;%1$s%%&lt;/b&gt; - &lt;b&gt;%2$s%%&lt;/b&gt;</string>
+    <string name="template_win_chance">Estimated Win Rate: &lt;b&gt;%1$s%%&lt;/b&gt;</string>
+
     <!-- Configuration activity/fragment -->
     <string name="title_configuration">Configure Cards</string>
 

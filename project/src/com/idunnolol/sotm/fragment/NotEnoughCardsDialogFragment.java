@@ -33,22 +33,7 @@ public class NotEnoughCardsDialogFragment extends DialogFragment {
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-		switch (type) {
-		case HERO:
-			if (Db.getCards(Type.HERO).size() == 0) {
-				builder.setMessage(R.string.message_no_heroes);
-			}
-			else {
-				builder.setMessage(R.string.message_not_enough_heroes);
-			}
-			break;
-		case VILLAIN:
-			builder.setMessage(R.string.message_no_villains);
-			break;
-		case ENVIRONMENT:
-			builder.setMessage(R.string.message_no_environments);
-			break;
-		}
+		builder.setMessage(getErrorResId(type));
 
 		builder.setPositiveButton(R.string.button_configure, new OnClickListener() {
 			public void onClick(DialogInterface dialog, int which) {
@@ -60,5 +45,23 @@ public class NotEnoughCardsDialogFragment extends DialogFragment {
 		builder.setNegativeButton(R.string.cancel, null);
 
 		return builder.create();
+	}
+
+	public static int getErrorResId(Type type) {
+		switch (type) {
+		case HERO:
+			if (Db.getCards(Type.HERO).size() == 0) {
+				return R.string.message_no_heroes;
+			}
+			else {
+				return R.string.message_not_enough_heroes;
+			}
+		case VILLAIN:
+			return R.string.message_no_villains;
+		case ENVIRONMENT:
+			return R.string.message_no_environments;
+		}
+
+		return 0;
 	}
 }

@@ -169,7 +169,7 @@ public class RandomizerListFragment extends ListFragment implements GameSetupAda
 		}
 
 		Randomizer randomizer = new Randomizer(baseGameSetup);
-		if (randomizer.canRandomize()) {
+		if (baseGameSetup.canRandomize()) {
 			if (targetWinPercent == Difficulty.RANDOM.getTargetWinPercent()) {
 				mGameSetup.updateFrom(randomizer.randomize());
 			}
@@ -182,7 +182,7 @@ public class RandomizerListFragment extends ListFragment implements GameSetupAda
 			mTargetWinPercent = targetWinPercent;
 		}
 		else {
-			DialogFragment df = NotEnoughCardsDialogFragment.newInstance(randomizer.getFirstLackingType());
+			DialogFragment df = NotEnoughCardsDialogFragment.newInstance(baseGameSetup.getFirstLackingType());
 			df.show(getActivity().getFragmentManager(), NotEnoughCardsDialogFragment.TAG);
 		}
 	}
@@ -209,8 +209,14 @@ public class RandomizerListFragment extends ListFragment implements GameSetupAda
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.action_randomize:
-			DifficultyDialogFragment df = new DifficultyDialogFragment();
-			df.show(getActivity().getFragmentManager(), DifficultyDialogFragment.TAG);
+			if (!mGameSetup.canRandomize()) {
+				DialogFragment df = NotEnoughCardsDialogFragment.newInstance(mGameSetup.getFirstLackingType());
+				df.show(getActivity().getFragmentManager(), NotEnoughCardsDialogFragment.TAG);
+			}
+			else {
+				DifficultyDialogFragment df = new DifficultyDialogFragment();
+				df.show(getActivity().getFragmentManager(), DifficultyDialogFragment.TAG);
+			}
 			return true;
 		case R.id.action_reroll:
 			randomize(mTargetWinPercent);
