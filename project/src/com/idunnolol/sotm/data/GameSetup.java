@@ -1,7 +1,6 @@
 package com.idunnolol.sotm.data;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -60,17 +59,6 @@ public class GameSetup {
 
 	public List<Card> getHeroes() {
 		return mHeroes;
-	}
-
-	/**
-	 * @return all alternative cards that are blocked because we've already selected one of them
-	 */
-	public Collection<Card> getHeroesAndAlternates() {
-		Collection<Card> alts = new HashSet<Card>();
-		for (Card hero : mHeroes) {
-			alts.addAll(Db.getCardAndAlternates(hero));
-		}
-		return alts;
 	}
 
 	public int getHeroCount() {

@@ -3,10 +3,12 @@ package com.idunnolol.sotm.data;
 import java.util.Comparator;
 
 import android.content.Context;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import com.idunnolol.sotm.R;
 
-public class Card {
+public class Card implements Parcelable {
 
 	/**
 	 * Represents the special "random" card
@@ -115,5 +117,40 @@ public class Card {
 			}
 		};
 	}
+
+	//////////////////////////////////////////////////////////////////////////
+	// Parcelable
+
+	private Card(Parcel in) {
+		mType = Type.values()[in.readInt()];
+		mId = in.readString();
+		mNameResId = in.readInt();
+		mPoints = in.readInt();
+		mEnabled = in.readByte() == 1;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeInt(mType.ordinal());
+		dest.writeString(mId);
+		dest.writeInt(mNameResId);
+		dest.writeInt(mPoints);
+		dest.writeByte((byte) (mEnabled ? 1 : 0));
+	}
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	public static final Parcelable.Creator<Card> CREATOR = new Parcelable.Creator<Card>() {
+		public Card createFromParcel(Parcel in) {
+			return new Card(in);
+		}
+
+		public Card[] newArray(int size) {
+			return new Card[size];
+		}
+	};
 
 }

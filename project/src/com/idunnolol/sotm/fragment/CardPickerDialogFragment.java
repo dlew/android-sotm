@@ -25,12 +25,14 @@ public class CardPickerDialogFragment extends DialogFragment {
 
 	private static final String ARG_TYPE = "ARG_TYPE";
 	private static final String ARG_GAME_SETUP = "ARG_GAME_SETUP";
+	private static final String ARG_CARD = "ARG_CARD";
 
-	public static CardPickerDialogFragment newInstance(Type type, GameSetup gameSetup) {
+	public static CardPickerDialogFragment newInstance(Type type, GameSetup gameSetup, Card card) {
 		CardPickerDialogFragment fragment = new CardPickerDialogFragment();
 		Bundle args = new Bundle();
 		args.putInt(ARG_TYPE, type.ordinal());
 		args.putBundle(ARG_GAME_SETUP, gameSetup.toBundle());
+		args.putParcelable(ARG_CARD, card);
 		fragment.setArguments(args);
 		return fragment;
 	}
@@ -57,10 +59,17 @@ public class CardPickerDialogFragment extends DialogFragment {
 
 		// We disable heroes that are already selected.  We don't bother with villains
 		// or environments; I don't care if someone re-selects what they already had.
+		//
+		// We do not disable the clicked card (and alts) because the user may want to
+		// select a different version of the current card.
 		Set<Card> disabledCards = new HashSet<Card>();
 		if (type == Type.HERO) {
-			disabledCards.addAll(gameSetup.getHeroes());
-			disabledCards.addAll(gameSetup.getHeroesAndAlternates());
+			Card currCard = getArguments().getParcelable(ARG_CARD);
+			for (Card hero : gameSetup.getHeroes()) {
+				if (!hero.equals(currCard)) {
+					disabledCards.addAll(Db.getCardAndAlternates(hero));
+				}
+			}
 		}
 
 		Collection<Card> cards = Db.getCards(getType());
