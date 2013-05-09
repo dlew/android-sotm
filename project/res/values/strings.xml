@@ -29,6 +29,7 @@
 
     <!-- Configuration activity/fragment -->
     <string name="title_configuration">Configure Cards</string>
+    <string name="action_done">Done</string>
 
     <!-- Multi-use dialog button actions -->
     <string name="ok">OK</string>
