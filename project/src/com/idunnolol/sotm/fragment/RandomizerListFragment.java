@@ -19,11 +19,13 @@ import com.idunnolol.sotm.data.Card.Type;
 import com.idunnolol.sotm.data.Db;
 import com.idunnolol.sotm.data.GameSetup;
 import com.idunnolol.sotm.fragment.CardPickerDialogFragment.CardPickerDialogFragmentListener;
+import com.idunnolol.sotm.fragment.DifficultyDialogFragment.Difficulty;
+import com.idunnolol.sotm.fragment.DifficultyDialogFragment.DifficultyDialogFragmentListener;
 import com.idunnolol.sotm.widget.GameSetupAdapter;
 import com.idunnolol.sotm.widget.GameSetupAdapter.GameSetupAdapterListener;
 
 public class RandomizerListFragment extends ListFragment implements GameSetupAdapterListener,
-		CardPickerDialogFragmentListener {
+		CardPickerDialogFragmentListener, DifficultyDialogFragmentListener {
 
 	public static final String TAG = RandomizerListFragment.class.getName();
 
@@ -39,6 +41,7 @@ public class RandomizerListFragment extends ListFragment implements GameSetupAda
 	private GameSetup mGameSetup;
 
 	// We keep the base GameSetup around, in case we want to randomize multiple times in a row
+	private Difficulty mDifficulty;
 	private GameSetup mBaseGameSetup;
 
 	// Which index we're currently selecting for the card dialog fragment
@@ -153,9 +156,35 @@ public class RandomizerListFragment extends ListFragment implements GameSetupAda
 
 	private void onGameSetupChanged() {
 		mBaseGameSetup = null;
+		mDifficulty = null;
 		mAdapter.notifyDataSetChanged();
 		mListener.onGameSetupChanged(mGameSetup);
 		getActivity().invalidateOptionsMenu();
+	}
+
+	private void randomize(Difficulty difficulty) {
+		GameSetup baseGameSetup = mBaseGameSetup;
+		if (baseGameSetup == null) {
+			baseGameSetup = new GameSetup(mGameSetup);
+		}
+
+		Randomizer randomizer = new Randomizer(baseGameSetup);
+		if (randomizer.canRandomize()) {
+			if (difficulty == Difficulty.RANDOM) {
+				mGameSetup.updateFrom(randomizer.randomize());
+			}
+			else {
+				mGameSetup.updateFrom(randomizer.randomize(difficulty.getTargetWinPercent()));
+			}
+
+			onGameSetupChanged();
+			mBaseGameSetup = baseGameSetup;
+			mDifficulty = difficulty;
+		}
+		else {
+			DialogFragment df = NotEnoughCardsDialogFragment.newInstance(randomizer.getFirstLackingType());
+			df.show(getActivity().getFragmentManager(), NotEnoughCardsDialogFragment.TAG);
+		}
 	}
 
 	//////////////////////////////////////////////////////////////////////////
@@ -171,7 +200,8 @@ public class RandomizerListFragment extends ListFragment implements GameSetupAda
 	public void onPrepareOptionsMenu(Menu menu) {
 		super.onPrepareOptionsMenu(menu);
 
-		menu.findItem(R.id.action_randomize_again).setVisible(mBaseGameSetup != null);
+		menu.findItem(R.id.action_reroll).setVisible(mBaseGameSetup != null);
+		menu.findItem(R.id.action_reset).setVisible(mBaseGameSetup != null);
 		menu.findItem(R.id.action_randomize).setVisible(mBaseGameSetup == null && mGameSetup.hasRandomCards());
 	}
 
@@ -179,23 +209,11 @@ public class RandomizerListFragment extends ListFragment implements GameSetupAda
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.action_randomize:
-		case R.id.action_randomize_again:
-			GameSetup baseGameSetup = mBaseGameSetup;
-			if (baseGameSetup == null) {
-				baseGameSetup = new GameSetup(mGameSetup);
-			}
-
-			Randomizer randomizer = new Randomizer(baseGameSetup);
-			if (randomizer.canRandomize()) {
-				mGameSetup.updateFrom(randomizer.randomize());
-				onGameSetupChanged();
-				mBaseGameSetup = baseGameSetup;
-			}
-			else {
-				mBaseGameSetup = null;
-				DialogFragment df = NotEnoughCardsDialogFragment.newInstance(randomizer.getFirstLackingType());
-				df.show(getActivity().getFragmentManager(), NotEnoughCardsDialogFragment.TAG);
-			}
+			DifficultyDialogFragment df = new DifficultyDialogFragment();
+			df.show(getActivity().getFragmentManager(), DifficultyDialogFragment.TAG);
+			return true;
+		case R.id.action_reroll:
+			randomize(mDifficulty);
 			return true;
 		case R.id.action_reset:
 			mGameSetup.reset();
@@ -239,6 +257,14 @@ public class RandomizerListFragment extends ListFragment implements GameSetupAda
 		}
 
 		onGameSetupChanged();
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+	// DifficultyDialogFragmentListener
+
+	@Override
+	public void onDifficultyChosen(Difficulty difficulty) {
+		randomize(difficulty);
 	}
 
 	//////////////////////////////////////////////////////////////////////////

@@ -10,13 +10,15 @@ import com.idunnolol.sotm.R;
 import com.idunnolol.sotm.data.Card;
 import com.idunnolol.sotm.data.GameSetup;
 import com.idunnolol.sotm.fragment.CardPickerDialogFragment.CardPickerDialogFragmentListener;
+import com.idunnolol.sotm.fragment.DifficultyDialogFragment.Difficulty;
+import com.idunnolol.sotm.fragment.DifficultyDialogFragment.DifficultyDialogFragmentListener;
 import com.idunnolol.sotm.fragment.RandomizerListFragment;
 import com.idunnolol.sotm.fragment.RandomizerListFragment.RandomizerListFragmentListener;
 import com.idunnolol.sotm.fragment.StatsFragment;
 import com.idunnolol.utils.Ui;
 
 public class RandomizerActivity extends Activity implements RandomizerListFragmentListener,
-		CardPickerDialogFragmentListener {
+		CardPickerDialogFragmentListener, DifficultyDialogFragmentListener {
 
 	private RandomizerListFragment mRandomizerListFragment;
 	private StatsFragment mStatsFragment;
@@ -64,6 +66,14 @@ public class RandomizerActivity extends Activity implements RandomizerListFragme
 	@Override
 	public void onCardSelected(Card card) {
 		mRandomizerListFragment.onCardSelected(card);
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+	// DifficultyDialogFragmentListener
+
+	@Override
+	public void onDifficultyChosen(Difficulty difficulty) {
+		mRandomizerListFragment.onDifficultyChosen(difficulty);
 	}
 
 	//////////////////////////////////////////////////////////////////////////

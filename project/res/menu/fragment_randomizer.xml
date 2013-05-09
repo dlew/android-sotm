@@ -6,13 +6,13 @@
         android:showAsAction="ifRoom"
         android:title="@string/action_randomize"/>
     <item
-        android:id="@+id/action_randomize_again"
+        android:id="@+id/action_reroll"
         android:orderInCategory="15"
         android:showAsAction="ifRoom"
-        android:title="@string/action_randomize_again"/>
+        android:title="@string/action_reroll"/>
     <item
         android:id="@+id/action_reset"
-        android:orderInCategory="20"
+        android:orderInCategory="25"
         android:showAsAction="ifRoom"
         android:title="@string/action_reset"/>
 

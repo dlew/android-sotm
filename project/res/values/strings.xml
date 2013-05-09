@@ -7,7 +7,7 @@
     <!-- Randomizer activity/fragment -->
     <string name="title_randomizer">Randomizer</string>
     <string name="action_randomize">Randomize</string>
-    <string name="action_randomize_again">Try Again</string>
+    <string name="action_reroll">Reroll</string>
     <string name="action_reset">Reset</string>
     <string name="action_configure">Configure Cards</string>
     <string name="header_heroes">Heroes</string>
@@ -18,6 +18,16 @@
 
     <!-- Configuration activity/fragment -->
     <string name="title_configuration">Configure Cards</string>
+
+    <!-- Difficulty dialog fragment -->
+    <string name="title_difficulty">Choose Game Difficulty</string>
+    <string name="difficulty_random">Random</string>
+    <string name="difficulty_easy">Easy</string>
+    <string name="difficulty_medium">Medium</string>
+    <string name="difficulty_hard">Hard</string>
+    <string name="difficulty_very_hard">Very Hard</string>
+    <string name="difficulty_impossible">Impossible</string>
+    <string name="template_win_rate">%1$s (%2$s%% Win Rate)</string>
 
     <!-- Not enough cards dialog fragment -->
     <string name="button_configure">Configure</string>

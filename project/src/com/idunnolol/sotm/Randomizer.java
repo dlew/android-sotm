@@ -16,10 +16,10 @@ import com.idunnolol.utils.Log;
 public class Randomizer {
 
 	// Plus/minus this value for difficulty
-	private static final int DIFFICULTY_FUZZ = 5;
+	private static final int DIFFICULTY_FUZZ = 4;
 
-	// Randomization timeout in nanoseconds
-	private static final long RANDOMIZE_TIMEOUT = 100 * 1000000;
+	// Randomization timeout in nanoseconds (200 ms)
+	private static final long RANDOMIZE_TIMEOUT = 200 * 1000000;
 
 	private Random mRand;
 
