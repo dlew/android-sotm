@@ -1,6 +1,9 @@
 package com.idunnolol.sotm.data;
 
+import java.util.Collection;
 import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Set;
 
 import android.content.Context;
 
@@ -29,8 +32,8 @@ public class Card {
 
 	private boolean mEnabled;
 
-	// Indicates this is an "alternate" promo card, not a full set
-	private boolean mIsAlternate;
+	// Alternate promo cards, use same set but different cover cards (both cards will reference each other)
+	private Set<Card> mAlternates = new HashSet<Card>();
 
 	public Card() {
 		// Default constructor
@@ -84,12 +87,26 @@ public class Card {
 		mEnabled = enabled;
 	}
 
-	public boolean isIsAlternate() {
-		return mIsAlternate;
+	public void addAlternate(Card card) {
+		// We want all cards to be listed as alternates of each other,
+		// but don't want an infinite loop
+
+		// Add all of the new cards' alternates to this one
+		mAlternates.add(card);
+		mAlternates.addAll(card.mAlternates);
+
+		// Go through all alternates and add this as an alternate
+		for (Card alt : mAlternates) {
+			alt.mAlternates.add(this);
+		}
 	}
 
-	public void setIsAlternate(boolean isAlternate) {
-		mIsAlternate = isAlternate;
+	public boolean hasAlternates() {
+		return mAlternates.size() != 0;
+	}
+
+	public Collection<Card> getAlternates() {
+		return mAlternates;
 	}
 
 	//////////////////////////////////////////////////////////////////////////
@@ -110,6 +127,30 @@ public class Card {
 				return lhName.compareTo(rhName);
 			}
 		};
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(mId);
+		sb.append(" points=");
+		sb.append(mPoints);
+		sb.append(" enabled=");
+		
+		if (mAlternates.size() != 0) {
+			sb.append(" alts=[");
+			boolean first = true;
+			for (Card alt : mAlternates) {
+				if (!first) {
+					sb.append(", ");
+				}
+				sb.append(alt.getId());
+				first = false;
+			}
+			sb.append("]");
+		}
+
+		return sb.toString();
 	}
 
 }

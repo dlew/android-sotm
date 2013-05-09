@@ -60,6 +60,7 @@ public class CardPickerDialogFragment extends DialogFragment {
 		Set<Card> disabledCards = new HashSet<Card>();
 		if (type == Type.HERO) {
 			disabledCards.addAll(gameSetup.getHeroes());
+			disabledCards.addAll(gameSetup.getAlternateHeroes());
 		}
 
 		Collection<Card> cards = Db.getCards(getType());

@@ -1,4 +1,5 @@
 {
+  "comments": "Make sure all 'alternates' point to the same base card.",
   "sets": [
     {
       "id": "Base Set",
@@ -279,91 +280,91 @@
       "name": "set_promos",
       "cards": [
         {
-          "alternate": true,
+          "alternate": "Legacy",
           "type": "hero",
           "id": "Young Legacy",
           "name": "card_young_legacy"
         },
         {
-          "alternate": true,
+          "alternate": "The Wraith",
           "type": "hero",
           "id": "Rook City Wraith",
           "name": "card_rook_city_wraith"
         },
         {
-          "alternate": true,
+          "alternate": "Ra",
           "type": "hero",
           "id": "Ra: Horus of Two Horizons",
           "name": "card_ra_horus_of_two_horizons"
         },
         {
-          "alternate": true,
+          "alternate": "Fanatic",
           "type": "hero",
           "id": "Redeemer Fanatic",
           "name": "card_redeemer_fanatic"
         },
         {
-          "alternate": true,
+          "alternate": "The Visionary",
           "type": "hero",
           "id": "Dark Visionary",
           "name": "card_dark_visionary"
         },
         {
-          "alternate": true,
+          "alternate": "Haka",
           "type": "hero",
           "id": "The Eternal Haka",
           "name": "card_the_eternal_haka"
         },
         {
-          "alternate": true,
+          "alternate": "Tachyon",
           "type": "hero",
           "id": "Freedom Six Tachyon",
           "name": "card_freedom_six_tachyon"
         },
         {
-          "alternate": true,
+          "alternate": "The Wraith",
           "type": "hero",
           "id": "Freedom Six Wraith: Price of Freedom",
           "name": "card_freedom_six_wraith_price_of_freedom"
         },
         {
-          "alternate": true,
+          "alternate": "Unity",
           "type": "hero",
           "id": "Freedom Six Unity",
           "name": "card_freedom_six_unity"
         },
         {
-          "alternate": true,
+          "alternate": "Bunker",
           "type": "hero",
           "id": "Freedom Six Bunker: Engine of War",
           "name": "card_freedom_six_bunker_engine_of_war"
         },
         {
-          "alternate": true,
+          "alternate": "Absolute Zero",
           "type": "hero",
           "id": "Freedom Six Absolute Zero",
           "name": "card_freedom_six_absolute_zero"
         },
         {
-          "alternate": true,
+          "alternate": "Tempest",
           "type": "hero",
           "id": "Freedom Six Tempest",
           "name": "card_freedom_six_tempest"
         },
         {
-          "alternate": true,
+          "alternate": "Legacy",
           "type": "hero",
           "id": "America's Greatest Legacy",
           "name": "card_americas_greatest_legacy"
         },
         {
-          "alternate": true,
+          "alternate": "Omnitron",
           "type": "villain",
           "id": "Cosmic Omnitron",
           "name": "card_cosmic_omnitron"
         },
         {
-          "alternate": true,
+          "alternate": "Baron Blade",
           "type": "villain",
           "id": "Mad Bomber Blade",
           "name": "card_mad_bomber_blade"

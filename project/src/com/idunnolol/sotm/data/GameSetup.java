@@ -1,8 +1,11 @@
 package com.idunnolol.sotm.data;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import android.os.Bundle;
 import android.util.Pair;
@@ -57,6 +60,19 @@ public class GameSetup {
 
 	public List<Card> getHeroes() {
 		return mHeroes;
+	}
+
+	/**
+	 * @return all alternative cards that are blocked because we've already selected one of them
+	 */
+	public Collection<Card> getAlternateHeroes() {
+		Collection<Card> alts = new HashSet<Card>();
+		for (Card card : mHeroes) {
+			if (card.hasAlternates()) {
+				alts.addAll(card.getAlternates());
+			}
+		}
+		return alts;
 	}
 
 	public int getHeroCount() {
@@ -123,7 +139,20 @@ public class GameSetup {
 	 * @return the first type without enough enabled cards, or null if we're good to go
 	 */
 	public Type getFirstLackingType() {
-		if (Db.getCards(Type.HERO).size() < getHeroCount()) {
+		// Make sure we count each hero (and alternate) only once, as we
+		// cannot pick the same hero twice (even with promos)
+		int heroCount = 0;
+		List<Card> heroList = Db.getCards(Type.HERO);
+		Set<Card> countedSet = new HashSet<Card>();
+		for (Card hero : heroList) {
+			if (!countedSet.contains(hero)) {
+				heroCount++;
+				countedSet.add(hero);
+				countedSet.addAll(hero.getAlternates());
+			}
+		}
+
+		if (heroCount < getHeroCount()) {
 			return Type.HERO;
 		}
 		else if (Db.getCards(Type.VILLAIN).size() == 0) {

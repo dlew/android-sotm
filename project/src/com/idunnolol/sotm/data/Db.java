@@ -14,6 +14,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.preference.PreferenceManager;
+import android.text.TextUtils;
 import android.util.JsonReader;
 import android.util.JsonToken;
 import android.util.Pair;
@@ -80,6 +81,8 @@ public class Db {
 	private SparseIntArray mDifficultyScale = new SparseIntArray();
 
 	private Map<String, String> mNameConversions = new HashMap<String, String>();
+
+	private Map<String, String> mAlternates = new HashMap<String, String>();
 
 	private int mMinDifficultyPoints;
 	private int mMaxDifficultyPoints;
@@ -251,6 +254,18 @@ public class Db {
 		finally {
 			in.close();
 		}
+
+		// Process the alternates
+		for (String alt1 : mAlternates.keySet()) {
+			String alt2 = mAlternates.get(alt1);
+
+			Log.v("Linking alternates: " + alt1 + ", " + alt2);
+
+			Card card1 = mCards.get(alt1);
+			Card card2 = mCards.get(alt2);
+
+			card1.addAlternate(card2);
+		}
 	}
 
 	private CardSet readSet(JsonReader reader) throws IOException {
@@ -288,6 +303,8 @@ public class Db {
 	private Card readCard(JsonReader reader) throws IOException {
 		Card card = new Card();
 
+		String altId = null;
+
 		reader.beginObject();
 		while (reader.hasNext()) {
 			String jsonName = reader.nextName();
@@ -312,13 +329,17 @@ public class Db {
 				}
 			}
 			else if (jsonName.equals("alternate")) {
-				card.setIsAlternate(reader.nextBoolean());
+				altId = reader.nextString();
 			}
 			else {
 				reader.skipValue();
 			}
 		}
 		reader.endObject();
+
+		if (!TextUtils.isEmpty(altId)) {
+			mAlternates.put(card.getId(), altId);
+		}
 
 		return card;
 	}

@@ -37,15 +37,21 @@ public class Randomizer {
 		// Go through all heroes, villains and environments
 		// and randomly select cards to fill in when the
 		// card is "random"
-		Set<Card> usedCards = new HashSet<Card>();
 		List<Card> heroes = gameSetup.getHeroes();
+		Set<Card> usedCards = new HashSet<Card>();
 		int size = heroes.size();
-		for (int a = 0; a < size; a++) {
-			Card hero = heroes.get(a);
+
+		// Fill the initial used cards
+		for (Card hero : heroes) {
 			if (hero != Card.RANDOM) {
 				usedCards.add(hero);
+				usedCards.addAll(hero.getAlternates());
 			}
-			else {
+		}
+
+		for (int a = 0; a < size; a++) {
+			Card hero = heroes.get(a);
+			if (hero == Card.RANDOM) {
 				Card card;
 				do {
 					card = getRandomCard(Type.HERO);
@@ -54,6 +60,7 @@ public class Randomizer {
 
 				gameSetup.setHero(a, card);
 				usedCards.add(card);
+				usedCards.addAll(card.getAlternates());
 			}
 		}
 
