@@ -59,10 +59,10 @@ public class RandomizerListFragment extends ListFragment implements GameSetupAda
 			mGameSetup = new GameSetup();
 		}
 		else {
-			mGameSetup = new GameSetup(savedInstanceState.getBundle(INSTANCE_GAME_SETUP));
+			mGameSetup = savedInstanceState.getParcelable(INSTANCE_GAME_SETUP);
 
 			if (savedInstanceState.containsKey(INSTANCE_BASE_GAME_SETUP)) {
-				mBaseGameSetup = new GameSetup(savedInstanceState.getBundle(INSTANCE_BASE_GAME_SETUP));
+				mBaseGameSetup = savedInstanceState.getParcelable(INSTANCE_BASE_GAME_SETUP);
 			}
 
 			if (savedInstanceState.containsKey(INSTANCE_SELECTED_CARD_TYPE)) {
@@ -119,10 +119,10 @@ public class RandomizerListFragment extends ListFragment implements GameSetupAda
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 
-		outState.putBundle(INSTANCE_GAME_SETUP, mGameSetup.toBundle());
+		outState.putParcelable(INSTANCE_GAME_SETUP, mGameSetup);
 
 		if (mBaseGameSetup != null) {
-			outState.putBundle(INSTANCE_BASE_GAME_SETUP, mBaseGameSetup.toBundle());
+			outState.putParcelable(INSTANCE_BASE_GAME_SETUP, mBaseGameSetup);
 		}
 
 		if (mSelectCardType != null) {

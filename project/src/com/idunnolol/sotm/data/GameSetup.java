@@ -6,7 +6,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Pair;
 
 import com.idunnolol.sotm.data.Card.Type;
@@ -15,11 +16,7 @@ import com.idunnolol.sotm.data.Card.Type;
  * Represents a setup of a game (i.e., which heroes are selected,
  * as well as villain and environment).
  */
-public class GameSetup {
-
-	private static final String KEY_HEROES = "KEY_HEROES";
-	private static final String KEY_VILLAIN = "KEY_VILLAIN";
-	private static final String KEY_ENVIRONMENT = "KEY_ENVIRONMENT";
+public class GameSetup implements Parcelable {
 
 	private static final int MIN_HEROES = 3;
 	private static final int MAX_HEROES = 5;
@@ -43,10 +40,6 @@ public class GameSetup {
 		mHeroes.addAll(toCopy.mHeroes);
 		mVillain = toCopy.mVillain;
 		mEnvironment = toCopy.mEnvironment;
-	}
-
-	public GameSetup(Bundle bundle) {
-		fromBundle(bundle);
 	}
 
 	public void reset() {
@@ -247,29 +240,15 @@ public class GameSetup {
 		mEnvironment = other.mEnvironment;
 	}
 
-	public Bundle toBundle() {
-		Bundle bundle = new Bundle();
-
-		ArrayList<String> heroes = new ArrayList<String>();
-		for (Card card : mHeroes) {
-			heroes.add(card.getId());
+	@Override
+	public boolean equals(Object o) {
+		if (!(o instanceof GameSetup)) {
+			return false;
 		}
 
-		bundle.putStringArrayList(KEY_HEROES, heroes);
-		bundle.putString(KEY_VILLAIN, mVillain.getId());
-		bundle.putString(KEY_ENVIRONMENT, mEnvironment.getId());
-
-		return bundle;
-	}
-
-	public void fromBundle(Bundle bundle) {
-		mHeroes.clear();
-		for (String hero : bundle.getStringArrayList(KEY_HEROES)) {
-			mHeroes.add(Db.getCard(hero));
-		}
-
-		mVillain = Db.getCard(bundle.getString(KEY_VILLAIN));
-		mEnvironment = Db.getCard(bundle.getString(KEY_ENVIRONMENT));
+		GameSetup other = (GameSetup) o;
+		return mHeroes.equals(other.mHeroes) && mVillain.equals(other.mVillain)
+				&& mEnvironment.equals(other.mEnvironment);
 	}
 
 	@Override
@@ -290,5 +269,37 @@ public class GameSetup {
 
 		return sb.toString();
 	}
+
+	//////////////////////////////////////////////////////////////////////////
+	// Parcelable
+
+	private GameSetup(Parcel in) {
+		ClassLoader cl = getClass().getClassLoader();
+		in.readList(mHeroes, cl);
+		mVillain = in.readParcelable(cl);
+		mEnvironment = in.readParcelable(cl);
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeList(mHeroes);
+		dest.writeParcelable(mVillain, flags);
+		dest.writeParcelable(mEnvironment, flags);
+	}
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	public static final Parcelable.Creator<GameSetup> CREATOR = new Parcelable.Creator<GameSetup>() {
+		public GameSetup createFromParcel(Parcel in) {
+			return new GameSetup(in);
+		}
+
+		public GameSetup[] newArray(int size) {
+			return new GameSetup[size];
+		}
+	};
 
 }

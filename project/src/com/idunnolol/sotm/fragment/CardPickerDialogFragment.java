@@ -31,7 +31,7 @@ public class CardPickerDialogFragment extends DialogFragment {
 		CardPickerDialogFragment fragment = new CardPickerDialogFragment();
 		Bundle args = new Bundle();
 		args.putInt(ARG_TYPE, type.ordinal());
-		args.putBundle(ARG_GAME_SETUP, gameSetup.toBundle());
+		args.putParcelable(ARG_GAME_SETUP, gameSetup);
 		args.putParcelable(ARG_CARD, card);
 		fragment.setArguments(args);
 		return fragment;
@@ -55,7 +55,7 @@ public class CardPickerDialogFragment extends DialogFragment {
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		Type type = getType();
-		GameSetup gameSetup = new GameSetup(getArguments().getBundle(ARG_GAME_SETUP));
+		GameSetup gameSetup = getArguments().getParcelable(ARG_GAME_SETUP);
 
 		// We disable heroes that are already selected.  We don't bother with villains
 		// or environments; I don't care if someone re-selects what they already had.

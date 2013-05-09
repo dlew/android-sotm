@@ -122,7 +122,10 @@ public class Card implements Parcelable {
 	// Parcelable
 
 	private Card(Parcel in) {
-		mType = Type.values()[in.readInt()];
+		boolean hasType = in.readByte() == 1;
+		if (hasType) {
+			mType = Type.values()[in.readInt()];
+		}
 		mId = in.readString();
 		mNameResId = in.readInt();
 		mPoints = in.readInt();
@@ -131,7 +134,13 @@ public class Card implements Parcelable {
 
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeInt(mType.ordinal());
+		if (mType != null) {
+			dest.writeByte((byte) 1);
+			dest.writeInt(mType.ordinal());
+		}
+		else {
+			dest.writeByte((byte) 0);
+		}
 		dest.writeString(mId);
 		dest.writeInt(mNameResId);
 		dest.writeInt(mPoints);
