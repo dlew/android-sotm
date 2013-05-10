@@ -22,11 +22,7 @@
         android:textStyle="bold"
         app:font="@string/font_crash_landing" />
 
-    <View
-        android:id="@+id/divider"
-        android:layout_width="1dp"
-        android:layout_height="match_parent"
-        android:background="?android:attr/listDivider" />
+    <include layout="@layout/include_vertical_divider" />
 
     <com.idunnolol.sotm.widget.TextView
         android:id="@+id/add_button"
