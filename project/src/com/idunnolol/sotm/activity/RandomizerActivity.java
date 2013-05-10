@@ -8,9 +8,9 @@ import android.view.MenuItem;
 
 import com.idunnolol.sotm.R;
 import com.idunnolol.sotm.data.Card;
+import com.idunnolol.sotm.data.Difficulty;
 import com.idunnolol.sotm.data.GameSetup;
 import com.idunnolol.sotm.fragment.CardPickerDialogFragment.CardPickerDialogFragmentListener;
-import com.idunnolol.sotm.fragment.DifficultyDialogFragment.Difficulty;
 import com.idunnolol.sotm.fragment.DifficultyDialogFragment.DifficultyDialogFragmentListener;
 import com.idunnolol.sotm.fragment.AboutDialogFragment;
 import com.idunnolol.sotm.fragment.RandomizerListFragment;

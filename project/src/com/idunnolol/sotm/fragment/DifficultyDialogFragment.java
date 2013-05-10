@@ -1,8 +1,5 @@
 package com.idunnolol.sotm.fragment;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -12,38 +9,16 @@ import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 
 import com.idunnolol.sotm.R;
+import com.idunnolol.sotm.data.Difficulty;
+import com.idunnolol.sotm.widget.DifficultyAdapter;
 
 public class DifficultyDialogFragment extends DialogFragment {
 
 	public static final String TAG = DifficultyDialogFragment.class.getName();
 
-	public enum Difficulty {
-		RANDOM(-1, R.string.difficulty_random),
-		EASY(90, R.string.difficulty_easy),
-		MEDIUM(75, R.string.difficulty_medium),
-		HARD(50, R.string.difficulty_hard),
-		VERY_HARD(30, R.string.difficulty_very_hard),
-		GOOD_LUCK(15, R.string.difficulty_good_luck),
-		PICK_YOUR_OWN(-1, R.string.difficulty_specify);
-
-		private int mTargetWinPercent;
-		private int mStrResId;
-
-		private Difficulty(int targetWinPercent, int strResId) {
-			mTargetWinPercent = targetWinPercent;
-			mStrResId = strResId;
-		}
-
-		public int getTargetWinPercent() {
-			return mTargetWinPercent;
-		}
-
-		public int getStrResId() {
-			return mStrResId;
-		}
-	}
-
 	private DifficultyDialogFragmentListener mListener;
+
+	private DifficultyAdapter mAdapter;
 
 	@Override
 	public void onAttach(Activity activity) {
@@ -56,22 +31,12 @@ public class DifficultyDialogFragment extends DialogFragment {
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-		// Construct items from Difficulty enum
-		List<CharSequence> items = new ArrayList<CharSequence>();
-
-		for (Difficulty difficulty : Difficulty.values()) {
-			if (difficulty.getTargetWinPercent() == -1) {
-				items.add(getString(difficulty.getStrResId()));
-			}
-			else {
-				items.add(getString(R.string.template_win_rate, getString(difficulty.getStrResId()),
-						difficulty.getTargetWinPercent()));
-			}
-		}
-
-		builder.setItems(items.toArray(new CharSequence[0]), new OnClickListener() {
+		mAdapter = new DifficultyAdapter(getActivity());
+		builder.setSingleChoiceItems(mAdapter, 0, new OnClickListener() {
+			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				mListener.onDifficultyChosen(Difficulty.values()[which]);
+				dismissAllowingStateLoss();
+				mListener.onDifficultyChosen(mAdapter.getItem(which));
 			}
 		});
 

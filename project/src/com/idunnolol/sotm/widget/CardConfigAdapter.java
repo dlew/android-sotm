@@ -5,7 +5,6 @@ import java.util.List;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.Typeface;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +16,7 @@ import com.idunnolol.sotm.R;
 import com.idunnolol.sotm.data.Card;
 import com.idunnolol.sotm.data.CardSet;
 import com.idunnolol.sotm.data.Db;
+import com.idunnolol.utils.FontCache;
 import com.idunnolol.utils.Ui;
 
 public class CardConfigAdapter extends BaseAdapter {
@@ -97,7 +97,7 @@ public class CardConfigAdapter extends BaseAdapter {
 			if (rowType == RowType.HEADER) {
 				convertView.setBackgroundColor(mCachedHeaderBgColor);
 				holder.mLabel.setTextAppearance(mContext, android.R.style.TextAppearance_Inverse);
-				holder.mLabel.setTypeface(Typeface.DEFAULT_BOLD);
+				holder.mLabel.setTypeface(FontCache.getTypeface(mContext, mContext.getString(R.string.font_crash_landing)));
 				holder.mLabel.setTextSize(TypedValue.COMPLEX_UNIT_PX, mCachedHeaderTextSize);
 			}
 		}

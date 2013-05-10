@@ -5,12 +5,13 @@
     android:orientation="vertical"
     android:padding="12dp" >
 
-    <TextView
+    <com.idunnolol.sotm.widget.TextView
         android:id="@+id/stats_text_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
         android:textAppearance="@android:style/TextAppearance.Holo.Widget.ActionBar.Title"
-        android:textIsSelectable="false" />
+        android:textIsSelectable="false"
+        android:textSize="@dimen/text_size_row" />
 
 </LinearLayout>

@@ -4,7 +4,7 @@
     android:layout_height="?android:attr/listPreferredItemHeight"
     android:orientation="horizontal" >
 
-    <TextView
+    <com.idunnolol.sotm.widget.TextView
         android:id="@+id/label_text_view"
         android:layout_width="0dp"
         android:layout_height="match_parent"
@@ -24,7 +24,7 @@
         android:layout_height="match_parent"
         android:background="?android:attr/listDivider" />
 
-    <TextView
+    <com.idunnolol.sotm.widget.TextView
         android:id="@+id/remove_button"
         android:layout_width="64dp"
         android:layout_height="match_parent"

@@ -1,5 +1,7 @@
 <resources>
 
-    <style name="AppTheme" parent="android:Theme.Holo.Light" />
+    <style name="AppTheme" parent="android:Theme.Holo.Light">
+        <item name="font">@string/font_rsbs</item>
+    </style>
 
 </resources>

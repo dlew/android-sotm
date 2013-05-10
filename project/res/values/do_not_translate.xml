@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="font_crash_landing">fonts/CrashLandingBB.ttf</string>
+    <string name="font_rsbs">fonts/RedStateBlueStateBB_reg.ttf</string>
+
+</resources>

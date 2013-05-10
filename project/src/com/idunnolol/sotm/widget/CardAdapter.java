@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.idunnolol.sotm.R;
 import com.idunnolol.sotm.data.Card;
 
 public class CardAdapter extends BaseAdapter {
@@ -63,7 +64,7 @@ public class CardAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		if (convertView == null) {
-			convertView = LayoutInflater.from(mContext).inflate(android.R.layout.simple_list_item_1, parent, false);
+			convertView = LayoutInflater.from(mContext).inflate(R.layout.row_dialog, parent, false);
 		}
 
 		TextView textView = (TextView) convertView;

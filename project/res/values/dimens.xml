@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="text_size_row">16dp</dimen>
-    <dimen name="text_size_row_header">24dp</dimen>
-    <dimen name="text_size_row_button">28dp</dimen>
+    <dimen name="text_size_row">22dp</dimen>
+    <dimen name="text_size_row_header">40dp</dimen>
+    <dimen name="text_size_row_button">36dp</dimen>
 
 </resources>
