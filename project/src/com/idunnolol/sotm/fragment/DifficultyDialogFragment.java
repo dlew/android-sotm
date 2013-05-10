@@ -31,6 +31,8 @@ public class DifficultyDialogFragment extends DialogFragment {
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
+		builder.setTitle(R.string.title_difficulty);
+
 		mAdapter = new DifficultyAdapter(getActivity());
 		builder.setSingleChoiceItems(mAdapter, 0, new OnClickListener() {
 			@Override
