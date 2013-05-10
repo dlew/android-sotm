@@ -24,6 +24,7 @@ import com.idunnolol.sotm.fragment.DifficultyDialogFragment.DifficultyDialogFrag
 import com.idunnolol.sotm.fragment.SpecifyDifficultyDialogFragment.SpecifyDifficultyDialogFragmentListener;
 import com.idunnolol.sotm.widget.GameSetupAdapter;
 import com.idunnolol.sotm.widget.GameSetupAdapter.GameSetupAdapterListener;
+import com.idunnolol.utils.Log;
 
 public class RandomizerListFragment extends ListFragment implements GameSetupAdapterListener,
 		CardPickerDialogFragmentListener, DifficultyDialogFragmentListener, SpecifyDifficultyDialogFragmentListener {
@@ -161,7 +162,11 @@ public class RandomizerListFragment extends ListFragment implements GameSetupAda
 	}
 
 	private void onGameSetupChanged() {
-		mBaseGameSetup = null;
+		onGameSetupChanged(null);
+	}
+
+	private void onGameSetupChanged(GameSetup gameSetup) {
+		mBaseGameSetup = gameSetup;
 		mAdapter.notifyDataSetChanged();
 		mListener.onGameSetupChanged(mGameSetup);
 		getActivity().invalidateOptionsMenu();
@@ -182,8 +187,7 @@ public class RandomizerListFragment extends ListFragment implements GameSetupAda
 				mGameSetup.updateFrom(randomizer.randomize(targetWinPercent));
 			}
 
-			onGameSetupChanged();
-			mBaseGameSetup = baseGameSetup;
+			onGameSetupChanged(baseGameSetup);
 			mTargetWinPercent = targetWinPercent;
 		}
 		else {
@@ -204,6 +208,8 @@ public class RandomizerListFragment extends ListFragment implements GameSetupAda
 	@Override
 	public void onPrepareOptionsMenu(Menu menu) {
 		super.onPrepareOptionsMenu(menu);
+
+		Log.i("Base game setup: " + mBaseGameSetup);
 
 		menu.findItem(R.id.action_reroll).setVisible(mBaseGameSetup != null);
 		menu.findItem(R.id.action_randomize).setVisible(mBaseGameSetup == null && mGameSetup.hasRandomCards());
