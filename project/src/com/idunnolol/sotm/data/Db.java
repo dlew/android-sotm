@@ -525,7 +525,6 @@ public class Db {
 		while (reader.hasNext()) {
 			int total = 0;
 			int lossPercent = 0;
-			boolean skipped = false;
 
 			// NOTE: This null-check can be removed if points JSON becomes compliant
 			if (reader.peek() != JsonToken.NULL) {
@@ -543,13 +542,7 @@ public class Db {
 					}
 				}
 				reader.endObject();
-			}
-			else {
-				reader.skipValue();
-				skipped = true;
-			}
 
-			if (!skipped) {
 				mDifficultyScale.put(total, lossPercent);
 
 				if (total < mMinDifficultyPoints) {
@@ -558,6 +551,9 @@ public class Db {
 				if (total > mMaxDifficultyPoints) {
 					mMaxDifficultyPoints = total;
 				}
+			}
+			else {
+				reader.skipValue();
 			}
 		}
 		reader.endArray();
