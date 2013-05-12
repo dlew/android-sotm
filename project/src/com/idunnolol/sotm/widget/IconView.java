@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.idunnolol.sotm.BitmapCache;
 import com.idunnolol.sotm.R;
 import com.idunnolol.sotm.data.Card;
 import com.idunnolol.utils.Ui;
@@ -41,7 +42,7 @@ public class IconView extends LinearLayout {
 		mRandomView.setVisibility(isRandom ? View.VISIBLE : View.GONE);
 
 		if (!isRandom) {
-			mIconView.setImageResource(card.getIconResId());
+			mIconView.setImageBitmap(BitmapCache.getBitmap(card.getIconResId()));
 		}
 	}
 }

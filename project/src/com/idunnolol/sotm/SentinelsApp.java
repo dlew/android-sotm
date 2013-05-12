@@ -16,5 +16,7 @@ public class SentinelsApp extends Application {
 		Log.configure(TAG, true);
 
 		Db.init(this);
+
+		BitmapCache.init(this);
 	}
 }
