@@ -10,17 +10,19 @@ import com.idunnolol.sotm.R;
 import com.idunnolol.sotm.data.Card;
 import com.idunnolol.sotm.data.Difficulty;
 import com.idunnolol.sotm.data.GameSetup;
+import com.idunnolol.sotm.fragment.AboutDialogFragment;
 import com.idunnolol.sotm.fragment.CardPickerDialogFragment.CardPickerDialogFragmentListener;
 import com.idunnolol.sotm.fragment.DifficultyDialogFragment.DifficultyDialogFragmentListener;
-import com.idunnolol.sotm.fragment.AboutDialogFragment;
 import com.idunnolol.sotm.fragment.RandomizerListFragment;
 import com.idunnolol.sotm.fragment.RandomizerListFragment.RandomizerListFragmentListener;
 import com.idunnolol.sotm.fragment.SpecifyDifficultyDialogFragment.SpecifyDifficultyDialogFragmentListener;
 import com.idunnolol.sotm.fragment.StatsFragment;
+import com.idunnolol.sotm.fragment.StatsFragment.StatsFragmentListener;
 import com.idunnolol.utils.Ui;
 
 public class RandomizerActivity extends Activity implements RandomizerListFragmentListener,
-		CardPickerDialogFragmentListener, DifficultyDialogFragmentListener, SpecifyDifficultyDialogFragmentListener {
+		CardPickerDialogFragmentListener, DifficultyDialogFragmentListener, SpecifyDifficultyDialogFragmentListener,
+		StatsFragmentListener {
 
 	private RandomizerListFragment mRandomizerListFragment;
 	private StatsFragment mStatsFragment;
@@ -98,6 +100,14 @@ public class RandomizerActivity extends Activity implements RandomizerListFragme
 	@Override
 	public void onGameSetupChanged(GameSetup gameSetup) {
 		mStatsFragment.bind(gameSetup);
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+	// StatsFragmentListener
+
+	@Override
+	public void onStatsClick() {
+		mRandomizerListFragment.launchRandomizerDialog();
 	}
 
 }

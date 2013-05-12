@@ -1,7 +1,7 @@
 package com.idunnolol.sotm.fragment;
 
+import android.app.Activity;
 import android.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Pair;
@@ -12,14 +12,22 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.idunnolol.sotm.R;
-import com.idunnolol.sotm.activity.CardConfigActivity;
 import com.idunnolol.sotm.data.Db;
 import com.idunnolol.sotm.data.GameSetup;
 import com.idunnolol.utils.Ui;
 
 public class StatsFragment extends Fragment {
 
+	private StatsFragmentListener mListener;
+
 	private TextView mStatsTextView;
+
+	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+
+		mListener = (StatsFragmentListener) activity;
+	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -27,10 +35,10 @@ public class StatsFragment extends Fragment {
 
 		mStatsTextView = Ui.findView(root, R.id.stats_text_view);
 
-		mStatsTextView.setOnClickListener(new OnClickListener() {
+		root.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				startActivity(new Intent(getActivity(), CardConfigActivity.class));
+				mListener.onStatsClick();
 			}
 		});
 
@@ -40,13 +48,9 @@ public class StatsFragment extends Fragment {
 	public void bind(GameSetup gameSetup) {
 		String str;
 		if (!gameSetup.canRandomize()) {
-			mStatsTextView.setClickable(true);
-
 			str = getString(NotEnoughCardsDialogFragment.getErrorResId(gameSetup.getFirstLackingType()));
 		}
 		else {
-			mStatsTextView.setClickable(false);
-
 			if (gameSetup.hasRandomCards()) {
 				Pair<Integer, Integer> winPointRange = gameSetup.getPointRange();
 				int low = Db.getWinPercent(winPointRange.second);
@@ -61,4 +65,10 @@ public class StatsFragment extends Fragment {
 		mStatsTextView.setText(Html.fromHtml(str));
 	}
 
+	//////////////////////////////////////////////////////////////////////////
+	// Listener
+
+	public interface StatsFragmentListener {
+		public void onStatsClick();
+	}
 }

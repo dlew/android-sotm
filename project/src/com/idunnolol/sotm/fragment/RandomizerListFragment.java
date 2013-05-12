@@ -24,7 +24,6 @@ import com.idunnolol.sotm.fragment.DifficultyDialogFragment.DifficultyDialogFrag
 import com.idunnolol.sotm.fragment.SpecifyDifficultyDialogFragment.SpecifyDifficultyDialogFragmentListener;
 import com.idunnolol.sotm.widget.GameSetupAdapter;
 import com.idunnolol.sotm.widget.GameSetupAdapter.GameSetupAdapterListener;
-import com.idunnolol.utils.Log;
 
 public class RandomizerListFragment extends ListFragment implements GameSetupAdapterListener,
 		CardPickerDialogFragmentListener, DifficultyDialogFragmentListener, SpecifyDifficultyDialogFragmentListener {
@@ -161,6 +160,17 @@ public class RandomizerListFragment extends ListFragment implements GameSetupAda
 		return mGameSetup;
 	}
 
+	public void launchRandomizerDialog() {
+		if (!mGameSetup.canRandomize()) {
+			DialogFragment df = NotEnoughCardsDialogFragment.newInstance(mGameSetup.getFirstLackingType());
+			df.show(getFragmentManager(), NotEnoughCardsDialogFragment.TAG);
+		}
+		else {
+			DifficultyDialogFragment df = new DifficultyDialogFragment();
+			df.show(getFragmentManager(), DifficultyDialogFragment.TAG);
+		}
+	}
+
 	private void onGameSetupChanged() {
 		onGameSetupChanged(null);
 	}
@@ -209,8 +219,6 @@ public class RandomizerListFragment extends ListFragment implements GameSetupAda
 	public void onPrepareOptionsMenu(Menu menu) {
 		super.onPrepareOptionsMenu(menu);
 
-		Log.i("Base game setup: " + mBaseGameSetup);
-
 		menu.findItem(R.id.action_reroll).setVisible(mBaseGameSetup != null);
 		menu.findItem(R.id.action_randomize).setVisible(mBaseGameSetup == null && mGameSetup.hasRandomCards());
 	}
@@ -219,14 +227,7 @@ public class RandomizerListFragment extends ListFragment implements GameSetupAda
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.action_randomize:
-			if (!mGameSetup.canRandomize()) {
-				DialogFragment df = NotEnoughCardsDialogFragment.newInstance(mGameSetup.getFirstLackingType());
-				df.show(getFragmentManager(), NotEnoughCardsDialogFragment.TAG);
-			}
-			else {
-				DifficultyDialogFragment df = new DifficultyDialogFragment();
-				df.show(getFragmentManager(), DifficultyDialogFragment.TAG);
-			}
+			launchRandomizerDialog();
 			return true;
 		case R.id.action_reroll:
 			randomize(mTargetWinPercent);
