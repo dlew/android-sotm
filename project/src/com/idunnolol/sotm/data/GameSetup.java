@@ -99,12 +99,12 @@ public class GameSetup implements Parcelable {
 	 */
 	public boolean hasRandomCards() {
 		for (Card card : mHeroes) {
-			if (card == Card.RANDOM) {
+			if (card.isRandom()) {
 				return true;
 			}
 		}
 
-		return mVillain == Card.RANDOM || mEnvironment == Card.RANDOM;
+		return mVillain.isRandom() || mEnvironment.isRandom();
 	}
 
 	/**
@@ -187,7 +187,7 @@ public class GameSetup implements Parcelable {
 		List<Card> possibleHeroes = Db.getCards(Type.HERO);
 		Collections.sort(possibleHeroes, Card.POINT_COMPARATOR);
 		for (Card hero : mHeroes) {
-			if (hero == Card.RANDOM) {
+			if (hero.isRandom()) {
 				if (minPoints) {
 					points += possibleHeroes.get(0).getPoints();
 					possibleHeroes.remove(0);
@@ -199,7 +199,7 @@ public class GameSetup implements Parcelable {
 			}
 		}
 
-		if (mVillain == Card.RANDOM) {
+		if (mVillain.isRandom()) {
 			List<Card> possibleVillains = Db.getCards(Type.VILLAIN);
 			Collections.sort(possibleVillains, Card.POINT_COMPARATOR);
 
@@ -211,7 +211,7 @@ public class GameSetup implements Parcelable {
 			}
 		}
 
-		if (mEnvironment == Card.RANDOM) {
+		if (mEnvironment.isRandom()) {
 			List<Card> possibleEnvironments = Db.getCards(Type.ENVIRONMENT);
 			Collections.sort(possibleEnvironments, Card.POINT_COMPARATOR);
 

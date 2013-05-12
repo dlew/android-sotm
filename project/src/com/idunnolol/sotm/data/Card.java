@@ -93,6 +93,10 @@ public class Card implements Parcelable {
 		mEnabled = enabled;
 	}
 
+	public boolean isRandom() {
+		return this.equals(Card.RANDOM);
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (!(o instanceof Card)) {

@@ -37,7 +37,7 @@ public class IconView extends LinearLayout {
 	}
 
 	public void bind(Card card) {
-		boolean isRandom = card == Card.RANDOM;
+		boolean isRandom = card.isRandom();
 		mIconView.setVisibility(isRandom ? View.GONE : View.VISIBLE);
 		mRandomView.setVisibility(isRandom ? View.VISIBLE : View.GONE);
 

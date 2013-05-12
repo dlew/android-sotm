@@ -48,7 +48,7 @@ public class Randomizer {
 
 		for (int a = 0; a < size; a++) {
 			Card hero = heroes.get(a);
-			if (hero == Card.RANDOM) {
+			if (hero.isRandom()) {
 				Card card;
 				do {
 					card = getRandomCard(Type.HERO);
@@ -60,11 +60,11 @@ public class Randomizer {
 			}
 		}
 
-		if (gameSetup.getVillain() == Card.RANDOM) {
+		if (gameSetup.getVillain().isRandom()) {
 			gameSetup.setVillain(getRandomCard(Type.VILLAIN));
 		}
 
-		if (gameSetup.getEnvironment() == Card.RANDOM) {
+		if (gameSetup.getEnvironment().isRandom()) {
 			gameSetup.setEnvironment(getRandomCard(Type.ENVIRONMENT));
 		}
 

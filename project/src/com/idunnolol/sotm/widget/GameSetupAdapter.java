@@ -209,7 +209,7 @@ public class GameSetupAdapter extends BaseAdapter {
 		holder.mIcon.bind(card);
 
 		int resId = card.getNameResId();
-		if (card == Card.RANDOM) {
+		if (card.isRandom()) {
 			switch (getType(position)) {
 			case HERO:
 				resId = R.string.card_random_hero;
