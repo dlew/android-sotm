@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.idunnolol.sotm.R;
 import com.idunnolol.sotm.data.Card;
+import com.idunnolol.utils.Ui;
 
 public class CardAdapter extends BaseAdapter {
 
@@ -63,16 +64,30 @@ public class CardAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
+		ViewHolder holder;
 		if (convertView == null) {
-			convertView = LayoutInflater.from(mContext).inflate(R.layout.row_dialog, parent, false);
+			convertView = LayoutInflater.from(mContext).inflate(R.layout.row_card_dialog, parent, false);
+
+			holder = new ViewHolder();
+			holder.mIcon = Ui.findView(convertView, R.id.icon_view);
+			holder.mLabel = Ui.findView(convertView, R.id.label_text_view);
+
+			convertView.setTag(holder);
+		}
+		else {
+			holder = (ViewHolder) convertView.getTag();
 		}
 
-		TextView textView = (TextView) convertView;
 		Card card = getItem(position);
-		textView.setText(card.getNameResId());
-		textView.setEnabled(isEnabled(position));
+		holder.mIcon.bind(card);
+		holder.mLabel.setText(card.getNameResId());
+		holder.mLabel.setEnabled(isEnabled(position));
 
 		return convertView;
 	}
 
+	private static class ViewHolder {
+		public IconView mIcon;
+		public TextView mLabel;
+	}
 }
