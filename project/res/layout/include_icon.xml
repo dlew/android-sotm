@@ -17,6 +17,6 @@
         android:layout_height="64dp"
         android:gravity="center"
         android:text="@string/symbol_random"
-        android:textSize="@dimen/text_size_row_button" />
+        android:textSize="@dimen/text_size_random" />
 
 </com.idunnolol.sotm.widget.IconView>
