@@ -27,6 +27,8 @@ public class Card implements Parcelable {
 
 	private int mNameResId;
 
+	private int mIconResId;
+
 	private int mPoints;
 
 	private boolean mEnabled;
@@ -65,6 +67,14 @@ public class Card implements Parcelable {
 
 	public int getNameResId() {
 		return mNameResId;
+	}
+
+	public void setIconResId(int resId) {
+		mIconResId = resId;
+	}
+
+	public int getIconResId() {
+		return mIconResId;
 	}
 
 	public int getPoints() {

@@ -194,6 +194,7 @@ public class GameSetupAdapter extends BaseAdapter {
 			convertView = LayoutInflater.from(mContext).inflate(R.layout.row_card, parent, false);
 
 			holder = new CardViewHolder();
+			holder.mIcon = Ui.findView(convertView, R.id.icon_view);
 			holder.mLabel = Ui.findView(convertView, R.id.label_text_view);
 			holder.mDivider = Ui.findView(convertView, R.id.divider);
 			holder.mRemoveButton = Ui.findView(convertView, R.id.remove_button);
@@ -204,6 +205,9 @@ public class GameSetupAdapter extends BaseAdapter {
 		}
 
 		Card card = (Card) getItem(position);
+
+		holder.mIcon.bind(card);
+
 		int resId = card.getNameResId();
 		if (card == Card.RANDOM) {
 			switch (getType(position)) {
@@ -239,6 +243,7 @@ public class GameSetupAdapter extends BaseAdapter {
 	}
 
 	private static class CardViewHolder {
+		private IconView mIcon;
 		private TextView mLabel;
 		private View mDivider;
 		private View mRemoveButton;

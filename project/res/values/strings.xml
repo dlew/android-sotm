@@ -62,6 +62,7 @@
     <string name="title_environment">Pick an Environment</string>
 
     <!-- Cards -->
+    <string name="symbol_random">\?</string>
     <string name="card_random">Random</string>
     <string name="card_random_hero">Random Hero</string>
     <string name="card_random_villain">Random Villain</string>

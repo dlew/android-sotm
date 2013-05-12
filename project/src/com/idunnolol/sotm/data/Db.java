@@ -330,6 +330,10 @@ public class Db {
 				String name = reader.nextString();
 				card.setNameResId(ResourceUtils.getIdentifier(R.string.class, name));
 			}
+			else if (jsonName.equals("icon")) {
+				String icon = reader.nextString();
+				card.setIconResId(ResourceUtils.getIdentifier(R.drawable.class, icon));
+			}
 			else if (jsonName.equals("type")) {
 				String type = reader.nextString();
 				if (type.equals("hero")) {

@@ -90,14 +90,19 @@ public class CardConfigAdapter extends BaseAdapter {
 			convertView = LayoutInflater.from(mContext).inflate(R.layout.row_card_checkable, parent, false);
 
 			holder = new ViewHolder();
+			holder.mIcon = Ui.findView(convertView, R.id.icon_view);
+			holder.mDivider = Ui.findView(convertView, R.id.divider);
 			holder.mLabel = Ui.findView(convertView, R.id.label_text_view);
 			convertView.setTag(holder);
 
-			// Set different backgrounds based on the type
+			// Set different visuals based on the type
 			if (rowType == RowType.HEADER) {
 				convertView.setBackgroundColor(mCachedHeaderBgColor);
+				holder.mIcon.setVisibility(View.GONE);
+				holder.mDivider.setVisibility(View.GONE);
 				holder.mLabel.setTextAppearance(mContext, android.R.style.TextAppearance_Inverse);
-				holder.mLabel.setTypeface(FontCache.getTypeface(mContext, mContext.getString(R.string.font_crash_landing)));
+				holder.mLabel.setTypeface(FontCache.getTypeface(mContext,
+						mContext.getString(R.string.font_crash_landing)));
 				holder.mLabel.setTextSize(TypedValue.COMPLEX_UNIT_PX, mCachedHeaderTextSize);
 			}
 		}
@@ -112,6 +117,7 @@ public class CardConfigAdapter extends BaseAdapter {
 		}
 		else {
 			Card card = (Card) getItem(position);
+			holder.mIcon.bind(card);
 			labelResId = card.getNameResId();
 		}
 		holder.mLabel.setText(labelResId);
@@ -120,6 +126,8 @@ public class CardConfigAdapter extends BaseAdapter {
 	}
 
 	private static class ViewHolder {
+		public IconView mIcon;
+		public View mDivider;
 		public TextView mLabel;
 	}
 }

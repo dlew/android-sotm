@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.idunnolol.sotm.widget.IconView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/icon_view"
+    android:layout_width="64dp"
+    android:layout_height="64dp" >
+
+    <ImageView
+        android:id="@+id/icon_image_view"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        tools:ignore="ContentDescription" />
+
+    <com.idunnolol.sotm.widget.TextView
+        android:id="@+id/icon_random_view"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:gravity="center"
+        android:text="@string/symbol_random"
+        android:textSize="@dimen/text_size_row_button" />
+
+</com.idunnolol.sotm.widget.IconView>
