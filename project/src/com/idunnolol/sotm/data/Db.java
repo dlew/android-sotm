@@ -117,8 +117,12 @@ public class Db {
 		if (sInstance.mAlternates.containsKey(card)) {
 			return sInstance.mAlternates.get(card);
 		}
-
-		return new HashSet<Card>();
+		else {
+			// Return a set consisting of just the card itself
+			Set<Card> cards = new HashSet<Card>();
+			cards.add(card);
+			return cards;
+		}
 	}
 
 	public static void saveCardStates(Context context) {
