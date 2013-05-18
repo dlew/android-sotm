@@ -142,6 +142,7 @@ public class Card implements Parcelable {
 		}
 		mId = in.readString();
 		mNameResId = in.readInt();
+		mIconResId = in.readInt();
 		mPoints = in.readInt();
 		mEnabled = in.readByte() == 1;
 	}
@@ -157,6 +158,7 @@ public class Card implements Parcelable {
 		}
 		dest.writeString(mId);
 		dest.writeInt(mNameResId);
+		dest.writeInt(mIconResId);
 		dest.writeInt(mPoints);
 		dest.writeByte((byte) (mEnabled ? 1 : 0));
 	}
