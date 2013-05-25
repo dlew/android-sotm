@@ -15,7 +15,6 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.preference.PreferenceManager;
 import android.util.JsonReader;
-import android.util.JsonToken;
 import android.util.Pair;
 import android.util.SparseIntArray;
 
@@ -390,7 +389,6 @@ public class Db {
 		try {
 			in = context.getAssets().open(POINT_FILE);
 			reader = new JsonReader(new InputStreamReader(in));
-			reader.setLenient(true);
 
 			reader.beginObject();
 			while (reader.hasNext()) {
@@ -426,26 +424,14 @@ public class Db {
 			if (name.equals("hero") || name.equals("villain") || name.equals("env")) {
 				reader.beginArray();
 				while (reader.hasNext()) {
-					// NOTE: This null-check can be removed if points JSON becomes compliant
-					if (reader.peek() != JsonToken.NULL) {
-						readCardPoints(reader);
-					}
-					else {
-						reader.skipValue();
-					}
+					readCardPoints(reader);
 				}
 				reader.endArray();
 			}
 			else if (name.equals("nump")) {
 				reader.beginArray();
 				while (reader.hasNext()) {
-					// NOTE: This null-check can be removed if points JSON becomes compliant
-					if (reader.peek() != JsonToken.NULL) {
-						readNumPlayers(reader);
-					}
-					else {
-						reader.skipValue();
-					}
+					readNumPlayers(reader);
 				}
 				reader.endArray();
 			}
@@ -534,34 +520,28 @@ public class Db {
 			int total = 0;
 			int lossPercent = 0;
 
-			// NOTE: This null-check can be removed if points JSON becomes compliant
-			if (reader.peek() != JsonToken.NULL) {
-				reader.beginObject();
-				while (reader.hasNext()) {
-					String name = reader.nextName();
-					if (name.equals("total")) {
-						total = reader.nextInt();
-					}
-					else if (name.equals("losspct")) {
-						lossPercent = reader.nextInt();
-					}
-					else {
-						reader.skipValue();
-					}
+			reader.beginObject();
+			while (reader.hasNext()) {
+				String name = reader.nextName();
+				if (name.equals("total")) {
+					total = reader.nextInt();
 				}
-				reader.endObject();
-
-				mDifficultyScale.put(total, lossPercent);
-
-				if (total < mMinDifficultyPoints) {
-					mMinDifficultyPoints = total;
+				else if (name.equals("losspct")) {
+					lossPercent = reader.nextInt();
 				}
-				if (total > mMaxDifficultyPoints) {
-					mMaxDifficultyPoints = total;
+				else {
+					reader.skipValue();
 				}
 			}
-			else {
-				reader.skipValue();
+			reader.endObject();
+
+			mDifficultyScale.put(total, lossPercent);
+
+			if (total < mMinDifficultyPoints) {
+				mMinDifficultyPoints = total;
+			}
+			if (total > mMaxDifficultyPoints) {
+				mMaxDifficultyPoints = total;
 			}
 		}
 		reader.endArray();

@@ -31,7 +31,7 @@
 			{"name": "Dark Visionary", "points": -43 },
 			{"name": "The Scholar", "points": -43 },
 			{"name": "Team Leader Tachyon", "points": -83 },
-			{"name": "The Greatest Legacy", "points": -125 },
+			{"name": "The Greatest Legacy", "points": -125 }
 		],
 		"villain": [
 			{"name": "The Matriarch", "points": 93 },
@@ -53,7 +53,7 @@
 			{"name": "Akash'bhuta", "points": -65 },
 			{"name": "Ambuscade", "points": -99 },
 			{"name": "Gloomweaver", "points": -112 },
-			{"name": "Miss Information", "points": -112 },
+			{"name": "Miss Information", "points": -112 }
 		],
 		"env": [
 			{"name": "Rook City", "points": 97 },
@@ -67,12 +67,12 @@
 			{"name": "Silver Gulch 1883", "points": -13 },
 			{"name": "Realm of Discord", "points": -30 },
 			{"name": "The Block", "points": -59 },
-			{"name": "The Final Wasteland", "points": -65 },
+			{"name": "The Final Wasteland", "points": -65 }
 		],
 		"nump": [
 			{"name": "Three", "points": 51 },
 			{"name": "Five", "points": -38 },
-			{"name": "Four", "points": -43 },
+			{"name": "Four", "points": -43 }
 		]
 	},
 	"scale": [
@@ -195,6 +195,6 @@
 		{"total": -295, "losspct": 2},
 		{"total": -285, "losspct": 2},
 		{"total": -275, "losspct": 2},
-		{"total": -290, "losspct": 2},
+		{"total": -290, "losspct": 2}
 	]
 }
