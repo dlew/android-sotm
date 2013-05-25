@@ -38,7 +38,7 @@ public class CardConfigListFragment extends ListFragment {
 		boolean enabled = checkedItems.get(position);
 		Object item = mAdapter.getItem(position);
 		if (item instanceof CardSet) {
-			((CardSet) item).setAllCardsEnabled(enabled);
+			((CardSet) item).setAllCardsEnabled(enabled, true);
 		}
 		else {
 			((Card) item).setEnabled(enabled);

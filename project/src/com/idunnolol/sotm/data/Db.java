@@ -51,7 +51,7 @@ public class Db {
 			}
 			else {
 				for (CardSet cardSet : sInstance.mCardSets) {
-					cardSet.setAllCardsEnabled(cardSet.isEnabledByDefault());
+					cardSet.setAllCardsEnabled(cardSet.isEnabledByDefault(), false);
 				}
 				saveCardStates(context);
 			}
