@@ -445,6 +445,7 @@ public class Db {
 	private void readCardPoints(JsonReader reader) throws IOException {
 		String cardName = null;
 		int points = 0;
+		Integer advanced = null;
 
 		reader.beginObject();
 		while (reader.hasNext()) {
@@ -455,6 +456,9 @@ public class Db {
 			}
 			else if (name.equals("points")) {
 				points = reader.nextInt();
+			}
+			else if (name.equals("advanced")) {
+				advanced = reader.nextInt();
 			}
 			else {
 				reader.skipValue();
@@ -475,6 +479,19 @@ public class Db {
 		}
 
 		card.setPoints(points);
+
+		// Set the advanced points (if available)
+		if (advanced != null) {
+			cardName = card.getAdvancedId();
+			Card advancedCard = mCards.get(cardName);
+
+			if (advancedCard == null) {
+				throw new RuntimeException("Could not find advanced card \"" + cardName + "\" for points");
+			}
+
+			advancedCard.setAdvanced(true);
+			advancedCard.setPoints(advanced);
+		}
 	}
 
 	private void readNumPlayers(JsonReader reader) throws IOException {

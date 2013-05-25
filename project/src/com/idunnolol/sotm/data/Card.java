@@ -33,6 +33,8 @@ public class Card implements Parcelable {
 
 	private boolean mEnabled;
 
+	private boolean mAdvanced;
+
 	public Card() {
 		// Default constructor
 	}
@@ -93,8 +95,23 @@ public class Card implements Parcelable {
 		mEnabled = enabled;
 	}
 
+	public boolean isAdvanced() {
+		return mAdvanced;
+	}
+
+	public void setAdvanced(boolean advanced) {
+		mAdvanced = advanced;
+	}
+
 	public boolean isRandom() {
 		return this.equals(Card.RANDOM);
+	}
+
+	/**
+	 * @return the advanced version of this card
+	 */
+	public String getAdvancedId() {
+		return mAdvanced ? mId : mId + " (Advanced)";
 	}
 
 	@Override
@@ -145,6 +162,7 @@ public class Card implements Parcelable {
 		mIconResId = in.readInt();
 		mPoints = in.readInt();
 		mEnabled = in.readByte() == 1;
+		mAdvanced = in.readByte() == 1;
 	}
 
 	@Override
@@ -161,6 +179,7 @@ public class Card implements Parcelable {
 		dest.writeInt(mIconResId);
 		dest.writeInt(mPoints);
 		dest.writeByte((byte) (mEnabled ? 1 : 0));
+		dest.writeByte((byte) (mAdvanced ? 1 : 0));
 	}
 
 	@Override

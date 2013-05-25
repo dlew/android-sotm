@@ -19,4 +19,13 @@
         android:text="@string/symbol_random"
         android:textSize="@dimen/text_size_random" />
 
+    <com.idunnolol.sotm.widget.TextView
+        android:id="@+id/icon_advanced_view"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:gravity="center"
+        android:text="@string/symbol_advanced"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="@dimen/text_size_random" />
+
 </com.idunnolol.sotm.widget.IconView>
