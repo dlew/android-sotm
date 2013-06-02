@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 
 import com.idunnolol.sotm.BitmapCache;
 import com.idunnolol.sotm.R;
@@ -13,7 +12,7 @@ import com.idunnolol.utils.Ui;
 
 public class IconView extends FrameLayout {
 
-	private ImageView mIconView;
+	private ShadedImageView mIconView;
 	private TextView mRandomView;
 	private TextView mAdvancedView;
 
@@ -40,12 +39,21 @@ public class IconView extends FrameLayout {
 
 	public void bind(Card card) {
 		boolean isRandom = card.isRandom();
+		boolean isAdvanced = card.isAdvanced();
+
 		mIconView.setVisibility(isRandom ? View.GONE : View.VISIBLE);
 		mRandomView.setVisibility(isRandom ? View.VISIBLE : View.GONE);
-		mAdvancedView.setVisibility(card.isAdvanced() ? View.VISIBLE : View.GONE);
+		mAdvancedView.setVisibility(isAdvanced ? View.VISIBLE : View.GONE);
 
 		if (!isRandom) {
 			mIconView.setImageBitmap(BitmapCache.getBitmap(card.getIconResId()));
+		}
+
+		if (isAdvanced) {
+			mIconView.setShadeColor(getResources().getColor(R.color.advanced_shade));
+		}
+		else {
+			mIconView.disableShade();
 		}
 	}
 }
