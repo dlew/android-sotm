@@ -64,6 +64,7 @@
     <!-- Cards -->
     <string name="symbol_random">\?</string>
     <string name="symbol_advanced">A</string>
+    <string name="advanced_TEMPLATE">%s (Advanced)</string>
     <string name="card_random">Random</string>
     <string name="card_random_hero">Random Hero</string>
     <string name="card_random_villain">Random Villain</string>
@@ -81,7 +82,6 @@
     <string name="card_baron_blade">Baron Blade</string>
     <string name="card_citizen_dawn">Citizen Dawn</string>
     <string name="card_grand_warlord_voss">Grand Warlord Voss</string>
-    <string name="card_grand_warlord_voss_advanced">Grand Warlord Voss (Advanced)</string>
     <string name="card_omnitron">Omnitron</string>
     <string name="card_insula_primalis">Insula Primalis</string>
     <string name="card_megalopolis">Megalopolis</string>
@@ -90,7 +90,6 @@
     <string name="card_expatriette">Expatriette</string>
     <string name="card_mister_fixer">Mister Fixer</string>
     <string name="card_plague_rat">Plague Rat</string>
-    <string name="card_plague_rat_advanced">Plague Rat (Advanced)</string>
     <string name="card_spite">Spite</string>
     <string name="card_the_chairman">The Chairman</string>
     <string name="card_the_matriarch">The Matriarch</string>
@@ -101,9 +100,7 @@
     <string name="card_akashbhuta">Akash\'bhuta</string>
     <string name="card_apostate">Apostate</string>
     <string name="card_gloomweaver">GloomWeaver</string>
-    <string name="card_gloomweaver_advanced">GloomWeaver (Advanced)</string>
     <string name="card_the_ennead">The Ennead</string>
-    <string name="card_the_ennead_advanced">The Ennead (Advanced)</string>
     <string name="card_realm_of_discord">Realm of Discord</string>
     <string name="card_tomb_of_anubis">Tomb of Anubis</string>
     <string name="card_chrono_ranger">Chrono Ranger</string>
@@ -118,7 +115,6 @@
     <string name="card_the_scholar">The Scholar</string>
     <string name="card_ambuscade">Ambuscade</string>
     <string name="card_miss_information">Miss Information</string>
-    <string name="card_miss_information_advanced">Miss Information (Advanced)</string>
     <string name="card_silver_gulch_1883">Silver Gulch 1883</string>
     <string name="card_the_final_wasteland">The Final Wasteland</string>
     <string name="card_young_legacy">Young Legacy</string>

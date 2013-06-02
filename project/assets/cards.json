@@ -85,12 +85,6 @@
         },
         {
           "type": "villain",
-          "id": "Grand Warlord Voss (Advanced)",
-          "icon": "card_grand_warlord_voss",
-          "name": "card_grand_warlord_voss_advanced"
-        },
-        {
-          "type": "villain",
           "id": "Omnitron",
           "icon": "card_omnitron",
           "name": "card_omnitron"
@@ -143,12 +137,6 @@
           "id": "Plague Rat",
           "icon": "card_plague_rat",
           "name": "card_plague_rat"
-        },
-        {
-          "type": "villain",
-          "id": "Plague Rat (Advanced)",
-          "icon": "card_plague_rat",
-          "name": "card_plague_rat_advanced"
         },
         {
           "type": "villain",
@@ -219,21 +207,9 @@
         },
         {
           "type": "villain",
-          "id": "GloomWeaver (Advanced)",
-          "icon": "card_gloomweaver",
-          "name": "card_gloomweaver_advanced"
-        },
-        {
-          "type": "villain",
           "id": "The Ennead",
           "icon": "card_the_ennead",
           "name": "card_the_ennead"
-        },
-        {
-          "type": "villain",
-          "id": "The Ennead (Advanced)",
-          "icon": "card_the_ennead",
-          "name": "card_the_ennead_advanced"
         },
         {
           "type": "environment",
@@ -331,12 +307,6 @@
           "id": "Miss Information",
           "icon": "card_miss_information",
           "name": "card_miss_information"
-        },
-        {
-          "type": "villain",
-          "id": "Miss Information (Advanced)",
-          "icon": "card_miss_information",
-          "name": "card_miss_information_advanced"
         },
         {
           "type": "environment",
@@ -503,26 +473,6 @@
     [
       "Omnitron",
       "Cosmic Omnitron"
-    ],
-    [
-      "Grand Warlord Voss",
-      "Grand Warlord Voss (Advanced)"
-    ],
-    [
-      "Plague Rat",
-      "Plague Rat (Advanced)"
-    ],
-    [
-      "GloomWeaver",
-      "GloomWeaver (Advanced)"
-    ],
-    [
-      "The Ennead",
-      "The Ennead (Advanced)"
-    ],
-    [
-      "Miss Information",
-      "Miss Information (Advanced)"
     ]
   ]
 }

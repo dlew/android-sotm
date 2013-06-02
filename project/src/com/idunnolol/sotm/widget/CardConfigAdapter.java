@@ -110,17 +110,17 @@ public class CardConfigAdapter extends BaseAdapter {
 			holder = (ViewHolder) convertView.getTag();
 		}
 
-		int labelResId;
+		CharSequence label;
 		if (rowType == RowType.HEADER) {
 			CardSet cardSet = (CardSet) getItem(position);
-			labelResId = cardSet.getNameResId();
+			label = mContext.getString(cardSet.getNameResId());
 		}
 		else {
 			Card card = (Card) getItem(position);
 			holder.mIcon.bind(card);
-			labelResId = card.getNameResId();
+			label = card.getName(mContext);
 		}
-		holder.mLabel.setText(labelResId);
+		holder.mLabel.setText(label);
 
 		return convertView;
 	}

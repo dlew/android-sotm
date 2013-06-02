@@ -43,6 +43,19 @@ public class CardSet {
 		mCards.add(card);
 	}
 
+	/**
+	 * Like addCard(), but makes sure to add the advanced card at
+	 * the correct spot below the current non-advanced card.
+	 */
+	public void addAdvancedCard(Card baseCard, Card advancedCard) {
+		int size = mCards.size();
+		for (int a = 0; a < size; a++) {
+			if (mCards.get(a).equals(baseCard)) {
+				mCards.add(a + 1, advancedCard);
+			}
+		}
+	}
+
 	public List<Card> getCards() {
 		return mCards;
 	}

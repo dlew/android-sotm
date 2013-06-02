@@ -82,6 +82,9 @@ public class Db {
 
 	private Map<Card, Set<Card>> mAlternates = new HashMap<Card, Set<Card>>();
 
+	// Just used during parsing; if needed this can be more robust
+	private Map<Card, CardSet> mReverseCardSetCache = new HashMap<Card, CardSet>();
+
 	private int mMinDifficultyPoints;
 	private int mMaxDifficultyPoints;
 
@@ -251,6 +254,7 @@ public class Db {
 						mCardSets.add(set);
 						for (Card card : set.getCards()) {
 							mCards.put(card.getId(), card);
+							mReverseCardSetCache.put(card, set);
 						}
 					}
 					reader.endArray();
@@ -285,6 +289,18 @@ public class Db {
 			}
 		}
 		reader.endArray();
+	}
+
+	private void addAlternate(Card baseCard, Card altCard) {
+		Set<Card> altSet = mAlternates.get(baseCard);
+
+		if (altSet == null) {
+			altSet = new HashSet<Card>();
+			mAlternates.put(baseCard, altSet);
+		}
+
+		altSet.add(altCard);
+		mAlternates.put(altCard, altSet);
 	}
 
 	private CardSet readSet(JsonReader reader) throws IOException {
@@ -446,6 +462,7 @@ public class Db {
 		String cardName = null;
 		int points = 0;
 		Integer advanced = null;
+		int advancedCount = 0;
 
 		reader.beginObject();
 		while (reader.hasNext()) {
@@ -459,6 +476,9 @@ public class Db {
 			}
 			else if (name.equals("advanced")) {
 				advanced = reader.nextInt();
+			}
+			else if (name.equals("advcount")) {
+				advancedCount = reader.nextInt();
 			}
 			else {
 				reader.skipValue();
@@ -482,15 +502,18 @@ public class Db {
 
 		// Set the advanced points (if available)
 		if (advanced != null) {
-			cardName = card.getAdvancedId();
-			Card advancedCard = mCards.get(cardName);
-
-			if (advancedCard == null) {
-				throw new RuntimeException("Could not find advanced card \"" + cardName + "\" for points");
-			}
-
-			advancedCard.setAdvanced(true);
+			// Create an advanced version of the current card, and add it to its set
+			// directly after the original card
+			Card advancedCard = new Card(card);
+			advancedCard.makeAdvanced();
 			advancedCard.setPoints(advanced);
+			advancedCard.setAdvancedCount(advancedCount);
+
+			// Add the card to the sets
+			mCards.put(advancedCard.getId(), advancedCard);
+			CardSet set = mReverseCardSetCache.get(card);
+			set.addAdvancedCard(card, advancedCard);
+			addAlternate(card, advancedCard);
 		}
 	}
 
