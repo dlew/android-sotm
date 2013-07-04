@@ -2,27 +2,34 @@
 <com.idunnolol.sotm.widget.IconView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/icon_view"
-    android:layout_width="64dp"
+    android:layout_width="56dp"
     android:layout_height="64dp" >
 
     <com.idunnolol.sotm.widget.ShadedImageView
         android:id="@+id/icon_image_view"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center_vertical|right"
         tools:ignore="ContentDescription" />
 
     <com.idunnolol.sotm.widget.TextView
         android:id="@+id/icon_random_view"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center_vertical|right"
+        android:background="#818FF6"
         android:gravity="center"
         android:text="@string/symbol_random"
+        android:textColor="@android:color/white"
         android:textSize="@dimen/text_size_random" />
+
+    <!-- android:background="#5668ED" -->
 
     <com.idunnolol.sotm.widget.TextView
         android:id="@+id/icon_advanced_view"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center_vertical|right"
         android:gravity="center"
         android:text="@string/symbol_advanced"
         android:textColor="@android:color/holo_red_light"

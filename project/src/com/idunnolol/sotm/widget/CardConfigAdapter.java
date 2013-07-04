@@ -91,7 +91,6 @@ public class CardConfigAdapter extends BaseAdapter {
 
 			holder = new ViewHolder();
 			holder.mIcon = Ui.findView(convertView, R.id.icon_view);
-			holder.mDivider = Ui.findView(convertView, R.id.divider);
 			holder.mLabel = Ui.findView(convertView, R.id.label_text_view);
 			convertView.setTag(holder);
 
@@ -99,7 +98,6 @@ public class CardConfigAdapter extends BaseAdapter {
 			if (rowType == RowType.HEADER) {
 				convertView.setBackgroundColor(mCachedHeaderBgColor);
 				holder.mIcon.setVisibility(View.GONE);
-				holder.mDivider.setVisibility(View.GONE);
 				holder.mLabel.setTextAppearance(mContext, android.R.style.TextAppearance_Inverse);
 				holder.mLabel.setTypeface(FontCache.getTypeface(mContext,
 						mContext.getString(R.string.font_crash_landing)));
@@ -127,7 +125,6 @@ public class CardConfigAdapter extends BaseAdapter {
 
 	private static class ViewHolder {
 		public IconView mIcon;
-		public View mDivider;
 		public TextView mLabel;
 	}
 }

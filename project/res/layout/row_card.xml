@@ -6,8 +6,6 @@
 
     <include layout="@layout/include_icon" />
 
-    <include layout="@layout/include_vertical_divider_full" />
-
     <com.idunnolol.sotm.widget.TextView
         android:id="@+id/label_text_view"
         android:layout_width="0dp"
