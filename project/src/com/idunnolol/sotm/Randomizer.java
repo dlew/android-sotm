@@ -1,7 +1,11 @@
 package com.idunnolol.sotm;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
@@ -26,9 +30,17 @@ public class Randomizer {
 	// The base game setup; when we randomize, we fill in any cards set to RANDOM
 	private GameSetup mBaseGameSetup;
 
+	// All cards that can be picked by the randomizer for a given type
+	private Map<Type, Set<Card>> mValidCards;
+
+	// These are the cards, minus alts, to give each card equal weight
+	private Map<Type, List<Card>> mCardBanks;
+
 	public Randomizer(GameSetup baseGameSetup) {
 		mBaseGameSetup = baseGameSetup;
 		mRand = new Random();
+		mValidCards = new HashMap<Type, Set<Card>>();
+		mCardBanks = new HashMap<Type, List<Card>>();
 	}
 
 	public GameSetup randomize() {
@@ -135,8 +147,52 @@ public class Randomizer {
 	}
 
 	private Card getRandomCard(Type type) {
-		List<Card> cards = Db.getCards(type);
+		if (!mValidCards.containsKey(type)) {
+			List<Card> validCards = Db.getCards(type);
+			mValidCards.put(type, new HashSet<Card>(validCards));
+
+			Set<Card> cardBank = new HashSet<Card>(validCards);
+
+			// Remove alternates so that all cards have equal weight
+			Iterator<Card> iterator = cardBank.iterator();
+			while (iterator.hasNext()) {
+				Card card = iterator.next();
+
+				Set<Card> alts = Db.getCardAndAlternates(card);
+				for (Card alt : alts) {
+					if (!card.equals(alt) && cardBank.contains(alt)) {
+						iterator.remove();
+						break;
+					}
+				}
+			}
+
+			// Add to card banks
+			mCardBanks.put(type, new ArrayList<Card>(cardBank));
+		}
+
+		List<Card> cards = mCardBanks.get(type);
 		int index = mRand.nextInt(cards.size());
-		return cards.get(index);
+		Card card = cards.get(index);
+
+		// Check if there are alternates; if there are, pick one of them
+		List<Card> alts = new ArrayList<Card>(Db.getCardAndAlternates(card));
+		int size = alts.size();
+		if (size > 1) {
+			Set<Card> validCards = mValidCards.get(type);
+			index = mRand.nextInt(size);
+			while (true) {
+				card = alts.get(index);
+				if (validCards.contains(card)) {
+					break;
+				}
+				else {
+					index = (index + 1) % size;
+				}
+			}
+		}
+
+		return card;
 	}
+
 }

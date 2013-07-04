@@ -157,6 +157,11 @@ public class Card implements Parcelable {
 	}
 
 	@Override
+	public int hashCode() {
+		return mId.hashCode();
+	}
+
+	@Override
 	public boolean equals(Object o) {
 		if (!(o instanceof Card)) {
 			return false;
