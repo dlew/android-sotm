@@ -18,6 +18,7 @@ import com.idunnolol.sotm.fragment.RandomizerListFragment.RandomizerListFragment
 import com.idunnolol.sotm.fragment.SpecifyDifficultyDialogFragment.SpecifyDifficultyDialogFragmentListener;
 import com.idunnolol.sotm.fragment.StatsFragment;
 import com.idunnolol.sotm.fragment.StatsFragment.StatsFragmentListener;
+import com.idunnolol.sotm.sync.AccountUtils;
 import com.idunnolol.utils.Ui;
 
 public class RandomizerActivity extends Activity implements RandomizerListFragmentListener,
@@ -37,6 +38,12 @@ public class RandomizerActivity extends Activity implements RandomizerListFragme
 
 		mRandomizerListFragment = Ui.findFragment(this, R.id.randomizer_list_fragment);
 		mStatsFragment = Ui.findFragment(this, R.id.stats_fragment);
+
+		if (savedInstanceState == null) {
+			// Make sure we have a sync account setup and that it's set to sync
+			AccountUtils.addSyncAccount(this);
+			AccountUtils.startPeriodicSync();
+		}
 	}
 
 	@Override

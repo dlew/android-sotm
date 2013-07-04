@@ -8,6 +8,13 @@
         android:minSdkVersion="14"
         android:targetSdkVersion="17" />
 
+    <!-- For creating an account in order to sync data over the internet -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
+
     <application
         android:name="com.idunnolol.sotm.SentinelsApp"
         android:allowBackup="true"
@@ -24,6 +31,34 @@
         <activity
             android:name="com.idunnolol.sotm.activity.CardConfigActivity"
             android:label="@string/title_configuration" />
+
+        <provider
+            android:name="com.idunnolol.sotm.sync.PointContentProvider"
+            android:authorities="com.idunnolol.sotm.authority"
+            android:exported="false" />
+
+        <service
+            android:name="com.idunnolol.sotm.sync.SotmAuthenticationService"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.accounts.AccountAuthenticator" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.accounts.AccountAuthenticator"
+                android:resource="@xml/accountauth" />
+        </service>
+        <service
+            android:name="com.idunnolol.sotm.sync.PointSyncService"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.content.SyncAdapter" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.content.SyncAdapter"
+                android:resource="@xml/sync_sotm" />
+        </service>
     </application>
 
 </manifest>
