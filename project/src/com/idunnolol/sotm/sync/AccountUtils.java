@@ -4,11 +4,14 @@ import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 
 import com.idunnolol.utils.Log;
 
 public class AccountUtils {
+
+	public static final Uri SYNC_URI = Uri.parse("content://" + PointContentProvider.CONTENT_AUTHORITY + "/points");
 
 	public static final String ACCOUNT_TYPE = "com.idunnolol.sotm";
 	public static final String ACCOUNT_NAME = "Data Updater";

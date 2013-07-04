@@ -25,9 +25,13 @@ public class PointSyncAdapter extends AbstractThreadedSyncAdapter {
 			SyncResult syncResult) {
 		Log.i("Syncing SotM data from server...");
 
-		Db.updatePoints(getContext());
-
-		// TODO: Notify the app of data updates?
+		boolean success = Db.updatePoints(getContext());
+		if (success) {
+			getContext().getContentResolver().notifyChange(AccountUtils.SYNC_URI, null);
+		}
+		else {
+			syncResult.hasError();
+		}
 	}
 
 }

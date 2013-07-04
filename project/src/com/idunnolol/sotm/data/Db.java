@@ -629,7 +629,7 @@ public class Db {
 
 	private static final String SYNC_POINT_URL = "http://x.gray.org/sentinels.json";
 
-	public static void updatePoints(Context context) {
+	public static boolean updatePoints(Context context) {
 		try {
 			// Clear the old TMP file
 			File tmpFile = context.getFileStreamPath(TMP_SYNCED_POINT_FILE);
@@ -672,9 +672,13 @@ public class Db {
 		}
 		catch (MalformedURLException e) {
 			// Ignore; this should never happen
+			return false;
 		}
 		catch (IOException e) {
 			Log.w("Could not sync Sentinels data", e);
+			return false;
 		}
+
+		return true;
 	}
 }

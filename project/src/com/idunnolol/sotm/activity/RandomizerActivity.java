@@ -2,6 +2,8 @@ package com.idunnolol.sotm.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.ContentObserver;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,6 +21,7 @@ import com.idunnolol.sotm.fragment.SpecifyDifficultyDialogFragment.SpecifyDiffic
 import com.idunnolol.sotm.fragment.StatsFragment;
 import com.idunnolol.sotm.fragment.StatsFragment.StatsFragmentListener;
 import com.idunnolol.sotm.sync.AccountUtils;
+import com.idunnolol.utils.Log;
 import com.idunnolol.utils.Ui;
 
 public class RandomizerActivity extends Activity implements RandomizerListFragmentListener,
@@ -50,7 +53,16 @@ public class RandomizerActivity extends Activity implements RandomizerListFragme
 	protected void onResume() {
 		super.onResume();
 
+		getContentResolver().registerContentObserver(AccountUtils.SYNC_URI, false, mSyncObserver);
+
 		mStatsFragment.bind(mRandomizerListFragment.getGameSetup());
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+
+		getContentResolver().unregisterContentObserver(mSyncObserver);
 	}
 
 	//////////////////////////////////////////////////////////////////////////
@@ -76,6 +88,23 @@ public class RandomizerActivity extends Activity implements RandomizerListFragme
 
 		return super.onOptionsItemSelected(item);
 	}
+
+	//////////////////////////////////////////////////////////////////////////
+	// Syncing
+
+	private ContentObserver mSyncObserver = new ContentObserver(null) {
+		@Override
+		public void onChange(boolean selfChange) {
+			onChange(selfChange, null);
+		}
+
+		@Override
+		public void onChange(boolean selfChange, Uri uri) {
+			Log.i("Points info updated, re-binding data");
+
+			mStatsFragment.bind(mRandomizerListFragment.getGameSetup());
+		}
+	};
 
 	//////////////////////////////////////////////////////////////////////////
 	// CardPickerDialogFragmentListener
