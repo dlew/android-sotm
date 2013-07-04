@@ -54,7 +54,12 @@ public class Db {
 			if (prefs.contains(PREFERENCE_CARD_STATE)) {
 				Set<String> enabledIds = prefs.getStringSet(PREFERENCE_CARD_STATE, null);
 				for (String id : enabledIds) {
-					sInstance.mCards.get(id).setEnabled(true);
+					Card card = sInstance.mCards.get(id);
+					
+					// Card can be null if an advanced card ends up being cut off later
+					if (card != null) {
+						sInstance.mCards.get(id).setEnabled(true);
+					}
 				}
 			}
 			else {
