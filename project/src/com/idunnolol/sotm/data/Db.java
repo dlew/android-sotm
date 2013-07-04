@@ -32,6 +32,9 @@ public class Db {
 
 	private static final Db sInstance = new Db();
 
+	// Only show advanced villains who have more than a certain # of games logged
+	private static final int ADVANCED_COUNT_CUTOFF = 35;
+
 	private Db() {
 		// Singleton
 	}
@@ -534,7 +537,7 @@ public class Db {
 		card.setPoints(points);
 
 		// Set the advanced points (if available)
-		if (advanced != null) {
+		if (advanced != null && advancedCount >= ADVANCED_COUNT_CUTOFF) {
 			// Create an advanced version of the current card, and add it to its set
 			// directly after the original card
 			Card advancedCard = new Card(card);
