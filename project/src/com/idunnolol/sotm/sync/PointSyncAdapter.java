@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.SyncResult;
 import android.os.Bundle;
 
+import com.idunnolol.sotm.data.Db;
 import com.idunnolol.utils.Log;
 
 public class PointSyncAdapter extends AbstractThreadedSyncAdapter {
@@ -22,9 +23,11 @@ public class PointSyncAdapter extends AbstractThreadedSyncAdapter {
 	@Override
 	public void onPerformSync(Account account, Bundle extras, String authority, ContentProviderClient provider,
 			SyncResult syncResult) {
-		Log.i("TODO: Syncing SotM data from server...");
+		Log.i("Syncing SotM data from server...");
 
-		// TODO Synchronize your data between client and server
+		Db.updatePoints(getContext());
+
+		// TODO: Notify the app of data updates?
 	}
 
 }

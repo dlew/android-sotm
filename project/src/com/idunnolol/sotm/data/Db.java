@@ -1,8 +1,13 @@
 package com.idunnolol.sotm.data;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -400,36 +405,64 @@ public class Db {
 	}
 
 	private void initPoints(Context context) throws IOException {
+		boolean success = initPoints(context, false);
+
+		// If we failed to load data from whatever we loaded off the network,
+		// fallback to the version we store locally.
+		if (!success) {
+			initPoints(context, true);
+		}
+	}
+
+	private boolean initPoints(Context context, boolean useAssetFile) {
 		InputStream in = null;
 		JsonReader reader = null;
 		try {
-			in = context.getAssets().open(POINT_FILE);
+			// Use the sync file if it exists; otherwise use the built-in points file
+			File syncFile = context.getFileStreamPath(SYNCED_POINT_FILE);
+			if (!useAssetFile && syncFile.exists()) {
+				in = context.openFileInput(SYNCED_POINT_FILE);
+				Log.d("Loading point data from synced file...");
+			}
+			else {
+				in = context.getAssets().open(POINT_FILE);
+				Log.d("Loading point data from built-in asset file...");
+			}
+
 			reader = new JsonReader(new InputStreamReader(in));
 
-			reader.beginObject();
-			while (reader.hasNext()) {
-				String name = reader.nextName();
+			try {
+				reader.beginObject();
+				while (reader.hasNext()) {
+					String name = reader.nextName();
 
-				if (name.equals("difficulty")) {
-					readPoints(reader);
+					if (name.equals("difficulty")) {
+						readPoints(reader);
+					}
+					else if (name.equals("scale")) {
+						readDifficultyScale(reader);
+					}
+					else {
+						reader.skipValue();
+					}
 				}
-				else if (name.equals("scale")) {
-					readDifficultyScale(reader);
+				reader.endObject();
+			}
+			finally {
+				if (in != null) {
+					in.close();
 				}
-				else {
-					reader.skipValue();
+				if (reader != null) {
+					reader.close();
 				}
 			}
-			reader.endObject();
 		}
-		finally {
-			if (in != null) {
-				in.close();
-			}
-			if (reader != null) {
-				reader.close();
-			}
+		catch (IOException e) {
+			Log.w("Could not read point file", e);
+			return false;
 		}
+
+		return true;
 	}
 
 	private void readPoints(JsonReader reader) throws IOException {
@@ -585,5 +618,63 @@ public class Db {
 			}
 		}
 		reader.endArray();
+	}
+
+	//////////////////////////////////////////////////////////////////////////
+	// Network updates
+
+	private static final String SYNCED_POINT_FILE = "synced-points.json";
+
+	private static final String TMP_SYNCED_POINT_FILE = "synced-points.json.tmp";
+
+	private static final String SYNC_POINT_URL = "http://x.gray.org/sentinels.json";
+
+	public static void updatePoints(Context context) {
+		try {
+			// Clear the old TMP file
+			File tmpFile = context.getFileStreamPath(TMP_SYNCED_POINT_FILE);
+			if (tmpFile.exists()) {
+				Log.v("Deleted old TMP sync download file");
+				tmpFile.delete();
+			}
+
+			// Read JSON to TMP file
+			Log.v("Loading latest points JSON into TMP file");
+
+			URL url = new URL(SYNC_POINT_URL);
+			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+			urlConnection.setRequestMethod("GET");
+
+			urlConnection.connect();
+
+			FileOutputStream out = context.openFileOutput(TMP_SYNCED_POINT_FILE, Context.MODE_PRIVATE);
+			InputStream in = urlConnection.getInputStream();
+
+			try {
+				byte[] buffer = new byte[1024];
+				int len = 0;
+				while ((len = in.read(buffer)) > 0) {
+					out.write(buffer, 0, len);
+				}
+			}
+			finally {
+				in.close();
+				out.close();
+			}
+
+			// Rename the TMP file to the sync file
+			Log.v("Renaming TMP sync file to POINT sync file");
+			tmpFile.renameTo(context.getFileStreamPath(SYNCED_POINT_FILE));
+
+			// Reload the new points file
+			Log.v("Reloading points data");
+			sInstance.initPoints(context);
+		}
+		catch (MalformedURLException e) {
+			// Ignore; this should never happen
+		}
+		catch (IOException e) {
+			Log.w("Could not sync Sentinels data", e);
+		}
 	}
 }
