@@ -155,7 +155,6 @@ public class GameSetupAdapter extends BaseAdapter {
 
 			holder = new HeaderViewHolder();
 			holder.mLabel = Ui.findView(convertView, R.id.label_text_view);
-			holder.mDivider = Ui.findView(convertView, R.id.divider);
 			holder.mAddButton = Ui.findView(convertView, R.id.add_button);
 			convertView.setTag(holder);
 
@@ -172,10 +171,8 @@ public class GameSetupAdapter extends BaseAdapter {
 			holder = (HeaderViewHolder) convertView.getTag();
 		}
 
-		Type type = getType(position);
-		int addVisibility = type == Type.HERO && mGameSetup.canAddHero() ? View.VISIBLE : View.GONE;
-		holder.mDivider.setVisibility(addVisibility);
-		holder.mAddButton.setVisibility(addVisibility);
+		holder.mAddButton.setVisibility(getType(position) == Type.HERO && mGameSetup.canAddHero() ? View.VISIBLE
+				: View.GONE);
 
 		holder.mLabel.setText((Integer) getItem(position));
 
@@ -184,7 +181,6 @@ public class GameSetupAdapter extends BaseAdapter {
 
 	private static class HeaderViewHolder {
 		private TextView mLabel;
-		private View mDivider;
 		private View mAddButton;
 	}
 
@@ -196,7 +192,6 @@ public class GameSetupAdapter extends BaseAdapter {
 			holder = new CardViewHolder();
 			holder.mIcon = Ui.findView(convertView, R.id.icon_view);
 			holder.mLabel = Ui.findView(convertView, R.id.label_text_view);
-			holder.mDivider = Ui.findView(convertView, R.id.divider);
 			holder.mRemoveButton = Ui.findView(convertView, R.id.remove_button);
 			convertView.setTag(holder);
 		}
@@ -228,7 +223,6 @@ public class GameSetupAdapter extends BaseAdapter {
 		holder.mLabel.setText(label);
 
 		int removeVisibility = getType(position) == Type.HERO && mGameSetup.canRemoveHero() ? View.VISIBLE : View.GONE;
-		holder.mDivider.setVisibility(removeVisibility);
 		holder.mRemoveButton.setVisibility(removeVisibility);
 		if (removeVisibility == View.VISIBLE) {
 			// For now, you can only remove heroes; so assume that is what will happen
@@ -248,7 +242,6 @@ public class GameSetupAdapter extends BaseAdapter {
 	private static class CardViewHolder {
 		private IconView mIcon;
 		private TextView mLabel;
-		private View mDivider;
 		private View mRemoveButton;
 	}
 

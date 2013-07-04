@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="divider_size">1dp</dimen>
+    <dimen name="divider_padding">8dp</dimen>
     <dimen name="text_size_row">22dp</dimen>
     <dimen name="text_size_row_header">40dp</dimen>
     <dimen name="text_size_row_button">36dp</dimen>

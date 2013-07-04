@@ -4,7 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="?android:attr/listPreferredItemHeight"
     android:background="@android:color/holo_blue_light"
-    android:orientation="horizontal" >
+    android:divider="?android:dividerVertical"
+    android:dividerPadding="@dimen/divider_padding"
+    android:orientation="horizontal"
+    android:showDividers="middle" >
 
     <com.idunnolol.sotm.widget.TextView
         android:id="@+id/label_text_view"
@@ -21,8 +24,6 @@
         android:textSize="@dimen/text_size_row_header"
         android:textStyle="bold"
         app:font="@string/font_crash_landing" />
-
-    <include layout="@layout/include_vertical_divider" />
 
     <com.idunnolol.sotm.widget.TextView
         android:id="@+id/add_button"

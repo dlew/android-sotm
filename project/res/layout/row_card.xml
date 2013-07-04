@@ -2,25 +2,32 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="?android:attr/listPreferredItemHeight"
-    android:orientation="horizontal" >
+    android:divider="?android:dividerVertical"
+    android:dividerPadding="@dimen/divider_padding"
+    android:orientation="horizontal"
+    android:showDividers="middle" >
 
-    <include layout="@layout/include_icon" />
-
-    <com.idunnolol.sotm.widget.TextView
-        android:id="@+id/label_text_view"
+    <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="12dp"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:ellipsize="end"
-        android:gravity="center_vertical"
-        android:singleLine="true"
-        android:textIsSelectable="false"
-        android:textSize="@dimen/text_size_row"
-        android:textStyle="bold" />
+        android:orientation="horizontal" >
 
-    <include layout="@layout/include_vertical_divider" />
+        <include layout="@layout/include_icon" />
+
+        <com.idunnolol.sotm.widget.TextView
+            android:id="@+id/label_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:textIsSelectable="false"
+            android:textSize="@dimen/text_size_row"
+            android:textStyle="bold" />
+    </LinearLayout>
 
     <com.idunnolol.sotm.widget.TextView
         android:id="@+id/remove_button"
