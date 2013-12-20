@@ -508,6 +508,12 @@
           "name": "card_americas_greatest_legacy"
         },
         {
+          "type": "hero",
+          "id": "G.I. Bunker",
+          "icon": "card_gi_bunker",
+          "name": "card_gi_bunker"
+        },
+        {
           "type": "villain",
           "id": "Cosmic Omnitron",
           "icon": "card_cosmic_omnitron",
@@ -541,7 +547,8 @@
     ],
     [
       "Bunker",
-      "Freedom Six Bunker: Engine of War"
+      "Freedom Six Bunker: Engine of War",
+      "G.I. Bunker"
     ],
     [
       "Expatriette",
