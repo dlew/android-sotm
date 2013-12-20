@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="14"
-        android:targetSdkVersion="17" />
+        android:targetSdkVersion="19" />
 
     <!-- For creating an account in order to sync data over the internet -->
     <uses-permission android:name="android.permission.INTERNET" />
