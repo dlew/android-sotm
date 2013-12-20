@@ -78,7 +78,7 @@ if __name__ == "__main__":
     parser = OptionParser(usage=usage)
     parser.add_option('-a', '--art', action="store", help="Input directory (with png art)", default="art/")
     parser.add_option('-o', '--out', action="store", help="Output directory", default="out/")
-    parser.add_option('-s', '--size', action="store", type="int", help="Size of cropped/resized art (in dp)", default=64)
+    parser.add_option('-s', '--size', action="store", type="int", help="Size of cropped/resized art (in dp)", default=48)
     parser.add_option('-q', '--quality', action="store", type="int", help="JPEG quality for cropped/resized art", default=90)
 
     (options, args) = parser.parse_args()
