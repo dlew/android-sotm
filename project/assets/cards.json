@@ -479,6 +479,30 @@
         },
         {
           "type": "hero",
+          "id": "Dark Watch Expatriette",
+          "icon": "card_dark_watch_expatriette",
+          "name": "card_dark_watch_expatriette"
+        },
+        {
+          "type": "hero",
+          "id": "Dark Watch Mister Fixer",
+          "icon": "card_dark_watch_mister_fixer",
+          "name": "card_dark_watch_mister_fixer"
+        },
+        {
+          "type": "hero",
+          "id": "Dark Watch Nightmist",
+          "icon": "card_dark_watch_nightmist",
+          "name": "card_dark_watch_nightmist"
+        },
+        {
+          "type": "hero",
+          "id": "Dark Watch Setback",
+          "icon": "card_dark_watch_setback",
+          "name": "card_dark_watch_setback"
+        },
+        {
+          "type": "hero",
           "id": "America's Greatest Legacy",
           "icon": "card_americas_greatest_legacy",
           "name": "card_americas_greatest_legacy"
@@ -494,6 +518,18 @@
           "id": "Mad Bomber Blade",
           "icon": "card_mad_bomber_blade",
           "name": "card_mad_bomber_blade"
+        },
+        {
+          "type": "villain",
+          "id": "Skinwalker Gloomweaver",
+          "icon": "card_skinwalker_gloomweaver",
+          "name": "card_skinwalker_gloomweaver"
+        },
+        {
+          "type": "villain",
+          "id": "Agent of Gloom Spite",
+          "icon": "card_spite_agent_of_gloom",
+          "name": "card_spite_agent_of_gloom"
         }
       ]
     }
@@ -506,6 +542,10 @@
     [
       "Bunker",
       "Freedom Six Bunker: Engine of War"
+    ],
+    [
+      "Expatriette",
+      "Dark Watch Expatriette"
     ],
     [
       "Fanatic",
@@ -521,8 +561,20 @@
       "America's Greatest Legacy"
     ],
     [
+      "Mister Fixer",
+      "Dark Watch Mister Fixer"
+    ],
+    [
+      "Nightmist",
+      "Dark Watch Nightmist"
+    ],
+    [
       "Ra",
       "Ra: Horus of Two Horizons"
+    ],
+    [
+      "Setback",
+      "Dark Watch Setback"
     ],
     [
       "Tachyon",
@@ -552,6 +604,14 @@
     [
       "Omnitron",
       "Cosmic Omnitron"
+    ],
+    [
+      "Gloomweaver",
+      "Skinwalker Gloomweaver"
+    ],
+    [
+      "Spite",
+      "Agent of Gloom Spite"
     ]
   ]
 }
