@@ -1,3 +1,6 @@
+# Things I don't need checked in
+lint.xml
+
 # built application files
 *.apk
 *.ap_
@@ -18,3 +21,4 @@ local.properties
 # Eclipse project files
 .classpath
 .project
+.settings/
