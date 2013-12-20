@@ -11,11 +11,11 @@ import java.util.Set;
 
 import android.util.Pair;
 
+import com.danlew.utils.Log;
 import com.idunnolol.sotm.data.Card;
 import com.idunnolol.sotm.data.Card.Type;
 import com.idunnolol.sotm.data.Db;
 import com.idunnolol.sotm.data.GameSetup;
-import com.idunnolol.utils.Log;
 
 public class Randomizer {
 

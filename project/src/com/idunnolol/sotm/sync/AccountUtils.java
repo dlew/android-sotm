@@ -7,7 +7,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 
-import com.idunnolol.utils.Log;
+import com.danlew.utils.Log;
 
 public class AccountUtils {
 

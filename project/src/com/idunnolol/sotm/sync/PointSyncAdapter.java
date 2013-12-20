@@ -7,8 +7,8 @@ import android.content.Context;
 import android.content.SyncResult;
 import android.os.Bundle;
 
+import com.danlew.utils.Log;
 import com.idunnolol.sotm.data.Db;
-import com.idunnolol.utils.Log;
 
 public class PointSyncAdapter extends AbstractThreadedSyncAdapter {
 

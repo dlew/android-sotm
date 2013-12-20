@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 
+import com.danlew.utils.FontCache;
 import com.idunnolol.sotm.R;
-import com.idunnolol.utils.FontCache;
 
 public class TextView extends android.widget.TextView {
 

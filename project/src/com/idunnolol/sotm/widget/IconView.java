@@ -5,10 +5,10 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import com.danlew.utils.Ui;
 import com.idunnolol.sotm.BitmapCache;
 import com.idunnolol.sotm.R;
 import com.idunnolol.sotm.data.Card;
-import com.idunnolol.utils.Ui;
 
 public class IconView extends FrameLayout {
 

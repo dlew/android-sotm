@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.danlew.utils.Log;
+import com.danlew.utils.Ui;
 import com.idunnolol.sotm.R;
 import com.idunnolol.sotm.data.Card;
 import com.idunnolol.sotm.data.Difficulty;
@@ -21,8 +23,6 @@ import com.idunnolol.sotm.fragment.SpecifyDifficultyDialogFragment.SpecifyDiffic
 import com.idunnolol.sotm.fragment.StatsFragment;
 import com.idunnolol.sotm.fragment.StatsFragment.StatsFragmentListener;
 import com.idunnolol.sotm.sync.AccountUtils;
-import com.idunnolol.utils.Log;
-import com.idunnolol.utils.Ui;
 
 public class RandomizerActivity extends Activity implements RandomizerListFragmentListener,
 		CardPickerDialogFragmentListener, DifficultyDialogFragmentListener, SpecifyDifficultyDialogFragmentListener,

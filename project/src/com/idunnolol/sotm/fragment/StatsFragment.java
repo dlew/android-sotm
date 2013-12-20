@@ -11,10 +11,10 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.danlew.utils.Ui;
 import com.idunnolol.sotm.R;
 import com.idunnolol.sotm.data.Db;
 import com.idunnolol.sotm.data.GameSetup;
-import com.idunnolol.utils.Ui;
 
 public class StatsFragment extends Fragment {
 

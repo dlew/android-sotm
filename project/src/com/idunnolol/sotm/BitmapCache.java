@@ -5,7 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.LruCache;
 
-import com.idunnolol.utils.Log;
+import com.danlew.utils.Log;
 
 public class BitmapCache {
 

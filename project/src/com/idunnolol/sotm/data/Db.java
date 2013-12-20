@@ -23,10 +23,10 @@ import android.util.JsonReader;
 import android.util.Pair;
 import android.util.SparseIntArray;
 
+import com.danlew.utils.Log;
+import com.danlew.utils.ResourceUtils;
 import com.idunnolol.sotm.R;
 import com.idunnolol.sotm.data.Card.Type;
-import com.idunnolol.utils.Log;
-import com.idunnolol.utils.ResourceUtils;
 
 public class Db {
 
