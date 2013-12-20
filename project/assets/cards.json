@@ -281,6 +281,85 @@
       ]
     },
     {
+      "id": "Vengeance",
+      "name": "set_vengeance",
+      "enabledByDefault": true,
+      "cards": [
+        {
+          "type": "hero",
+          "id": "K.N.Y.F.E.",
+          "icon": "card_knyfe",
+          "name": "card_knyfe"
+        },
+        {
+          "type": "hero",
+          "id": "The Naturalist",
+          "icon": "card_the_naturalist",
+          "name": "card_the_naturalist"
+        },
+        {
+          "type": "hero",
+          "id": "Parse",
+          "icon": "card_parse",
+          "name": "card_parse"
+        },
+        {
+          "type": "hero",
+          "id": "Setback",
+          "icon": "card_setback",
+          "name": "card_setback"
+        },
+        {
+          "type": "hero",
+          "id": "The Sentinels",
+          "icon": "card_the_sentinels",
+          "name": "card_the_sentinels"
+        },
+        {
+          "type": "villain",
+          "id": "Vengeance Baron Blade",
+          "icon": "card_vengeance_baron_blade",
+          "name": "card_vengeance_baron_blade"
+        },
+        {
+          "type": "villain",
+          "id": "Ermine",
+          "icon": "card_ermine",
+          "name": "card_ermine"
+        },
+        {
+          "type": "villain",
+          "id": "Fright Train",
+          "icon": "card_fright_train",
+          "name": "card_fright_train"
+        },
+        {
+          "type": "villain",
+          "id": "Friction",
+          "icon": "card_friction",
+          "name": "card_friction"
+        },
+        {
+          "type": "villain",
+          "id": "Proletariat",
+          "icon": "card_proletariat",
+          "name": "card_proletariat"
+        },
+        {
+          "type": "environment",
+          "id": "Mobile Defense Platform",
+          "icon": "card_mobile_defense_platform",
+          "name": "card_mobile_defense_platform"
+        },
+        {
+          "type": "environment",
+          "id": "Freedom Tower",
+          "icon": "card_freedom_tower",
+          "name": "card_freedom_tower"
+        }
+      ]
+    },
+    {
       "id": "Mini-Expansions",
       "name": "set_mini_expansions",
       "cards": [

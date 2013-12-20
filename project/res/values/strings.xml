@@ -112,6 +112,18 @@
     <string name="card_time_cataclysm">Time Cataclysm</string>
     <string name="card_the_block">The Block</string>
     <string name="card_unity">Unity</string>
+    <string name="card_knyfe">K.N.Y.F.E.</string>
+    <string name="card_the_naturalist">The Naturalist</string>
+    <string name="card_parse">Parse</string>
+    <string name="card_setback">Setback</string>
+    <string name="card_the_sentinels">The Sentinels</string>
+    <string name="card_vengeance_baron_blade">Baron Blade (Vengeance)</string>
+    <string name="card_ermine">Ermine</string>
+    <string name="card_fright_train">Fright Train</string>
+    <string name="card_friction">Friction</string>
+    <string name="card_proletariat">Proletariat</string>
+    <string name="card_mobile_defense_platform">Mobile Defense Platform</string>
+    <string name="card_freedom_tower">Freedom Tower</string>
     <string name="card_the_scholar">The Scholar</string>
     <string name="card_ambuscade">Ambuscade</string>
     <string name="card_miss_information">Miss Information</string>
@@ -138,6 +150,7 @@
     <string name="set_rook_city">Rook City</string>
     <string name="set_infernal_relics">Infernal Relics</string>
     <string name="set_shattered_timelines">Shattered Timelines</string>
+    <string name="set_vengeance">Vengeance</string>
     <string name="set_mini_expansions">Mini-Expansions</string>
     <string name="set_promos">Promos</string>
 
