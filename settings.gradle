@@ -1,0 +1,2 @@
+include ':project'
+include ':libs:android-utils:library'
