@@ -543,18 +543,23 @@ public class Db {
 
 		// Set the advanced points (if available)
 		if (advanced != null && advancedCount >= ADVANCED_COUNT_CUTOFF) {
-			// Create an advanced version of the current card, and add it to its set
-			// directly after the original card
-			Card advancedCard = new Card(card);
-			advancedCard.makeAdvanced();
+			Card advancedCard = mCards.get(card.getAdvancedId());
+			if (advancedCard == null) {
+				// Create an advanced version of the current card, and add it to its set
+				// directly after the original card
+				advancedCard = new Card(card);
+				advancedCard.makeAdvanced();
+
+				// Add the card to the sets
+				mCards.put(advancedCard.getId(), advancedCard);
+				CardSet set = mReverseCardSetCache.get(card);
+				set.addAdvancedCard(card, advancedCard);
+				addAlternate(card, advancedCard);
+			}
+
+			// Update info about the advanced card
 			advancedCard.setPoints(advanced);
 			advancedCard.setAdvancedCount(advancedCount);
-
-			// Add the card to the sets
-			mCards.put(advancedCard.getId(), advancedCard);
-			CardSet set = mReverseCardSetCache.get(card);
-			set.addAdvancedCard(card, advancedCard);
-			addAlternate(card, advancedCard);
 		}
 	}
 
