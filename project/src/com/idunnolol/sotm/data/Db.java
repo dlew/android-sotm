@@ -536,7 +536,8 @@ public class Db {
 		Card card = mCards.get(cardName);
 		if (card == null) {
 			// Sanity check
-			throw new RuntimeException("Could not find card \"" + cardName + "\" for points");
+            Log.e("Could not find card \"" + cardName + "\" for points");
+            return;
 		}
 
 		card.setPoints(points);
