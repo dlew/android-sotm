@@ -88,8 +88,7 @@ public class Randomizer {
                     throw new RuntimeException("Don't know how to handle this team: " + villain);
                 }
 
-                List<Card> team = getRandomTeam(villain, teamSize);
-                gameSetup.setTeam(villain, team);
+                gameSetup.setVillainTeam(getRandomTeam(villain, teamSize));
             }
         }
 

@@ -26,10 +26,9 @@ public class GameSetup implements Parcelable {
     private List<Card> mHeroes = new ArrayList<Card>(5);
 
     private Card mVillain;
+    private List<Card> mVillainTeam = new ArrayList<Card>(1);
 
     private Card mEnvironment;
-
-    private Map<Card, List<Card>> mTeams = new HashMap<Card, List<Card>>();
 
     public GameSetup() {
         // Default setup is 3 random heroes, 1 random villain and 1 random environment
@@ -52,7 +51,7 @@ public class GameSetup implements Parcelable {
         }
         mVillain = Card.RANDOM_VILLAIN;
         mEnvironment = Card.RANDOM_ENVIRONMENT;
-        mTeams.clear();
+        mVillainTeam.clear();
     }
 
     public List<Card> getHeroes() {
@@ -84,12 +83,24 @@ public class GameSetup implements Parcelable {
     }
 
     public void setVillain(Card card) {
-        mTeams.remove(mVillain);
+        mVillainTeam.clear();
         mVillain = card;
     }
 
     public Card getVillain() {
         return mVillain;
+    }
+
+    public void setVillainTeam(List<Card> villainTeam) {
+        mVillainTeam = villainTeam;
+    }
+
+    public List<Card> getVillainTeam() {
+        return mVillainTeam;
+    }
+
+    public int getVillainCount() {
+        return Math.max(mVillainTeam.size(), 1);
     }
 
     public void setEnvironment(Card card) {
@@ -98,10 +109,6 @@ public class GameSetup implements Parcelable {
 
     public Card getEnvironment() {
         return mEnvironment;
-    }
-
-    public void setTeam(Card card, List<Card> team) {
-        mTeams.put(card, team);
     }
 
     /**
@@ -115,7 +122,7 @@ public class GameSetup implements Parcelable {
         }
 
         // Villain is either random with no team, or is random but hasn't selected a team
-        if (mVillain.isRandom() && (!mVillain.isTeam() || !mTeams.containsKey(mVillain))) {
+        if (mVillain.isRandom() && (!mVillain.isTeam() || mVillainTeam.size() == 0)) {
             return true;
         }
 
@@ -253,8 +260,8 @@ public class GameSetup implements Parcelable {
         mHeroes.addAll(other.mHeroes);
         mVillain = other.mVillain;
         mEnvironment = other.mEnvironment;
-        mTeams.clear();
-        mTeams.putAll(other.mTeams);
+        mVillainTeam.clear();
+        mVillainTeam.addAll(other.mVillainTeam);
     }
 
     @Override
@@ -282,16 +289,16 @@ public class GameSetup implements Parcelable {
 
         sb.append("\nVillain: " + mVillain.getId());
 
-        sb.append("\nEnvironment: " + mEnvironment.getId());
-
-        for (Card leader : mTeams.keySet()) {
+        if (mVillainTeam.size() != 0) {
             List<String> teamIds = new ArrayList<String>();
-            for (Card teamMember : mTeams.get(leader)) {
+            for (Card teamMember : mVillainTeam) {
                 teamIds.add(teamMember.getId());
             }
 
-            sb.append("\nTeam (leader " + leader.getId() + "): [" + TextUtils.join(", ", teamIds) + "]");
+            sb.append("\nVillain Team): [" + TextUtils.join(", ", teamIds) + "]");
         }
+
+        sb.append("\nEnvironment: " + mEnvironment.getId());
 
         return sb.toString();
     }
@@ -304,7 +311,7 @@ public class GameSetup implements Parcelable {
         in.readList(mHeroes, cl);
         mVillain = in.readParcelable(cl);
         mEnvironment = in.readParcelable(cl);
-        mTeams = in.readHashMap(cl);
+        in.readList(mVillainTeam, cl);
     }
 
     @Override
@@ -312,7 +319,7 @@ public class GameSetup implements Parcelable {
         dest.writeList(mHeroes);
         dest.writeParcelable(mVillain, flags);
         dest.writeParcelable(mEnvironment, flags);
-        dest.writeMap(mTeams);
+        dest.writeList(mVillainTeam);
     }
 
     @Override
