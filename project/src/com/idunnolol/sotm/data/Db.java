@@ -106,14 +106,6 @@ public class Db {
         return sInstance.mCardSets;
     }
 
-    public static Card getCard(String id) {
-        if (id.equals(Card.RANDOM.getId())) {
-            return Card.RANDOM;
-        }
-
-        return sInstance.mCards.get(id);
-    }
-
     /**
      * Returns all cards of a particular type.  Only returns enabled cards.
      */

@@ -28,11 +28,11 @@ public class GameSetup implements Parcelable {
 
     public GameSetup() {
         // Default setup is 3 random heroes, 1 random villain and 1 random environment
-        mHeroes.add(Card.RANDOM);
-        mHeroes.add(Card.RANDOM);
-        mHeroes.add(Card.RANDOM);
-        mVillain = Card.RANDOM;
-        mEnvironment = Card.RANDOM;
+        mHeroes.add(Card.RANDOM_HERO);
+        mHeroes.add(Card.RANDOM_HERO);
+        mHeroes.add(Card.RANDOM_HERO);
+        mVillain = Card.RANDOM_VILLAIN;
+        mEnvironment = Card.RANDOM_ENVIRONMENT;
     }
 
     public GameSetup(GameSetup toCopy) {
@@ -43,10 +43,10 @@ public class GameSetup implements Parcelable {
 
     public void reset() {
         for (int a = 0; a < mHeroes.size(); a++) {
-            mHeroes.set(a, Card.RANDOM);
+            mHeroes.set(a, Card.RANDOM_HERO);
         }
-        mVillain = Card.RANDOM;
-        mEnvironment = Card.RANDOM;
+        mVillain = Card.RANDOM_VILLAIN;
+        mEnvironment = Card.RANDOM_ENVIRONMENT;
     }
 
     public List<Card> getHeroes() {
@@ -58,7 +58,7 @@ public class GameSetup implements Parcelable {
     }
 
     public void addHero() {
-        mHeroes.add(Card.RANDOM);
+        mHeroes.add(Card.RANDOM_HERO);
     }
 
     public void setHero(int index, Card card) {
@@ -150,16 +150,16 @@ public class GameSetup implements Parcelable {
         int points = 0;
 
         for (Card card : mHeroes) {
-            if (card != Card.RANDOM) {
+            if (card != Card.RANDOM_HERO) {
                 points += card.getPoints();
             }
         }
 
-        if (mVillain != Card.RANDOM) {
+        if (mVillain != Card.RANDOM_VILLAIN) {
             points += mVillain.getPoints();
         }
 
-        if (mEnvironment != Card.RANDOM) {
+        if (mEnvironment != Card.RANDOM_ENVIRONMENT) {
             points += mEnvironment.getPoints();
         }
 

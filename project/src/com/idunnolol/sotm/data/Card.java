@@ -13,10 +13,16 @@ public class Card implements Parcelable {
 
     private static final String ADVANCED_POSTFIX = " (Advanced)";
 
-    /**
-     * Represents the special "random" card
-     */
-    public static final Card RANDOM = new Card(null, "Random", R.string.card_random, 0);
+    private static final String RANDOM_ID = "Random";
+
+    public static final Card RANDOM_HERO =
+        new Card(Type.HERO, RANDOM_ID, R.string.card_random_hero, 0);
+
+    public static final Card RANDOM_VILLAIN =
+        new Card(Type.VILLAIN, RANDOM_ID, R.string.card_random_villain, 0);
+
+    public static final Card RANDOM_ENVIRONMENT =
+        new Card(Type.ENVIRONMENT, RANDOM_ID, R.string.card_random_environment, 0);
 
     public static enum Type {
         HERO,
@@ -162,7 +168,7 @@ public class Card implements Parcelable {
     }
 
     public boolean isRandom() {
-        return this.equals(Card.RANDOM);
+        return mId.equals(RANDOM_ID);
     }
 
     /**

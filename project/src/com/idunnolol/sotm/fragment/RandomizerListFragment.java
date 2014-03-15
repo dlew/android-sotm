@@ -98,16 +98,16 @@ public class RandomizerListFragment extends ListFragment implements GameSetupAda
         List<Card> heroes = mGameSetup.getHeroes();
         for (int a = 0; a < heroes.size(); a++) {
             if (!heroes.get(a).isEnabled()) {
-                mGameSetup.setHero(a, Card.RANDOM);
+                mGameSetup.setHero(a, Card.RANDOM_HERO);
                 hasChanged = true;
             }
         }
         if (!mGameSetup.getVillain().isEnabled()) {
-            mGameSetup.setVillain(Card.RANDOM);
+            mGameSetup.setVillain(Card.RANDOM_VILLAIN);
             hasChanged = true;
         }
         if (!mGameSetup.getEnvironment().isEnabled()) {
-            mGameSetup.setEnvironment(Card.RANDOM);
+            mGameSetup.setEnvironment(Card.RANDOM_ENVIRONMENT);
             hasChanged = true;
         }
 

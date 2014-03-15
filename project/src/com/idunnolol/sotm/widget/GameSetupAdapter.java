@@ -203,24 +203,7 @@ public class GameSetupAdapter extends BaseAdapter {
 
         holder.mIcon.bind(card);
 
-        CharSequence label = null;
-        if (card.isRandom()) {
-            switch (getType(position)) {
-                case HERO:
-                    label = mContext.getString(R.string.card_random_hero);
-                    break;
-                case VILLAIN:
-                    label = mContext.getString(R.string.card_random_villain);
-                    break;
-                case ENVIRONMENT:
-                    label = mContext.getString(R.string.card_random_environment);
-                    break;
-            }
-        }
-        else {
-            label = card.getName(mContext);
-        }
-        holder.mLabel.setText(label);
+        holder.mLabel.setText(card.getName(mContext));
 
         int removeVisibility = getType(position) == Type.HERO && mGameSetup.canRemoveHero() ? View.VISIBLE : View.GONE;
         holder.mRemoveButton.setVisibility(removeVisibility);

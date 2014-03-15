@@ -76,15 +76,20 @@ public class CardPickerDialogFragment extends DialogFragment {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
+        final Card randomCard;
         switch (type) {
             case HERO:
                 builder.setTitle(R.string.title_hero);
+                randomCard = Card.RANDOM_HERO;
                 break;
             case VILLAIN:
                 builder.setTitle(R.string.title_villain);
+                randomCard = Card.RANDOM_VILLAIN;
                 break;
             case ENVIRONMENT:
+            default:
                 builder.setTitle(R.string.title_environment);
+                randomCard = Card.RANDOM_ENVIRONMENT;
                 break;
         }
 
@@ -97,7 +102,7 @@ public class CardPickerDialogFragment extends DialogFragment {
         builder.setNeutralButton(R.string.card_random, new OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 dismissAllowingStateLoss();
-                mListener.onCardSelected(Card.RANDOM);
+                mListener.onCardSelected(randomCard);
             }
         });
         builder.setNegativeButton(R.string.cancel, null);

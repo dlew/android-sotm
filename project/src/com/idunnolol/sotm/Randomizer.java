@@ -62,7 +62,7 @@ public class Randomizer {
             if (hero.isRandom()) {
                 Card card;
                 do {
-                    card = getRandomCard(Type.HERO);
+                    card = getRandomCard(hero);
                 }
                 while (usedCards.contains(card));
 
@@ -71,12 +71,14 @@ public class Randomizer {
             }
         }
 
-        if (gameSetup.getVillain().isRandom()) {
-            gameSetup.setVillain(getRandomCard(Type.VILLAIN));
+        Card villain = gameSetup.getVillain();
+        if (villain.isRandom()) {
+            gameSetup.setVillain(getRandomCard(villain));
         }
 
-        if (gameSetup.getEnvironment().isRandom()) {
-            gameSetup.setEnvironment(getRandomCard(Type.ENVIRONMENT));
+        Card environment = gameSetup.getEnvironment();
+        if (environment.isRandom()) {
+            gameSetup.setEnvironment(getRandomCard(environment));
         }
 
         return gameSetup;
@@ -145,7 +147,9 @@ public class Randomizer {
         return bestGameSetup;
     }
 
-    private Card getRandomCard(Type type) {
+    private Card getRandomCard(Card baseCard) {
+        Type type = baseCard.getType();
+
         if (!mValidCards.containsKey(type)) {
             List<Card> validCards = Db.getCards(type);
             mValidCards.put(type, new HashSet<Card>(validCards));
