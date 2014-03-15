@@ -97,6 +97,8 @@ public class Db {
     // Just used during parsing; if needed this can be more robust
     private Map<Card, CardSet> mReverseCardSetCache = new HashMap<Card, CardSet>();
 
+    private Map<Card, String> mTeams = new HashMap<Card, String>();
+
     private int mMinDifficultyPoints;
     private int mMaxDifficultyPoints;
 
@@ -263,11 +265,18 @@ public class Db {
                 if (name.equals("sets")) {
                     reader.beginArray();
                     while (reader.hasNext()) {
+                        mTeams.clear();
+
                         CardSet set = readSet(reader);
                         mCardSets.add(set);
                         for (Card card : set.getCards()) {
                             mCards.put(card.getId(), card);
                             mReverseCardSetCache.put(card, set);
+                        }
+
+                        for (Card card : mTeams.keySet()) {
+                            Card team = mCards.get(mTeams.get(card));
+                            team.addTeamMember(card);
                         }
                     }
                     reader.endArray();
@@ -335,7 +344,12 @@ public class Db {
             else if (name.equals("cards")) {
                 reader.beginArray();
                 while (reader.hasNext()) {
-                    set.addCard(readCard(reader));
+                    Card card = readCard(reader);
+
+                    // If this card is part of a team, let that team have it, rather than adding it to the set
+                    if (!mTeams.containsKey(card)) {
+                        set.addCard(card);
+                    }
                 }
                 reader.endArray();
             }
@@ -377,6 +391,10 @@ public class Db {
                 else if (type.equals("environment")) {
                     card.setType(Type.ENVIRONMENT);
                 }
+            }
+            else if (jsonName.equals("team")) {
+                // Put it into a hash for later
+                mTeams.put(card, reader.nextString());
             }
             else {
                 reader.skipValue();

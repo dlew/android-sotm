@@ -5,7 +5,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import com.idunnolol.sotm.R;
 
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 
 public class Card implements Parcelable {
 
@@ -40,6 +42,11 @@ public class Card implements Parcelable {
     // with the card.  We want to cut off a low # because of how unreliable
     // the data can be.
     private int mAdvancedCount;
+
+    /**
+     * Some "cards" are actually a set of cards, i.e. the Vengeance Five.
+     */
+    private List<Card> mTeam;
 
     public Card() {
         // Default constructor
@@ -139,6 +146,21 @@ public class Card implements Parcelable {
         return mAdvancedCount;
     }
 
+    public void addTeamMember(Card teamMember) {
+        if (mTeam == null) {
+            mTeam = new ArrayList<Card>();
+        }
+        mTeam.add(teamMember);
+    }
+
+    public boolean isTeam() {
+        return mTeam != null;
+    }
+
+    public List<Card> getTeamMembers() {
+        return mTeam;
+    }
+
     public boolean isRandom() {
         return this.equals(Card.RANDOM);
     }
@@ -223,6 +245,7 @@ public class Card implements Parcelable {
         mEnabled = in.readByte() == 1;
         mAdvanced = in.readByte() == 1;
         mAdvancedCount = in.readInt();
+        mTeam = in.readArrayList(getClass().getClassLoader());
     }
 
     @Override
@@ -241,6 +264,7 @@ public class Card implements Parcelable {
         dest.writeByte((byte) (mEnabled ? 1 : 0));
         dest.writeByte((byte) (mAdvanced ? 1 : 0));
         dest.writeInt(mAdvancedCount);
+        dest.writeList(mTeam);
     }
 
     @Override

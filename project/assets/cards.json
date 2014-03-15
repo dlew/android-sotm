@@ -325,31 +325,36 @@
           "type": "villain",
           "id": "Vengeance Baron Blade",
           "icon": "card_vengeance_baron_blade",
-          "name": "card_vengeance_baron_blade"
+          "name": "card_vengeance_baron_blade",
+          "team": "Vengeance Five"
         },
         {
           "type": "villain",
           "id": "Ermine",
           "icon": "card_ermine",
-          "name": "card_ermine"
+          "name": "card_ermine",
+          "team": "Vengeance Five"
         },
         {
           "type": "villain",
           "id": "Fright Train",
           "icon": "card_fright_train",
-          "name": "card_fright_train"
+          "name": "card_fright_train",
+          "team": "Vengeance Five"
         },
         {
           "type": "villain",
           "id": "Friction",
           "icon": "card_friction",
-          "name": "card_friction"
+          "name": "card_friction",
+          "team": "Vengeance Five"
         },
         {
           "type": "villain",
           "id": "Proletariat",
           "icon": "card_proletariat",
-          "name": "card_proletariat"
+          "name": "card_proletariat",
+          "team": "Vengeance Five"
         },
         {
           "type": "environment",
