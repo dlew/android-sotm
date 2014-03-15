@@ -122,11 +122,11 @@
     <string name="card_setback">Setback</string>
     <string name="card_the_sentinels">The Sentinels</string>
     <string name="card_vengeance_five">Vengeance Five</string>
-    <string name="card_vengeance_baron_blade">Baron Blade (Vengeance)</string>
-    <string name="card_ermine">Ermine</string>
-    <string name="card_fright_train">Fright Train</string>
-    <string name="card_friction">Friction</string>
-    <string name="card_proletariat">Proletariat</string>
+    <string name="card_vengeance_baron_blade">Vengeance Five - Baron Blade</string>
+    <string name="card_ermine">Vengeance Five - Ermine</string>
+    <string name="card_fright_train">Vengeance Five - Fright Train</string>
+    <string name="card_friction">Vengeance Five - Friction</string>
+    <string name="card_proletariat">Vengeance Five - Proletariat</string>
     <string name="card_mobile_defense_platform">Mobile Defense Platform</string>
     <string name="card_freedom_tower">Freedom Tower</string>
     <string name="card_the_scholar">The Scholar</string>
