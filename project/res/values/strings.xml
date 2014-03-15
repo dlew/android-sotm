@@ -18,10 +18,14 @@
     <string name="action_configure">Configure Cards</string>
     <string name="action_about">About</string>
     <string name="header_heroes">Heroes</string>
-    <string name="header_villain">Villain</string>
     <string name="header_environment">Environment</string>
     <string name="add_symbol">+</string>
     <string name="remove_symbol">-</string>
+
+    <plurals name="header_villains">
+        <item quantity="one">Villain</item>
+        <item quantity="other">Villains</item>
+    </plurals>
 
     <!-- Stats fragment -->
     <string name="template_win_range">Possible Win Rates: &lt;b&gt;%1$s%%&lt;/b&gt; - &lt;b&gt;%2$s%%&lt;/b&gt;</string>

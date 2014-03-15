@@ -104,11 +104,12 @@ public class GameSetupAdapter extends BaseAdapter {
             case HEADER:
                 switch (type) {
                     case HERO:
-                        return R.string.header_heroes;
+                        return mContext.getString(R.string.header_heroes);
                     case VILLAIN:
-                        return R.string.header_villain;
+                        int numVillains = mGameSetup.getVillainCount();
+                        return mContext.getResources().getQuantityString(R.plurals.header_villains, numVillains);
                     case ENVIRONMENT:
-                        return R.string.header_environment;
+                        return mContext.getString(R.string.header_environment);
                 }
                 break;
             case CARD:
@@ -172,7 +173,7 @@ public class GameSetupAdapter extends BaseAdapter {
         holder.mAddButton.setVisibility(getType(position) == Type.HERO && mGameSetup.canAddHero() ? View.VISIBLE
             : View.GONE);
 
-        holder.mLabel.setText((Integer) getItem(position));
+        holder.mLabel.setText((CharSequence) getItem(position));
 
         return convertView;
     }
