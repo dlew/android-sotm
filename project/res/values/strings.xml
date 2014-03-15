@@ -16,6 +16,7 @@
     <string name="action_reroll">Reroll</string>
     <string name="action_reset">Reset</string>
     <string name="action_configure">Configure Cards</string>
+    <string name="allow_advanced">Allow Advanced</string>
     <string name="action_about">About</string>
     <string name="header_heroes">Heroes</string>
     <string name="header_environment">Environment</string>

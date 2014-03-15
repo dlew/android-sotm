@@ -1,14 +1,19 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
         android:id="@+id/action_configure"
         android:orderInCategory="100"
         android:showAsAction="never"
-        android:title="@string/action_configure"/>
+        android:title="@string/action_configure" />
+    <item
+        android:id="@+id/action_advanced"
+        android:checkable="true"
+        android:orderInCategory="110"
+        android:title="@string/allow_advanced" />
     <item
         android:id="@+id/action_about"
-        android:orderInCategory="100"
+        android:orderInCategory="120"
         android:showAsAction="never"
-        android:title="@string/action_about"/>
+        android:title="@string/action_about" />
 
 </menu>

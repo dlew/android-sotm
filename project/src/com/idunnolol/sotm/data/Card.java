@@ -134,6 +134,9 @@ public class Card implements Parcelable {
     }
 
     public int getAdvancedPoints() {
+        if (mAdvancedPoints == 0) {
+            return mPoints;
+        }
         return mAdvancedPoints;
     }
 
@@ -203,6 +206,13 @@ public class Card implements Parcelable {
         @Override
         public int compare(Card lhs, Card rhs) {
             return lhs.getPoints() - rhs.getPoints();
+        }
+    };
+
+    public static final Comparator<Card> POINT_ADVANCED_COMPARATOR = new Comparator<Card>() {
+        @Override
+        public int compare(Card lhs, Card rhs) {
+            return lhs.getAdvancedPoints() - rhs.getAdvancedPoints();
         }
     };
 

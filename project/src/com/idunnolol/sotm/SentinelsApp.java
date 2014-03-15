@@ -3,6 +3,7 @@ package com.idunnolol.sotm;
 import android.app.Application;
 import com.danlew.utils.Log;
 import com.idunnolol.sotm.data.Db;
+import com.idunnolol.sotm.data.Prefs;
 
 public class SentinelsApp extends Application {
 
@@ -13,6 +14,8 @@ public class SentinelsApp extends Application {
         super.onCreate();
 
         Log.configure(TAG, true);
+
+        Prefs.init(this);
 
         Db.init(this);
 

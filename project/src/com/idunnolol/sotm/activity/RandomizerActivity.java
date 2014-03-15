@@ -13,6 +13,7 @@ import com.idunnolol.sotm.R;
 import com.idunnolol.sotm.data.Card;
 import com.idunnolol.sotm.data.Difficulty;
 import com.idunnolol.sotm.data.GameSetup;
+import com.idunnolol.sotm.data.Prefs;
 import com.idunnolol.sotm.fragment.AboutDialogFragment;
 import com.idunnolol.sotm.fragment.CardPickerDialogFragment.CardPickerDialogFragmentListener;
 import com.idunnolol.sotm.fragment.DifficultyDialogFragment.DifficultyDialogFragmentListener;
@@ -74,10 +75,20 @@ public class RandomizerActivity extends Activity implements RandomizerListFragme
     }
 
     @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        menu.findItem(R.id.action_advanced).setChecked(Prefs.isAdvancedAllowed());
+
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_configure:
                 startActivity(new Intent(this, CardConfigActivity.class));
+                return true;
+            case R.id.action_advanced:
+                Prefs.setAdvancedAllowed(!item.isChecked());
                 return true;
             case R.id.action_about:
                 AboutDialogFragment df = new AboutDialogFragment();
