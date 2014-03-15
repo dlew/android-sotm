@@ -64,11 +64,9 @@ public class CardSet {
         return mCards.size();
     }
 
-    public void setAllCardsEnabled(boolean enabled, boolean includeAdvanced) {
+    public void setAllCardsEnabled(boolean enabled) {
         for (Card card : mCards) {
-            if (includeAdvanced || !card.isAdvanced()) {
-                card.setEnabled(enabled);
-            }
+            card.setEnabled(enabled);
         }
     }
 

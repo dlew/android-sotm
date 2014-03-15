@@ -36,9 +36,8 @@ public class IconView extends FrameLayout {
         mAdvancedView = Ui.findView(this, R.id.icon_advanced_view);
     }
 
-    public void bind(Card card) {
+    public void bind(Card card, boolean isAdvanced) {
         boolean isRandom = card.isRandom();
-        boolean isAdvanced = card.isAdvanced();
         int iconResId = card.getIconResId();
 
         mIconView.setVisibility(iconResId != 0 ? View.VISIBLE : View.GONE);

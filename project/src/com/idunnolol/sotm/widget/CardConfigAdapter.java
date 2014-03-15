@@ -114,7 +114,7 @@ public class CardConfigAdapter extends BaseAdapter {
         }
         else {
             Card card = (Card) getItem(position);
-            holder.mIcon.bind(card);
+            holder.mIcon.bind(card, false);
             label = card.getName(mContext);
         }
         holder.mLabel.setText(label);

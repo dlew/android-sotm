@@ -25,6 +25,7 @@ public class GameSetup implements Parcelable {
 
     private Card mVillain;
     private List<Card> mVillainTeam = new ArrayList<Card>(1);
+    private boolean mIsAdvancedVillain;
 
     private Card mEnvironment;
 
@@ -109,6 +110,14 @@ public class GameSetup implements Parcelable {
 
     public int getVillainCount() {
         return Math.max(mVillainTeam.size(), 1);
+    }
+
+    public boolean isAdvancedVillain() {
+        return mIsAdvancedVillain;
+    }
+
+    public void setAdvancedVillain(boolean isAdvancedVillain) {
+        mIsAdvancedVillain = isAdvancedVillain;
     }
 
     public void setEnvironment(Card card) {
@@ -320,6 +329,7 @@ public class GameSetup implements Parcelable {
         mVillain = in.readParcelable(cl);
         mEnvironment = in.readParcelable(cl);
         in.readList(mVillainTeam, cl);
+        mIsAdvancedVillain = in.readByte() == 1;
     }
 
     @Override
@@ -328,6 +338,7 @@ public class GameSetup implements Parcelable {
         dest.writeParcelable(mVillain, flags);
         dest.writeParcelable(mEnvironment, flags);
         dest.writeList(mVillainTeam);
+        dest.writeByte((byte) (mIsAdvancedVillain ? 1 : 0));
     }
 
     @Override

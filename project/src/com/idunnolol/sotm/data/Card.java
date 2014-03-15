@@ -42,7 +42,7 @@ public class Card implements Parcelable {
 
     private boolean mEnabled;
 
-    private boolean mAdvanced;
+    private int mAdvancedPoints;
 
     // If this is an advanced card, this is the # of advanced games logged
     // with the card.  We want to cut off a low # because of how unreliable
@@ -73,7 +73,8 @@ public class Card implements Parcelable {
         mIconResId = other.mIconResId;
         mPoints = other.mPoints;
         mEnabled = other.mEnabled;
-        mAdvanced = other.mAdvanced;
+        mAdvancedPoints = other.mAdvancedPoints;
+        mAdvancedCount = other.mAdvancedCount;
     }
 
     public Type getType() {
@@ -101,8 +102,7 @@ public class Card implements Parcelable {
     }
 
     public CharSequence getName(Context context) {
-        CharSequence name = context.getString(mNameResId);
-        return mAdvanced ? context.getString(R.string.advanced_TEMPLATE, name) : name;
+        return context.getString(mNameResId);
     }
 
     public void setIconResId(int resId) {
@@ -129,19 +129,12 @@ public class Card implements Parcelable {
         mEnabled = enabled;
     }
 
-    public boolean isAdvanced() {
-        return mAdvanced;
+    public void setAdvancedPoints(int advancedPoints) {
+        mAdvancedPoints = advancedPoints;
     }
 
-    public void makeAdvanced() {
-        if (!mAdvanced) {
-            mAdvanced = true;
-            mId = getAdvancedId();
-        }
-    }
-
-    public void setAdvanced(boolean advanced) {
-        mAdvanced = advanced;
+    public int getAdvancedPoints() {
+        return mAdvancedPoints;
     }
 
     public void setAdvancedCount(int count) {
@@ -218,20 +211,7 @@ public class Card implements Parcelable {
             public int compare(Card lhs, Card rhs) {
                 String lhName = context.getString(lhs.getNameResId());
                 String rhName = context.getString(rhs.getNameResId());
-                int comp = lhName.compareTo(rhName);
-
-                // When comparing names, advanced always comes below the
-                // non-advanced version of the card.
-                if (comp == 0) {
-                    if (lhs.isAdvanced()) {
-                        return 1;
-                    }
-                    else if (rhs.isAdvanced()) {
-                        return -1;
-                    }
-                }
-
-                return comp;
+                return lhName.compareTo(rhName);
             }
         };
     }
@@ -249,7 +229,7 @@ public class Card implements Parcelable {
         mIconResId = in.readInt();
         mPoints = in.readInt();
         mEnabled = in.readByte() == 1;
-        mAdvanced = in.readByte() == 1;
+        mAdvancedPoints = in.readInt();
         mAdvancedCount = in.readInt();
         in.readList(mTeam, getClass().getClassLoader());
         mTeam = in.readArrayList(getClass().getClassLoader());
@@ -269,7 +249,7 @@ public class Card implements Parcelable {
         dest.writeInt(mIconResId);
         dest.writeInt(mPoints);
         dest.writeByte((byte) (mEnabled ? 1 : 0));
-        dest.writeByte((byte) (mAdvanced ? 1 : 0));
+        dest.writeInt(mAdvancedPoints);
         dest.writeInt(mAdvancedCount);
         dest.writeList(mTeam);
     }

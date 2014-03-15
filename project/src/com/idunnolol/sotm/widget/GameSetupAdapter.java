@@ -201,7 +201,8 @@ public class GameSetupAdapter extends BaseAdapter {
 
         Card card = (Card) getItem(position);
 
-        holder.mIcon.bind(card);
+        boolean isAdvanced = card.getType() == Type.VILLAIN && mGameSetup.isAdvancedVillain();
+        holder.mIcon.bind(card, isAdvanced);
 
         holder.mLabel.setText(card.getName(mContext));
 

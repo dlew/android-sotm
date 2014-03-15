@@ -63,7 +63,7 @@ public class Db {
             }
             else {
                 for (CardSet cardSet : sInstance.mCardSets) {
-                    cardSet.setAllCardsEnabled(cardSet.isEnabledByDefault(), false);
+                    cardSet.setAllCardsEnabled(cardSet.isEnabledByDefault());
                 }
                 saveCardStates(context);
             }
@@ -512,7 +512,7 @@ public class Db {
     private void readCardPoints(JsonReader reader) throws IOException {
         String cardName = null;
         int points = 0;
-        Integer advanced = null;
+        Integer advancedPoints = null;
         int advancedCount = 0;
 
         reader.beginObject();
@@ -526,7 +526,7 @@ public class Db {
                 points = reader.nextInt();
             }
             else if (name.equals("advanced")) {
-                advanced = reader.nextInt();
+                advancedPoints = reader.nextInt();
             }
             else if (name.equals("advcount")) {
                 advancedCount = reader.nextInt();
@@ -552,25 +552,9 @@ public class Db {
 
         card.setPoints(points);
 
-        // Set the advanced points (if available)
-        if (advanced != null && advancedCount >= ADVANCED_COUNT_CUTOFF) {
-            Card advancedCard = mCards.get(card.getAdvancedId());
-            if (advancedCard == null) {
-                // Create an advanced version of the current card, and add it to its set
-                // directly after the original card
-                advancedCard = new Card(card);
-                advancedCard.makeAdvanced();
-
-                // Add the card to the sets
-                mCards.put(advancedCard.getId(), advancedCard);
-                CardSet set = mReverseCardSetCache.get(card);
-                set.addAdvancedCard(card, advancedCard);
-                addAlternate(card, advancedCard);
-            }
-
-            // Update info about the advanced card
-            advancedCard.setPoints(advanced);
-            advancedCard.setAdvancedCount(advancedCount);
+        if (advancedPoints != null) {
+            card.setAdvancedPoints(advancedPoints);
+            card.setAdvancedCount(advancedCount);
         }
     }
 

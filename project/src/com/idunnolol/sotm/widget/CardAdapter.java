@@ -78,7 +78,7 @@ public class CardAdapter extends BaseAdapter {
         }
 
         Card card = getItem(position);
-        holder.mIcon.bind(card);
+        holder.mIcon.bind(card, false);
         holder.mLabel.setText(card.getName(mContext));
         holder.mLabel.setEnabled(isEnabled(position));
 
