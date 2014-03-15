@@ -39,13 +39,18 @@ public class IconView extends FrameLayout {
     public void bind(Card card) {
         boolean isRandom = card.isRandom();
         boolean isAdvanced = card.isAdvanced();
+        int iconResId = card.getIconResId();
 
-        mIconView.setVisibility(isRandom ? View.GONE : View.VISIBLE);
+        mIconView.setVisibility(iconResId != 0 ? View.VISIBLE : View.GONE);
         mRandomView.setVisibility(isRandom ? View.VISIBLE : View.GONE);
         mAdvancedView.setVisibility(isAdvanced ? View.VISIBLE : View.GONE);
 
-        if (!isRandom) {
-            mIconView.setImageBitmap(BitmapCache.getBitmap(card.getIconResId()));
+        if (iconResId != 0) {
+            mIconView.setImageBitmap(BitmapCache.getBitmap(iconResId));
+            mRandomView.setBackgroundColor(0);
+        }
+        else {
+            mRandomView.setBackgroundColor(getResources().getColor(R.color.bg_random));
         }
 
         if (isAdvanced) {

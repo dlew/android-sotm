@@ -2,5 +2,6 @@
 <resources>
 
     <color name="advanced_shade" >#aaff4444</color>
+    <color name="bg_random">#818FF6</color>
 
 </resources>
