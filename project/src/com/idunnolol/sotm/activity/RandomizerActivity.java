@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-
 import com.danlew.utils.Log;
 import com.danlew.utils.Ui;
 import com.idunnolol.sotm.R;
@@ -25,125 +24,125 @@ import com.idunnolol.sotm.fragment.StatsFragment.StatsFragmentListener;
 import com.idunnolol.sotm.sync.AccountUtils;
 
 public class RandomizerActivity extends Activity implements RandomizerListFragmentListener,
-		CardPickerDialogFragmentListener, DifficultyDialogFragmentListener, SpecifyDifficultyDialogFragmentListener,
-		StatsFragmentListener {
+    CardPickerDialogFragmentListener, DifficultyDialogFragmentListener, SpecifyDifficultyDialogFragmentListener,
+    StatsFragmentListener {
 
-	private RandomizerListFragment mRandomizerListFragment;
-	private StatsFragment mStatsFragment;
+    private RandomizerListFragment mRandomizerListFragment;
+    private StatsFragment mStatsFragment;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-		setTitle(R.string.title_randomizer);
+        setTitle(R.string.title_randomizer);
 
-		setContentView(R.layout.activity_randomizer);
+        setContentView(R.layout.activity_randomizer);
 
-		mRandomizerListFragment = Ui.findFragment(this, R.id.randomizer_list_fragment);
-		mStatsFragment = Ui.findFragment(this, R.id.stats_fragment);
+        mRandomizerListFragment = Ui.findFragment(this, R.id.randomizer_list_fragment);
+        mStatsFragment = Ui.findFragment(this, R.id.stats_fragment);
 
-		if (savedInstanceState == null) {
-			// Make sure we have a sync account setup and that it's set to sync
-			AccountUtils.addSyncAccount(this);
-			AccountUtils.startPeriodicSync();
-		}
-	}
+        if (savedInstanceState == null) {
+            // Make sure we have a sync account setup and that it's set to sync
+            AccountUtils.addSyncAccount(this);
+            AccountUtils.startPeriodicSync();
+        }
+    }
 
-	@Override
-	protected void onResume() {
-		super.onResume();
+    @Override
+    protected void onResume() {
+        super.onResume();
 
-		getContentResolver().registerContentObserver(AccountUtils.SYNC_URI, false, mSyncObserver);
+        getContentResolver().registerContentObserver(AccountUtils.SYNC_URI, false, mSyncObserver);
 
-		mStatsFragment.bind(mRandomizerListFragment.getGameSetup());
-	}
+        mStatsFragment.bind(mRandomizerListFragment.getGameSetup());
+    }
 
-	@Override
-	protected void onPause() {
-		super.onPause();
+    @Override
+    protected void onPause() {
+        super.onPause();
 
-		getContentResolver().unregisterContentObserver(mSyncObserver);
-	}
+        getContentResolver().unregisterContentObserver(mSyncObserver);
+    }
 
-	//////////////////////////////////////////////////////////////////////////
-	// Action bar
+    //////////////////////////////////////////////////////////////////////////
+    // Action bar
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.activity_randomizer, menu);
-		return super.onCreateOptionsMenu(menu);
-	}
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_randomizer, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case R.id.action_configure:
-			startActivity(new Intent(this, CardConfigActivity.class));
-			return true;
-		case R.id.action_about:
-			AboutDialogFragment df = new AboutDialogFragment();
-			df.show(getFragmentManager(), AboutDialogFragment.TAG);
-			return true;
-		}
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_configure:
+                startActivity(new Intent(this, CardConfigActivity.class));
+                return true;
+            case R.id.action_about:
+                AboutDialogFragment df = new AboutDialogFragment();
+                df.show(getFragmentManager(), AboutDialogFragment.TAG);
+                return true;
+        }
 
-		return super.onOptionsItemSelected(item);
-	}
+        return super.onOptionsItemSelected(item);
+    }
 
-	//////////////////////////////////////////////////////////////////////////
-	// Syncing
+    //////////////////////////////////////////////////////////////////////////
+    // Syncing
 
-	private ContentObserver mSyncObserver = new ContentObserver(null) {
-		@Override
-		public void onChange(boolean selfChange) {
-			onChange(selfChange, null);
-		}
+    private ContentObserver mSyncObserver = new ContentObserver(null) {
+        @Override
+        public void onChange(boolean selfChange) {
+            onChange(selfChange, null);
+        }
 
-		@Override
-		public void onChange(boolean selfChange, Uri uri) {
-			Log.i("Points info updated, re-binding data");
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+            Log.i("Points info updated, re-binding data");
 
-			mStatsFragment.bind(mRandomizerListFragment.getGameSetup());
-		}
-	};
+            mStatsFragment.bind(mRandomizerListFragment.getGameSetup());
+        }
+    };
 
-	//////////////////////////////////////////////////////////////////////////
-	// CardPickerDialogFragmentListener
+    //////////////////////////////////////////////////////////////////////////
+    // CardPickerDialogFragmentListener
 
-	@Override
-	public void onCardSelected(Card card) {
-		mRandomizerListFragment.onCardSelected(card);
-	}
+    @Override
+    public void onCardSelected(Card card) {
+        mRandomizerListFragment.onCardSelected(card);
+    }
 
-	//////////////////////////////////////////////////////////////////////////
-	// DifficultyDialogFragmentListener
+    //////////////////////////////////////////////////////////////////////////
+    // DifficultyDialogFragmentListener
 
-	@Override
-	public void onDifficultyChosen(Difficulty difficulty) {
-		mRandomizerListFragment.onDifficultyChosen(difficulty);
-	}
+    @Override
+    public void onDifficultyChosen(Difficulty difficulty) {
+        mRandomizerListFragment.onDifficultyChosen(difficulty);
+    }
 
-	//////////////////////////////////////////////////////////////////////////
-	// SpecifyDifficultyDialogFragmentListener
+    //////////////////////////////////////////////////////////////////////////
+    // SpecifyDifficultyDialogFragmentListener
 
-	@Override
-	public void onSpecificDifficultyChosen(int targetWinPercent) {
-		mRandomizerListFragment.onSpecificDifficultyChosen(targetWinPercent);
-	}
+    @Override
+    public void onSpecificDifficultyChosen(int targetWinPercent) {
+        mRandomizerListFragment.onSpecificDifficultyChosen(targetWinPercent);
+    }
 
-	//////////////////////////////////////////////////////////////////////////
-	// RandomizerListFragmentListener
+    //////////////////////////////////////////////////////////////////////////
+    // RandomizerListFragmentListener
 
-	@Override
-	public void onGameSetupChanged(GameSetup gameSetup) {
-		mStatsFragment.bind(gameSetup);
-	}
+    @Override
+    public void onGameSetupChanged(GameSetup gameSetup) {
+        mStatsFragment.bind(gameSetup);
+    }
 
-	//////////////////////////////////////////////////////////////////////////
-	// StatsFragmentListener
+    //////////////////////////////////////////////////////////////////////////
+    // StatsFragmentListener
 
-	@Override
-	public void onStatsClick() {
-		mRandomizerListFragment.launchRandomizerDialog();
-	}
+    @Override
+    public void onStatsClick() {
+        mRandomizerListFragment.launchRandomizerDialog();
+    }
 
 }

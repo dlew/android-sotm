@@ -7,7 +7,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-
 import com.danlew.utils.Ui;
 import com.idunnolol.sotm.R;
 import com.idunnolol.sotm.data.Card;
@@ -16,242 +15,245 @@ import com.idunnolol.sotm.data.GameSetup;
 
 public class GameSetupAdapter extends BaseAdapter {
 
-	private enum RowType {
-		HEADER,
-		CARD
-	}
+    private enum RowType {
+        HEADER,
+        CARD
+    }
 
-	private Context mContext;
+    private Context mContext;
 
-	private GameSetup mGameSetup;
+    private GameSetup mGameSetup;
 
-	private GameSetupAdapterListener mListener;
+    private GameSetupAdapterListener mListener;
 
-	public GameSetupAdapter(Context context, GameSetup gameSetup, GameSetupAdapterListener listener) {
-		mContext = context;
-		mGameSetup = gameSetup;
-		mListener = listener;
-	}
+    public GameSetupAdapter(Context context, GameSetup gameSetup, GameSetupAdapterListener listener) {
+        mContext = context;
+        mGameSetup = gameSetup;
+        mListener = listener;
+    }
 
-	@Override
-	public int getViewTypeCount() {
-		return RowType.values().length;
-	}
+    @Override
+    public int getViewTypeCount() {
+        return RowType.values().length;
+    }
 
-	@Override
-	public int getItemViewType(int position) {
-		return getItemRowType(position).ordinal();
-	}
+    @Override
+    public int getItemViewType(int position) {
+        return getItemRowType(position).ordinal();
+    }
 
-	@Override
-	public boolean areAllItemsEnabled() {
-		return true;
-	}
+    @Override
+    public boolean areAllItemsEnabled() {
+        return true;
+    }
 
-	@Override
-	public boolean isEnabled(int position) {
-		return getItemRowType(position) == RowType.CARD;
-	}
+    @Override
+    public boolean isEnabled(int position) {
+        return getItemRowType(position) == RowType.CARD;
+    }
 
-	public RowType getItemRowType(int position) {
-		Type type = getType(position);
-		int typeStart = getTypeStart(type);
+    public RowType getItemRowType(int position) {
+        Type type = getType(position);
+        int typeStart = getTypeStart(type);
 
-		if (position == typeStart) {
-			return RowType.HEADER;
-		}
-		else {
-			return RowType.CARD;
-		}
-	}
+        if (position == typeStart) {
+            return RowType.HEADER;
+        }
+        else {
+            return RowType.CARD;
+        }
+    }
 
-	public int getTypeStart(Type type) {
-		switch (type) {
-		case HERO:
-			return 0;
-		case VILLAIN:
-			return mGameSetup.getHeroCount() + 1;
-		case ENVIRONMENT:
-			return mGameSetup.getHeroCount() + 3;
-		default:
-			throw new RuntimeException();
-		}
-	}
+    public int getTypeStart(Type type) {
+        switch (type) {
+            case HERO:
+                return 0;
+            case VILLAIN:
+                return mGameSetup.getHeroCount() + 1;
+            case ENVIRONMENT:
+                return mGameSetup.getHeroCount() + 3;
+            default:
+                throw new RuntimeException();
+        }
+    }
 
-	public Type getType(int position) {
-		if (position < getTypeStart(Type.VILLAIN)) {
-			return Type.HERO;
-		}
-		else if (position < getTypeStart(Type.ENVIRONMENT)) {
-			return Type.VILLAIN;
-		}
-		else {
-			return Type.ENVIRONMENT;
-		}
-	}
+    public Type getType(int position) {
+        if (position < getTypeStart(Type.VILLAIN)) {
+            return Type.HERO;
+        }
+        else if (position < getTypeStart(Type.ENVIRONMENT)) {
+            return Type.VILLAIN;
+        }
+        else {
+            return Type.ENVIRONMENT;
+        }
+    }
 
-	@Override
-	public int getCount() {
-		// 3 headers, 1 villain, 1 environment, and N heroes
-		return 5 + mGameSetup.getHeroCount();
-	}
+    @Override
+    public int getCount() {
+        // 3 headers, 1 villain, 1 environment, and N heroes
+        return 5 + mGameSetup.getHeroCount();
+    }
 
-	@Override
-	public Object getItem(int position) {
-		RowType rowType = getItemRowType(position);
-		Type type = getType(position);
+    @Override
+    public Object getItem(int position) {
+        RowType rowType = getItemRowType(position);
+        Type type = getType(position);
 
-		switch (rowType) {
-		case HEADER:
-			switch (type) {
-			case HERO:
-				return R.string.header_heroes;
-			case VILLAIN:
-				return R.string.header_villain;
-			case ENVIRONMENT:
-				return R.string.header_environment;
-			}
-			break;
-		case CARD:
-			switch (type) {
-			case HERO:
-				int typeStart = getTypeStart(type);
-				int heroIndex = position - typeStart - 1;
-				return mGameSetup.getHeroes().get(heroIndex);
-			case VILLAIN:
-				return mGameSetup.getVillain();
-			case ENVIRONMENT:
-				return mGameSetup.getEnvironment();
-			}
-			break;
-		}
+        switch (rowType) {
+            case HEADER:
+                switch (type) {
+                    case HERO:
+                        return R.string.header_heroes;
+                    case VILLAIN:
+                        return R.string.header_villain;
+                    case ENVIRONMENT:
+                        return R.string.header_environment;
+                }
+                break;
+            case CARD:
+                switch (type) {
+                    case HERO:
+                        int typeStart = getTypeStart(type);
+                        int heroIndex = position - typeStart - 1;
+                        return mGameSetup.getHeroes().get(heroIndex);
+                    case VILLAIN:
+                        return mGameSetup.getVillain();
+                    case ENVIRONMENT:
+                        return mGameSetup.getEnvironment();
+                }
+                break;
+        }
 
-		throw new RuntimeException();
-	}
+        throw new RuntimeException();
+    }
 
-	@Override
-	public long getItemId(int position) {
-		return position;
-	}
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
 
-	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-		RowType rowType = getItemRowType(position);
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        RowType rowType = getItemRowType(position);
 
-		switch (rowType) {
-		case HEADER:
-			return getHeaderView(position, convertView, parent);
-		case CARD:
-			return getCardView(position, convertView, parent);
-		}
+        switch (rowType) {
+            case HEADER:
+                return getHeaderView(position, convertView, parent);
+            case CARD:
+                return getCardView(position, convertView, parent);
+        }
 
-		throw new RuntimeException();
-	}
+        throw new RuntimeException();
+    }
 
-	private View getHeaderView(int position, View convertView, ViewGroup parent) {
-		HeaderViewHolder holder;
-		if (convertView == null) {
-			convertView = LayoutInflater.from(mContext).inflate(R.layout.row_header, parent, false);
+    private View getHeaderView(int position, View convertView, ViewGroup parent) {
+        HeaderViewHolder holder;
+        if (convertView == null) {
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.row_header, parent, false);
 
-			holder = new HeaderViewHolder();
-			holder.mLabel = Ui.findView(convertView, R.id.label_text_view);
-			holder.mAddButton = Ui.findView(convertView, R.id.add_button);
-			convertView.setTag(holder);
+            holder = new HeaderViewHolder();
+            holder.mLabel = Ui.findView(convertView, R.id.label_text_view);
+            holder.mAddButton = Ui.findView(convertView, R.id.add_button);
+            convertView.setTag(holder);
 
-			// For now, you can only add heroes; so assume that is what will happen
-			// if this button is visible and enabled.
-			holder.mAddButton.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					mListener.onAdd(Type.HERO);
-				}
-			});
-		}
-		else {
-			holder = (HeaderViewHolder) convertView.getTag();
-		}
+            // For now, you can only add heroes; so assume that is what will happen
+            // if this button is visible and enabled.
+            holder.mAddButton.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mListener.onAdd(Type.HERO);
+                }
+            });
+        }
+        else {
+            holder = (HeaderViewHolder) convertView.getTag();
+        }
 
-		holder.mAddButton.setVisibility(getType(position) == Type.HERO && mGameSetup.canAddHero() ? View.VISIBLE
-				: View.GONE);
+        holder.mAddButton.setVisibility(getType(position) == Type.HERO && mGameSetup.canAddHero() ? View.VISIBLE
+            : View.GONE);
 
-		holder.mLabel.setText((Integer) getItem(position));
+        holder.mLabel.setText((Integer) getItem(position));
 
-		return convertView;
-	}
+        return convertView;
+    }
 
-	private static class HeaderViewHolder {
-		private TextView mLabel;
-		private View mAddButton;
-	}
+    private static class HeaderViewHolder {
 
-	private View getCardView(final int position, View convertView, ViewGroup parent) {
-		CardViewHolder holder;
-		if (convertView == null) {
-			convertView = LayoutInflater.from(mContext).inflate(R.layout.row_card, parent, false);
+        private TextView mLabel;
+        private View mAddButton;
+    }
 
-			holder = new CardViewHolder();
-			holder.mIcon = Ui.findView(convertView, R.id.icon_view);
-			holder.mLabel = Ui.findView(convertView, R.id.label_text_view);
-			holder.mRemoveButton = Ui.findView(convertView, R.id.remove_button);
-			convertView.setTag(holder);
-		}
-		else {
-			holder = (CardViewHolder) convertView.getTag();
-		}
+    private View getCardView(final int position, View convertView, ViewGroup parent) {
+        CardViewHolder holder;
+        if (convertView == null) {
+            convertView = LayoutInflater.from(mContext).inflate(R.layout.row_card, parent, false);
 
-		Card card = (Card) getItem(position);
+            holder = new CardViewHolder();
+            holder.mIcon = Ui.findView(convertView, R.id.icon_view);
+            holder.mLabel = Ui.findView(convertView, R.id.label_text_view);
+            holder.mRemoveButton = Ui.findView(convertView, R.id.remove_button);
+            convertView.setTag(holder);
+        }
+        else {
+            holder = (CardViewHolder) convertView.getTag();
+        }
 
-		holder.mIcon.bind(card);
+        Card card = (Card) getItem(position);
 
-		CharSequence label = null;
-		if (card.isRandom()) {
-			switch (getType(position)) {
-			case HERO:
-				label = mContext.getString(R.string.card_random_hero);
-				break;
-			case VILLAIN:
-				label = mContext.getString(R.string.card_random_villain);
-				break;
-			case ENVIRONMENT:
-				label = mContext.getString(R.string.card_random_environment);
-				break;
-			}
-		}
-		else {
-			label = card.getName(mContext);
-		}
-		holder.mLabel.setText(label);
+        holder.mIcon.bind(card);
 
-		int removeVisibility = getType(position) == Type.HERO && mGameSetup.canRemoveHero() ? View.VISIBLE : View.GONE;
-		holder.mRemoveButton.setVisibility(removeVisibility);
-		if (removeVisibility == View.VISIBLE) {
-			// For now, you can only remove heroes; so assume that is what will happen
-			// if this button is visible and enabled.
-			holder.mRemoveButton.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					int start = getTypeStart(Type.HERO);
-					mListener.onRemove(Type.HERO, position - start - 1);
-				}
-			});
-		}
+        CharSequence label = null;
+        if (card.isRandom()) {
+            switch (getType(position)) {
+                case HERO:
+                    label = mContext.getString(R.string.card_random_hero);
+                    break;
+                case VILLAIN:
+                    label = mContext.getString(R.string.card_random_villain);
+                    break;
+                case ENVIRONMENT:
+                    label = mContext.getString(R.string.card_random_environment);
+                    break;
+            }
+        }
+        else {
+            label = card.getName(mContext);
+        }
+        holder.mLabel.setText(label);
 
-		return convertView;
-	}
+        int removeVisibility = getType(position) == Type.HERO && mGameSetup.canRemoveHero() ? View.VISIBLE : View.GONE;
+        holder.mRemoveButton.setVisibility(removeVisibility);
+        if (removeVisibility == View.VISIBLE) {
+            // For now, you can only remove heroes; so assume that is what will happen
+            // if this button is visible and enabled.
+            holder.mRemoveButton.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int start = getTypeStart(Type.HERO);
+                    mListener.onRemove(Type.HERO, position - start - 1);
+                }
+            });
+        }
 
-	private static class CardViewHolder {
-		private IconView mIcon;
-		private TextView mLabel;
-		private View mRemoveButton;
-	}
+        return convertView;
+    }
 
-	//////////////////////////////////////////////////////////////////////////
-	// Listener interface
+    private static class CardViewHolder {
 
-	public interface GameSetupAdapterListener {
-		public void onAdd(Type type);
+        private IconView mIcon;
+        private TextView mLabel;
+        private View mRemoveButton;
+    }
 
-		public void onRemove(Type type, int index);
-	}
+    //////////////////////////////////////////////////////////////////////////
+    // Listener interface
+
+    public interface GameSetupAdapterListener {
+
+        public void onAdd(Type type);
+
+        public void onRemove(Type type, int index);
+    }
 
 }

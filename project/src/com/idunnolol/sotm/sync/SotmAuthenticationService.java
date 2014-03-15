@@ -6,18 +6,18 @@ import android.os.IBinder;
 
 public class SotmAuthenticationService extends Service {
 
-	private SotmAccountAuthenticator mAuthenticator;
+    private SotmAccountAuthenticator mAuthenticator;
 
-	@Override
-	public void onCreate() {
-		super.onCreate();
+    @Override
+    public void onCreate() {
+        super.onCreate();
 
-		mAuthenticator = new SotmAccountAuthenticator(this);
-	}
+        mAuthenticator = new SotmAccountAuthenticator(this);
+    }
 
-	@Override
-	public IBinder onBind(Intent intent) {
-		return mAuthenticator.getIBinder();
-	}
+    @Override
+    public IBinder onBind(Intent intent) {
+        return mAuthenticator.getIBinder();
+    }
 
 }

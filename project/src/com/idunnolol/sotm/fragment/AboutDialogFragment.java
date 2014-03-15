@@ -7,40 +7,39 @@ import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.widget.TextView;
-
 import com.idunnolol.sotm.R;
 
 public class AboutDialogFragment extends DialogFragment {
 
-	public static final String TAG = AboutDialogFragment.class.getName();
+    public static final String TAG = AboutDialogFragment.class.getName();
 
-	@Override
-	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-		builder.setTitle(R.string.title_about);
+        builder.setTitle(R.string.title_about);
 
-		StringBuilder sb = new StringBuilder();
-		sb.append(getString(R.string.about_app));
-		sb.append("<br /><br />");
-		sb.append(getString(R.string.about_explanation));
-		sb.append("<br /><br />");
-		sb.append(getString(R.string.about_tracker));
-		sb.append("<br /><br />");
-		sb.append(getString(R.string.credit_points));
+        StringBuilder sb = new StringBuilder();
+        sb.append(getString(R.string.about_app));
+        sb.append("<br /><br />");
+        sb.append(getString(R.string.about_explanation));
+        sb.append("<br /><br />");
+        sb.append(getString(R.string.about_tracker));
+        sb.append("<br /><br />");
+        sb.append(getString(R.string.credit_points));
 
-		builder.setMessage(Html.fromHtml(sb.toString()));
+        builder.setMessage(Html.fromHtml(sb.toString()));
 
-		builder.setNeutralButton(R.string.ok, null);
+        builder.setNeutralButton(R.string.ok, null);
 
-		return builder.create();
-	}
+        return builder.create();
+    }
 
-	@Override
-	public void onResume() {
-		super.onResume();
+    @Override
+    public void onResume() {
+        super.onResume();
 
-		((TextView) getDialog().findViewById(android.R.id.message)).setMovementMethod(LinkMovementMethod.getInstance());
-	}
+        ((TextView) getDialog().findViewById(android.R.id.message)).setMovementMethod(LinkMovementMethod.getInstance());
+    }
 
 }
