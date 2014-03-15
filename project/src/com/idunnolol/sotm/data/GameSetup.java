@@ -8,10 +8,8 @@ import com.idunnolol.sotm.data.Card.Type;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 /**
@@ -63,6 +61,7 @@ public class GameSetup implements Parcelable {
     }
 
     public void addHero() {
+        mVillainTeam.clear();
         mHeroes.add(Card.RANDOM_HERO);
     }
 
@@ -71,6 +70,7 @@ public class GameSetup implements Parcelable {
     }
 
     public void removeHero(int index) {
+        mVillainTeam.clear();
         mHeroes.remove(index);
     }
 
@@ -89,6 +89,14 @@ public class GameSetup implements Parcelable {
 
     public Card getVillain() {
         return mVillain;
+    }
+
+    public Card getVillainAt(int position) {
+        if (mVillainTeam.size() == 0) {
+            return mVillain;
+        }
+
+        return mVillainTeam.get(position);
     }
 
     public void setVillainTeam(List<Card> villainTeam) {

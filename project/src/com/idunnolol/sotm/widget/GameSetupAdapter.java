@@ -71,7 +71,7 @@ public class GameSetupAdapter extends BaseAdapter {
             case VILLAIN:
                 return mGameSetup.getHeroCount() + 1;
             case ENVIRONMENT:
-                return mGameSetup.getHeroCount() + 3;
+                return mGameSetup.getHeroCount() + mGameSetup.getVillainCount() + 2;
             default:
                 throw new RuntimeException();
         }
@@ -91,8 +91,8 @@ public class GameSetupAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        // 3 headers, 1 villain, 1 environment, and N heroes
-        return 5 + mGameSetup.getHeroCount();
+        // 3 headers, 1 environment, N heroes, M villains
+        return 4 + mGameSetup.getHeroCount() + mGameSetup.getVillainCount();
     }
 
     @Override
@@ -112,13 +112,12 @@ public class GameSetupAdapter extends BaseAdapter {
                 }
                 break;
             case CARD:
+                int typeStart = getTypeStart(type);
                 switch (type) {
                     case HERO:
-                        int typeStart = getTypeStart(type);
-                        int heroIndex = position - typeStart - 1;
-                        return mGameSetup.getHeroes().get(heroIndex);
+                        return mGameSetup.getHeroes().get(position - typeStart - 1);
                     case VILLAIN:
-                        return mGameSetup.getVillain();
+                        return mGameSetup.getVillainAt(position - typeStart - 1);
                     case ENVIRONMENT:
                         return mGameSetup.getEnvironment();
                 }
