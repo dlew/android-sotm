@@ -5,13 +5,13 @@
     android:divider="?android:dividerVertical"
     android:dividerPadding="@dimen/divider_padding"
     android:orientation="horizontal"
-    android:showDividers="middle" >
+    android:showDividers="middle">
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <include layout="@layout/include_icon" />
 

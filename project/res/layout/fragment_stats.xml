@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="?android:attr/listChoiceBackgroundIndicator"
     android:orientation="vertical"
-    android:padding="12dp" >
+    android:padding="12dp">
 
     <com.idunnolol.sotm.widget.TextView
         android:id="@+id/stats_text_view"

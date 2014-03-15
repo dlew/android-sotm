@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.idunnolol.sotm.widget.IconView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.idunnolol.sotm.widget.IconView android:id="@+id/icon_view"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/icon_view"
     android:layout_width="56dp"
-    android:layout_height="64dp" >
+    android:layout_height="64dp">
 
     <com.idunnolol.sotm.widget.ShadedImageView
         android:id="@+id/icon_image_view"

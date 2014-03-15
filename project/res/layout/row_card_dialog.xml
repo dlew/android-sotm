@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="64dp"
     android:minHeight="?android:attr/listPreferredItemHeightSmall"
-    android:paddingRight="?android:attr/listPreferredItemPaddingRight" >
+    android:paddingRight="?android:attr/listPreferredItemPaddingRight">
 
     <include layout="@layout/include_icon" />
 

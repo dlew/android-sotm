@@ -7,7 +7,7 @@
     android:divider="?android:dividerVertical"
     android:dividerPadding="@dimen/divider_padding"
     android:orientation="horizontal"
-    android:showDividers="middle" >
+    android:showDividers="middle">
 
     <com.idunnolol.sotm.widget.TextView
         android:id="@+id/label_text_view"
