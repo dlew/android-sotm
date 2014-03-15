@@ -168,7 +168,7 @@ public class Card implements Parcelable {
     }
 
     public boolean isRandom() {
-        return mId.equals(RANDOM_ID);
+        return mId.equals(RANDOM_ID) || isTeam();
     }
 
     /**

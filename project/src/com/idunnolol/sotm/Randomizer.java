@@ -73,7 +73,24 @@ public class Randomizer {
 
         Card villain = gameSetup.getVillain();
         if (villain.isRandom()) {
-            gameSetup.setVillain(getRandomCard(villain));
+            if (!villain.isTeam()) {
+                gameSetup.setVillain(getRandomCard(villain));
+            }
+
+            // If we randomly selected a team, make sure to randomize the team as well
+            villain = gameSetup.getVillain();
+            if (villain.isTeam()) {
+                int teamSize = 0;
+                if (villain.getId().equals("Vengeance Five")) {
+                    teamSize = gameSetup.getHeroCount();
+                }
+                else {
+                    throw new RuntimeException("Don't know how to handle this team: " + villain);
+                }
+
+                List<Card> team = getRandomTeam(villain, teamSize);
+                gameSetup.setTeam(villain, team);
+            }
         }
 
         Card environment = gameSetup.getEnvironment();
@@ -196,6 +213,22 @@ public class Randomizer {
         }
 
         return card;
+    }
+
+    private List<Card> getRandomTeam(Card card, int teamSize) {
+        List<Card> team = new ArrayList<Card>(teamSize);
+        List<Card> teamChoices = new ArrayList<Card>(card.getTeamMembers());
+
+        if (teamChoices.size() < teamSize) {
+            throw new RuntimeException("Not enough team members to choose from for card " + card);
+        }
+
+        for (int a = 0; a < teamSize; a++) {
+            Card teamMember = teamChoices.remove(mRand.nextInt(teamChoices.size()));
+            team.add(teamMember);
+        }
+
+        return team;
     }
 
 }
