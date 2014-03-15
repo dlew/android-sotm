@@ -317,6 +317,12 @@
         },
         {
           "type": "villain",
+          "id": "Vengeance Five",
+          "icon": "card_vengeance_five",
+          "name": "card_vengeance_five"
+        },
+        {
+          "type": "villain",
           "id": "Vengeance Baron Blade",
           "icon": "card_vengeance_baron_blade",
           "name": "card_vengeance_baron_blade"
