@@ -1,66 +1,76 @@
 package com.idunnolol.sotm.fragment;
 
-import android.app.ListFragment;
+import android.app.Fragment;
 import android.os.Bundle;
 import android.util.SparseBooleanArray;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import com.danlew.utils.Ui;
+import com.idunnolol.sotm.R;
 import com.idunnolol.sotm.data.Card;
 import com.idunnolol.sotm.data.CardSet;
 import com.idunnolol.sotm.widget.CardConfigAdapter;
+import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
-public class CardConfigListFragment extends ListFragment {
+public class CardConfigListFragment extends Fragment {
 
     public static final String TAG = CardConfigListFragment.class.getName();
+
+    private StickyListHeadersListView mListView;
 
     private CardConfigAdapter mAdapter;
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_card_config, container, false);
+
+        mListView = Ui.findView(view, R.id.list);
+        mListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        mListView.setOnItemClickListener(mOnItemClickListener);
+        mListView.setOnHeaderClickListener(mOnHeaderClickListener);
 
         mAdapter = new CardConfigAdapter(getActivity());
-        setListAdapter(mAdapter);
+        mListView.setAdapter(mAdapter);
 
-        ListView listView = getListView();
-        listView.setItemsCanFocus(false);
-        listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        syncCheckedCards();
 
-        syncCheckedItems();
+        return view;
     }
 
-    @Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
-        super.onListItemClick(l, v, position, id);
-
-        SparseBooleanArray checkedItems = l.getCheckedItemPositions();
-        boolean enabled = checkedItems.get(position);
-        Object item = mAdapter.getItem(position);
-        if (item instanceof CardSet) {
-            ((CardSet) item).setAllCardsEnabled(enabled);
+    private AdapterView.OnItemClickListener mOnItemClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            SparseBooleanArray checkedItems = mListView.getCheckedItemPositions();
+            boolean enabled = checkedItems.get(position);
+            Card card = mAdapter.getItem(position);
+            card.setEnabled(enabled);
+            syncCheckedCards();
         }
-        else {
-            ((Card) item).setEnabled(enabled);
-        }
+    };
 
-        syncCheckedItems();
-    }
+    private StickyListHeadersListView.OnHeaderClickListener mOnHeaderClickListener =
+        new StickyListHeadersListView.OnHeaderClickListener() {
+            @Override
+            public void onHeaderClick(
+                StickyListHeadersListView stickyListHeadersListView, View view, int position, long headerId,
+                boolean currentlySticky) {
+                CardSet cardSet = mAdapter.getHeaderItem(position);
+                cardSet.setAllCardsEnabled(!cardSet.areAllCardsEnabled());
+                syncCheckedCards();
+            }
+        };
 
-    private void syncCheckedItems() {
-        ListView listView = getListView();
-
+    private void syncCheckedCards() {
         int count = mAdapter.getCount();
         for (int position = 0; position < count; position++) {
-            Object item = mAdapter.getItem(position);
-            if (item instanceof CardSet) {
-                CardSet cardSet = (CardSet) item;
-                listView.setItemChecked(position, cardSet.areAllCardsEnabled());
-            }
-            else {
-                Card card = (Card) item;
-                listView.setItemChecked(position, card.isEnabled());
-            }
+            Card card = mAdapter.getItem(position);
+            mListView.setItemChecked(position, card.isEnabled());
         }
+
+        mAdapter.notifyDataSetChanged();
     }
 
 }
