@@ -6,9 +6,40 @@ dependencies {
     compile 'se.emilsjolander:stickylistheaders:2.1.5'
 }
 
+def getKeystorePath() {
+    return hasProperty('KEYSTORE') ? KEYSTORE : "placeholder"
+}
+
+def getKeystorePw() {
+    return hasProperty('KEYSTORE_PASSWORD') ? KEYSTORE_PASSWORD : "placeholder"
+}
+
+def getKeystoreAlias() {
+    return hasProperty('KEY_ALIAS') ? KEY_ALIAS : "placeholder"
+}
+
+def getKeystoreAliasPw() {
+    return hasProperty('KEY_PASSWORD') ? KEY_PASSWORD : "placeholder"
+}
+
 android {
     compileSdkVersion 19
     buildToolsVersion "19.0.1"
+
+    signingConfigs {
+        release {
+            storeFile file(getKeystorePath())
+            storePassword getKeystorePw()
+            keyAlias getKeystoreAlias()
+            keyPassword getKeystoreAliasPw()
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+        }
+    }
 
     sourceSets {
         main {
