@@ -204,7 +204,9 @@ public class GameSetupAdapter extends BaseAdapter {
         boolean isAdvanced = card.getType() == Type.VILLAIN && mGameSetup.isAdvancedVillain();
         holder.mIcon.bind(card, isAdvanced);
 
-        holder.mLabel.setText(card.getName(mContext));
+        CharSequence name = card.getName(mContext);
+        name = isAdvanced ? mContext.getString(R.string.advanced_TEMPLATE, name): name;
+        holder.mLabel.setText(name);
 
         int removeVisibility = getType(position) == Type.HERO && mGameSetup.canRemoveHero() ? View.VISIBLE : View.GONE;
         holder.mRemoveButton.setVisibility(removeVisibility);
