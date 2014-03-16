@@ -220,6 +220,7 @@ public class RandomizerListFragment extends ListFragment implements GameSetupAda
 
         menu.findItem(R.id.action_reroll).setVisible(mBaseGameSetup != null);
         menu.findItem(R.id.action_randomize).setVisible(mBaseGameSetup == null && mGameSetup.hasRandomCards());
+        menu.findItem(R.id.action_reset).setVisible(!mGameSetup.isCompletelyRandom());
     }
 
     @Override

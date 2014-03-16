@@ -147,6 +147,16 @@ public class GameSetup implements Parcelable {
         return mEnvironment.isRandom();
     }
 
+    public boolean isCompletelyRandom() {
+        for (Card card : mHeroes) {
+            if (!card.equals(Card.RANDOM_HERO)) {
+                return false;
+            }
+        }
+
+        return mVillain.equals(Card.RANDOM_VILLAIN) && mEnvironment.equals(Card.RANDOM_ENVIRONMENT);
+    }
+
     /**
      * We might not be able to randomize if there aren't enough options available
      */
