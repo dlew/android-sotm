@@ -6,6 +6,7 @@ import com.idunnolol.sotm.data.Card;
 import com.idunnolol.sotm.data.Card.Type;
 import com.idunnolol.sotm.data.Db;
 import com.idunnolol.sotm.data.GameSetup;
+import com.idunnolol.sotm.data.Prefs;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,6 +24,12 @@ public class Randomizer {
 
     // Randomization timeout in nanoseconds (200 ms)
     private static final long RANDOMIZE_TIMEOUT = 200 * 1000000;
+
+    // Minimum number of advanced games counted before we will use it
+    private static final int ADVANCED_COUNT_MINIMUM = 50;
+
+    // Chance that we'll pick an advanced villain (if allowed)
+    private static final double ADVANCED_VILLAIN_CHANCE = .15;
 
     private Random mRand;
 
@@ -77,8 +84,14 @@ public class Randomizer {
                 gameSetup.setVillain(getRandomCard(villain));
             }
 
-            // If we randomly selected a team, make sure to randomize the team as well
             villain = gameSetup.getVillain();
+
+            // If advanced is allowed, and there are enough advanced stats, then give it a chance to pick advanced.
+            if (Prefs.isAdvancedAllowed() && villain.getAdvancedCount() >= ADVANCED_COUNT_MINIMUM) {
+                gameSetup.setAdvancedVillain(mRand.nextDouble() < ADVANCED_VILLAIN_CHANCE);
+            }
+
+            // If we randomly selected a team, make sure to randomize the team as well
             if (villain.isTeam()) {
                 int teamSize = 0;
                 if (villain.getId().equals("Vengeance Five")) {

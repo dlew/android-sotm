@@ -51,6 +51,7 @@ public class GameSetup implements Parcelable {
         mVillain = Card.RANDOM_VILLAIN;
         mEnvironment = Card.RANDOM_ENVIRONMENT;
         mVillainTeam.clear();
+        mIsAdvancedVillain = false;
     }
 
     public List<Card> getHeroes() {
@@ -196,7 +197,12 @@ public class GameSetup implements Parcelable {
         }
 
         if (mVillain != Card.RANDOM_VILLAIN) {
-            points += mVillain.getPoints();
+            if (mIsAdvancedVillain) {
+                points += mVillain.getAdvancedPoints();
+            }
+            else {
+                points += mVillain.getPoints();
+            }
         }
 
         if (mEnvironment != Card.RANDOM_ENVIRONMENT) {
@@ -240,7 +246,8 @@ public class GameSetup implements Parcelable {
 
         if (mVillain.isRandom()) {
             List<Card> possibleVillains = Db.getCards(Type.VILLAIN);
-            Collections.sort(possibleVillains, Card.POINT_COMPARATOR);
+            Collections.sort(possibleVillains,
+                Prefs.isAdvancedAllowed() ? Card.POINT_ADVANCED_COMPARATOR : Card.POINT_COMPARATOR);
 
             if (minPoints) {
                 points += possibleVillains.get(0).getPoints();
@@ -279,6 +286,7 @@ public class GameSetup implements Parcelable {
         mEnvironment = other.mEnvironment;
         mVillainTeam.clear();
         mVillainTeam.addAll(other.mVillainTeam);
+        mIsAdvancedVillain = other.mIsAdvancedVillain;
     }
 
     @Override
@@ -305,6 +313,9 @@ public class GameSetup implements Parcelable {
         }
 
         sb.append("\nVillain: " + mVillain.getId());
+        if (mIsAdvancedVillain) {
+            sb.append(" (Advanced)");
+        }
 
         if (mVillainTeam.size() != 0) {
             List<String> teamIds = new ArrayList<String>();
