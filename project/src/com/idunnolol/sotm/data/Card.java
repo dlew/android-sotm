@@ -241,7 +241,6 @@ public class Card implements Parcelable {
         mEnabled = in.readByte() == 1;
         mAdvancedPoints = in.readInt();
         mAdvancedCount = in.readInt();
-        in.readList(mTeam, getClass().getClassLoader());
         mTeam = in.readArrayList(getClass().getClassLoader());
     }
 
