@@ -1,6 +1,7 @@
 package com.idunnolol.sotm;
 
 import android.app.Application;
+import com.crashlytics.android.Crashlytics;
 import com.danlew.utils.Log;
 import com.idunnolol.sotm.data.Db;
 import com.idunnolol.sotm.data.Prefs;
@@ -12,6 +13,8 @@ public class SentinelsApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        Crashlytics.start(this);
 
         Log.configure(TAG, true);
 

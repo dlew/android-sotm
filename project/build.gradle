@@ -1,8 +1,26 @@
+buildscript {
+    repositories {
+        maven { url 'http://download.crashlytics.com/maven' }
+    }
+
+    dependencies {
+        classpath 'com.crashlytics.tools.gradle:crashlytics-gradle:1.+'
+    }
+}
+
 apply plugin: 'android'
+
+apply plugin: 'crashlytics'
+
+repositories {
+    maven { url 'http://download.crashlytics.com/maven' }
+}
+
 
 dependencies {
     compile project(':libs:android-utils:library')
     compile 'se.emilsjolander:stickylistheaders:2.1.5'
+    compile 'com.crashlytics.android:crashlytics:1.+'
 }
 
 def getKeystorePath() {
