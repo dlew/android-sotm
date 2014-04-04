@@ -94,26 +94,7 @@ public class RandomizerListFragment extends ListFragment implements GameSetupAda
 
         // Check that all selected cards are still enabled
         // (May have been disabled in card config activity)
-        boolean hasChanged = false;
-        List<Card> heroes = mGameSetup.getHeroes();
-        for (int a = 0; a < heroes.size(); a++) {
-            if (!heroes.get(a).isEnabled()) {
-                mGameSetup.setHero(a, Card.RANDOM_HERO);
-                hasChanged = true;
-            }
-        }
-        if (!mGameSetup.getVillain().isEnabled()) {
-            mGameSetup.setVillain(Card.RANDOM_VILLAIN);
-            hasChanged = true;
-        }
-        if (!mGameSetup.getEnvironment().isEnabled()) {
-            mGameSetup.setEnvironment(Card.RANDOM_ENVIRONMENT);
-            hasChanged = true;
-        }
-
-        if (hasChanged) {
-            onGameSetupChanged();
-        }
+        validateGameSetup();
     }
 
     @Override
@@ -157,6 +138,33 @@ public class RandomizerListFragment extends ListFragment implements GameSetupAda
 
     public GameSetup getGameSetup() {
         return mGameSetup;
+    }
+
+    /**
+     * Indicate that some outside settings may have changed and invalidated the game setup; if so, we want
+     * to change things so we are still legit .
+     */
+    public void validateGameSetup() {
+        boolean hasChanged = false;
+        List<Card> heroes = mGameSetup.getHeroes();
+        for (int a = 0; a < heroes.size(); a++) {
+            if (!heroes.get(a).isEnabled()) {
+                mGameSetup.setHero(a, Card.RANDOM_HERO);
+                hasChanged = true;
+            }
+        }
+        if (!mGameSetup.getVillain().isEnabled()) {
+            mGameSetup.setVillain(Card.RANDOM_VILLAIN);
+            hasChanged = true;
+        }
+        if (!mGameSetup.getEnvironment().isEnabled()) {
+            mGameSetup.setEnvironment(Card.RANDOM_ENVIRONMENT);
+            hasChanged = true;
+        }
+
+        if (hasChanged) {
+            onGameSetupChanged();
+        }
     }
 
     public void launchRandomizerDialog() {

@@ -89,6 +89,7 @@ public class RandomizerActivity extends Activity implements RandomizerListFragme
                 return true;
             case R.id.action_advanced:
                 Prefs.setAdvancedAllowed(!item.isChecked());
+                mRandomizerListFragment.validateGameSetup();
                 return true;
             case R.id.action_about:
                 AboutDialogFragment df = new AboutDialogFragment();

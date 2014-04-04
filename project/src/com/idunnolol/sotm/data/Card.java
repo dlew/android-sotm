@@ -129,7 +129,7 @@ public class Card implements Parcelable {
     }
 
     public boolean isEnabled() {
-        return mEnabled;
+        return mEnabled && (!isAdvanced() || canBeAdvanced());
     }
 
     public void setEnabled(boolean enabled) {
@@ -165,7 +165,7 @@ public class Card implements Parcelable {
     }
 
     public boolean canBeAdvanced() {
-        return mAdvancedCount >= ADVANCED_COUNT_MINIMUM;
+        return mAdvancedCount >= ADVANCED_COUNT_MINIMUM && Prefs.isAdvancedAllowed();
     }
 
     public void addTeamMember(Card teamMember) {
