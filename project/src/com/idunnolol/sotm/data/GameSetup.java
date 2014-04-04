@@ -25,7 +25,6 @@ public class GameSetup implements Parcelable {
 
     private Card mVillain;
     private List<Card> mVillainTeam = new ArrayList<Card>(1);
-    private boolean mIsAdvancedVillain;
 
     private Card mEnvironment;
 
@@ -51,7 +50,6 @@ public class GameSetup implements Parcelable {
         mVillain = Card.RANDOM_VILLAIN;
         mEnvironment = Card.RANDOM_ENVIRONMENT;
         mVillainTeam.clear();
-        mIsAdvancedVillain = false;
     }
 
     public List<Card> getHeroes() {
@@ -114,11 +112,7 @@ public class GameSetup implements Parcelable {
     }
 
     public boolean isAdvancedVillain() {
-        return mIsAdvancedVillain;
-    }
-
-    public void setAdvancedVillain(boolean isAdvancedVillain) {
-        mIsAdvancedVillain = isAdvancedVillain;
+        return mVillain.isAdvanced();
     }
 
     public void setEnvironment(Card card) {
@@ -207,7 +201,7 @@ public class GameSetup implements Parcelable {
         }
 
         if (mVillain != Card.RANDOM_VILLAIN) {
-            if (mIsAdvancedVillain) {
+            if (isAdvancedVillain()) {
                 points += mVillain.getAdvancedPoints();
             }
             else {
@@ -296,7 +290,6 @@ public class GameSetup implements Parcelable {
         mEnvironment = other.mEnvironment;
         mVillainTeam.clear();
         mVillainTeam.addAll(other.mVillainTeam);
-        mIsAdvancedVillain = other.mIsAdvancedVillain;
     }
 
     @Override
@@ -323,7 +316,7 @@ public class GameSetup implements Parcelable {
         }
 
         sb.append("\nVillain: " + mVillain.getId());
-        if (mIsAdvancedVillain) {
+        if (isAdvancedVillain()) {
             sb.append(" (Advanced)");
         }
 
@@ -350,7 +343,6 @@ public class GameSetup implements Parcelable {
         mVillain = in.readParcelable(cl);
         mEnvironment = in.readParcelable(cl);
         in.readList(mVillainTeam, cl);
-        mIsAdvancedVillain = in.readByte() == 1;
     }
 
     @Override
@@ -359,7 +351,6 @@ public class GameSetup implements Parcelable {
         dest.writeParcelable(mVillain, flags);
         dest.writeParcelable(mEnvironment, flags);
         dest.writeList(mVillainTeam);
-        dest.writeByte((byte) (mIsAdvancedVillain ? 1 : 0));
     }
 
     @Override

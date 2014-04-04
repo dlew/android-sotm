@@ -15,6 +15,9 @@ public class Card implements Parcelable {
 
     private static final String RANDOM_ID = "Random";
 
+    // Minimum number of advanced games counted before we will use it
+    private static final int ADVANCED_COUNT_MINIMUM = 50;
+
     public static final Card RANDOM_HERO =
         new Card(Type.HERO, RANDOM_ID, R.string.card_random_hero, 0);
 
@@ -41,6 +44,8 @@ public class Card implements Parcelable {
     private int mPoints;
 
     private boolean mEnabled;
+
+    private boolean mAdvanced;
 
     private int mAdvancedPoints;
 
@@ -73,6 +78,7 @@ public class Card implements Parcelable {
         mIconResId = other.mIconResId;
         mPoints = other.mPoints;
         mEnabled = other.mEnabled;
+        mAdvanced = other.mAdvanced;
         mAdvancedPoints = other.mAdvancedPoints;
         mAdvancedCount = other.mAdvancedCount;
     }
@@ -102,7 +108,8 @@ public class Card implements Parcelable {
     }
 
     public CharSequence getName(Context context) {
-        return context.getString(mNameResId);
+        CharSequence name = context.getString(mNameResId);
+        return mAdvanced ? context.getString(R.string.advanced_TEMPLATE, name) : name;
     }
 
     public void setIconResId(int resId) {
@@ -129,6 +136,15 @@ public class Card implements Parcelable {
         mEnabled = enabled;
     }
 
+    public boolean isAdvanced() {
+        return mAdvanced;
+    }
+
+    public void makeAdvanced() {
+        mAdvanced = true;
+        mId = getAdvancedId();
+    }
+
     public void setAdvancedPoints(int advancedPoints) {
         mAdvancedPoints = advancedPoints;
     }
@@ -146,6 +162,10 @@ public class Card implements Parcelable {
 
     public int getAdvancedCount() {
         return mAdvancedCount;
+    }
+
+    public boolean canBeAdvanced() {
+        return mAdvancedCount >= ADVANCED_COUNT_MINIMUM;
     }
 
     public void addTeamMember(Card teamMember) {
@@ -221,7 +241,20 @@ public class Card implements Parcelable {
             public int compare(Card lhs, Card rhs) {
                 String lhName = context.getString(lhs.getNameResId());
                 String rhName = context.getString(rhs.getNameResId());
-                return lhName.compareTo(rhName);
+                int comp = lhName.compareTo(rhName);
+
+                // When comparing names, advanced always comes below the
+                // non-advanced version of the card.
+                if (comp == 0) {
+                    if (lhs.isAdvanced()) {
+                        return 1;
+                    }
+                    else if (rhs.isAdvanced()) {
+                        return -1;
+                    }
+                }
+
+                return comp;
             }
         };
     }
@@ -239,6 +272,7 @@ public class Card implements Parcelable {
         mIconResId = in.readInt();
         mPoints = in.readInt();
         mEnabled = in.readByte() == 1;
+        mAdvanced = in.readByte() == 1;
         mAdvancedPoints = in.readInt();
         mAdvancedCount = in.readInt();
         mTeam = in.readArrayList(getClass().getClassLoader());
@@ -258,6 +292,7 @@ public class Card implements Parcelable {
         dest.writeInt(mIconResId);
         dest.writeInt(mPoints);
         dest.writeByte((byte) (mEnabled ? 1 : 0));
+        dest.writeByte((byte) (mAdvanced ? 1 : 0));
         dest.writeInt(mAdvancedPoints);
         dest.writeInt(mAdvancedCount);
         dest.writeList(mTeam);

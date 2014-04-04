@@ -12,8 +12,10 @@ import com.idunnolol.sotm.data.Card;
 import com.idunnolol.sotm.data.Card.Type;
 import com.idunnolol.sotm.data.Db;
 import com.idunnolol.sotm.data.GameSetup;
+import com.idunnolol.sotm.data.Prefs;
 import com.idunnolol.sotm.widget.CardAdapter;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -71,7 +73,23 @@ public class CardPickerDialogFragment extends DialogFragment {
             }
         }
 
-        Collection<Card> cards = Db.getCards(getType());
+        Collection<Card> cards = Db.getCards(type);
+
+        // Add in advanced cards (if allowed)
+        if (type == Type.VILLAIN && Prefs.isAdvancedAllowed()) {
+            Collection<Card> baseCards = cards;
+            cards = new ArrayList<Card>(baseCards.size() * 2);
+            for (Card villain : baseCards) {
+                cards.add(villain);
+
+                if (villain.canBeAdvanced()) {
+                    Card advancedVillain = new Card(villain);
+                    advancedVillain.makeAdvanced();
+                    cards.add(advancedVillain);
+                }
+            }
+        }
+
         mAdapter = new CardAdapter(getActivity(), cards, disabledCards);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());

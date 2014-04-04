@@ -25,9 +25,6 @@ public class Randomizer {
     // Randomization timeout in nanoseconds (200 ms)
     private static final long RANDOMIZE_TIMEOUT = 200 * 1000000;
 
-    // Minimum number of advanced games counted before we will use it
-    private static final int ADVANCED_COUNT_MINIMUM = 50;
-
     // Chance that we'll pick an advanced villain (if allowed)
     private static final double ADVANCED_VILLAIN_CHANCE = .15;
 
@@ -87,8 +84,10 @@ public class Randomizer {
             villain = gameSetup.getVillain();
 
             // If advanced is allowed, and there are enough advanced stats, then give it a chance to pick advanced.
-            if (Prefs.isAdvancedAllowed() && villain.getAdvancedCount() >= ADVANCED_COUNT_MINIMUM) {
-                gameSetup.setAdvancedVillain(mRand.nextDouble() < ADVANCED_VILLAIN_CHANCE);
+            if (Prefs.isAdvancedAllowed() && villain.canBeAdvanced() && mRand.nextDouble() < ADVANCED_VILLAIN_CHANCE) {
+                villain = new Card(villain);
+                villain.makeAdvanced();
+                gameSetup.setVillain(villain);
             }
 
             // If we randomly selected a team, make sure to randomize the team as well
