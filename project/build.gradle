@@ -43,6 +43,13 @@ android {
     compileSdkVersion 19
     buildToolsVersion "19.0.1"
 
+    defaultConfig {
+        versionCode 7
+        versionName "1.4.0-SNAPSHOT"
+        minSdkVersion 14
+        targetSdkVersion 19
+    }
+
     signingConfigs {
         release {
             storeFile file(getKeystorePath())
