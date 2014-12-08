@@ -154,7 +154,7 @@ public class RandomizerActivity extends Activity implements RandomizerListFragme
 
     @Override
     public void onStatsClick() {
-        mRandomizerListFragment.launchRandomizerDialog();
+        mRandomizerListFragment.launchRandomizerDialog(true);
     }
 
 }

@@ -3,6 +3,7 @@ package com.idunnolol.sotm.fragment;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.ListFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.widget.ListView;
 import com.idunnolol.sotm.R;
 import com.idunnolol.sotm.Randomizer;
+import com.idunnolol.sotm.activity.CardConfigActivity;
 import com.idunnolol.sotm.data.Card;
 import com.idunnolol.sotm.data.Card.Type;
 import com.idunnolol.sotm.data.Db;
@@ -167,10 +169,15 @@ public class RandomizerListFragment extends ListFragment implements GameSetupAda
         }
     }
 
-    public void launchRandomizerDialog() {
+    public void launchRandomizerDialog(boolean fromStats) {
         if (!mGameSetup.canRandomize()) {
-            DialogFragment df = NotEnoughCardsDialogFragment.newInstance(mGameSetup.getFirstLackingType());
-            df.show(getFragmentManager(), NotEnoughCardsDialogFragment.TAG);
+            if (fromStats) {
+                startActivity(new Intent(getActivity(), CardConfigActivity.class));
+            }
+            else {
+                DialogFragment df = NotEnoughCardsDialogFragment.newInstance(mGameSetup.getFirstLackingType());
+                df.show(getFragmentManager(), NotEnoughCardsDialogFragment.TAG);
+            }
         }
         else {
             DifficultyDialogFragment df = new DifficultyDialogFragment();
@@ -235,7 +242,7 @@ public class RandomizerListFragment extends ListFragment implements GameSetupAda
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_randomize:
-                launchRandomizerDialog();
+                launchRandomizerDialog(false);
                 return true;
             case R.id.action_reroll:
                 randomize(mTargetWinPercent);
