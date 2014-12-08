@@ -19,7 +19,7 @@ repositories {
 
 dependencies {
     compile project(':libs:android-utils:library')
-    compile 'se.emilsjolander:stickylistheaders:2.1.5'
+    compile 'se.emilsjolander:stickylistheaders:2.5.2'
     compile 'com.crashlytics.android:crashlytics:1.+'
 }
 
