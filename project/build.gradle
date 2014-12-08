@@ -44,10 +44,10 @@ android {
     buildToolsVersion "21.1.1"
 
     defaultConfig {
-        versionCode 8
-        versionName "1.4.1-SNAPSHOT"
+        versionCode 9
+        versionName "1.4.2-SNAPSHOT"
         minSdkVersion 14
-        targetSdkVersion 19
+        targetSdkVersion 21
     }
 
     signingConfigs {
