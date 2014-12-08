@@ -30,20 +30,14 @@ public class NotEnoughCardsDialogFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Type type = Type.values()[getArguments().getInt(ARG_TYPE)];
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
-        builder.setMessage(getErrorResId(type));
-
-        builder.setPositiveButton(R.string.button_configure, new OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                dismissAllowingStateLoss();
-                startActivity(new Intent(getActivity(), CardConfigActivity.class));
-            }
-        });
-
-        builder.setNegativeButton(R.string.cancel, null);
-
-        return builder.create();
+        return new AlertDialog.Builder(getActivity())
+            .setMessage(getErrorResId(type))
+            .setPositiveButton(R.string.button_configure, new OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    startActivity(new Intent(getActivity(), CardConfigActivity.class));
+                }
+            })
+            .create();
     }
 
     public static int getErrorResId(Type type) {

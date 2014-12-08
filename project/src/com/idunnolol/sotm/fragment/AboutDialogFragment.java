@@ -28,11 +28,10 @@ public class AboutDialogFragment extends DialogFragment {
         sb.append("<br /><br />");
         sb.append(getString(R.string.credit_points));
 
-        builder.setMessage(Html.fromHtml(sb.toString()));
-
-        builder.setNeutralButton(R.string.ok, null);
-
-        return builder.create();
+        return new AlertDialog.Builder(getActivity())
+            .setMessage(Html.fromHtml(sb.toString()))
+            .setNeutralButton(R.string.ok, null)
+            .create();
     }
 
     @Override

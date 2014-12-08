@@ -28,22 +28,19 @@ public class DifficultyDialogFragment extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
-        builder.setTitle(R.string.title_difficulty);
-
         mAdapter = new DifficultyAdapter(getActivity());
-        builder.setSingleChoiceItems(mAdapter, 0, new OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dismissAllowingStateLoss();
-                mListener.onDifficultyChosen(mAdapter.getItem(which));
-            }
-        });
 
-        builder.setNegativeButton(R.string.cancel, null);
-
-        return builder.create();
+        return new AlertDialog.Builder(getActivity())
+            .setTitle(R.string.title_difficulty)
+            .setSingleChoiceItems(mAdapter, 0, new OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dismissAllowingStateLoss();
+                    mListener.onDifficultyChosen(mAdapter.getItem(which));
+                }
+            })
+            .setNegativeButton(R.string.cancel, null)
+            .create();
     }
 
     //////////////////////////////////////////////////////////////////////////

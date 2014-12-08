@@ -1,7 +1,6 @@
 package com.idunnolol.sotm.fragment;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -34,18 +33,18 @@ public class SpecifyDifficultyDialogFragment extends DialogFragment {
         numPicker.setWrapSelectorWheel(false);
 
         // Build and return dialog
-        AlertDialog.Builder builder = new Builder(getActivity());
-        builder.setTitle(R.string.title_specify_difficulty);
-        builder.setView(numPicker);
-        builder.setPositiveButton(R.string.ok, new OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                numPicker.clearFocus();
-                mListener.onSpecificDifficultyChosen(numPicker.getValue());
-            }
-        });
-        builder.setNegativeButton(R.string.cancel, null);
-        return builder.create();
+        return new Builder(getActivity())
+            .setTitle(R.string.title_specify_difficulty)
+            .setView(numPicker)
+            .setPositiveButton(R.string.ok, new OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    numPicker.clearFocus();
+                    mListener.onSpecificDifficultyChosen(numPicker.getValue());
+                }
+            })
+            .setNegativeButton(R.string.cancel, null)
+            .create();
     }
 
     //////////////////////////////////////////////////////////////////////////

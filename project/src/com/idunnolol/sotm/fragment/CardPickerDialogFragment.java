@@ -92,40 +92,39 @@ public class CardPickerDialogFragment extends DialogFragment {
 
         mAdapter = new CardAdapter(getActivity(), cards, disabledCards);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
+        int titleResId;
         final Card randomCard;
         switch (type) {
             case HERO:
-                builder.setTitle(R.string.title_hero);
+                titleResId = R.string.title_hero;
                 randomCard = Card.RANDOM_HERO;
                 break;
             case VILLAIN:
-                builder.setTitle(R.string.title_villain);
+                titleResId = R.string.title_villain;
                 randomCard = Card.RANDOM_VILLAIN;
                 break;
             case ENVIRONMENT:
             default:
-                builder.setTitle(R.string.title_environment);
+                titleResId = R.string.title_environment;
                 randomCard = Card.RANDOM_ENVIRONMENT;
                 break;
         }
 
-        builder.setSingleChoiceItems(mAdapter, 0, new OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                dismissAllowingStateLoss();
-                mListener.onCardSelected(mAdapter.getItem(which));
-            }
-        });
-        builder.setNeutralButton(R.string.card_random, new OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                dismissAllowingStateLoss();
-                mListener.onCardSelected(randomCard);
-            }
-        });
-        builder.setNegativeButton(R.string.cancel, null);
-
-        return builder.create();
+        return new AlertDialog.Builder(getActivity())
+            .setTitle(titleResId)
+            .setSingleChoiceItems(mAdapter, 0, new OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    dismissAllowingStateLoss();
+                    mListener.onCardSelected(mAdapter.getItem(which));
+                }
+            })
+            .setNeutralButton(R.string.card_random, new OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    mListener.onCardSelected(randomCard);
+                }
+            })
+            .setNegativeButton(R.string.cancel, null)
+            .create();
     }
 
     //////////////////////////////////////////////////////////////////////////
