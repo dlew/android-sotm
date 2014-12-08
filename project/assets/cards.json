@@ -525,6 +525,12 @@
           "name": "card_gi_bunker"
         },
         {
+          "type": "hero",
+          "id": "The Super-Scientific Tachyon",
+          "icon": "card_the_super_scientific_tachyon",
+          "name": "card_the_super_scientific_tachyon"
+        },
+        {
           "type": "villain",
           "id": "Cosmic Omnitron",
           "icon": "card_cosmic_omnitron",
@@ -596,7 +602,8 @@
     ],
     [
       "Tachyon",
-      "Freedom Six Tachyon"
+      "Freedom Six Tachyon",
+      "The Super-Scientific Tachyon"
     ],
     [
       "Tempest",
