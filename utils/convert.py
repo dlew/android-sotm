@@ -26,6 +26,7 @@ DENSITIES = [
     ("hdpi", 1.5),
     ("xhdpi", 2.0),
     ("xxhdpi", 3.0),
+    ("xxxhdpi", 4.0),
 ]
 
 # Crops an image into a square (centered on middle of picture)
