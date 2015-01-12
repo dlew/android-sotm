@@ -371,6 +371,61 @@
       ]
     },
     {
+      "id": "Wrath of the Cosmos",
+      "name": "set_wrath_of_the_cosmos",
+      "enabledByDefault": true,
+      "cards": [
+        {
+          "type": "hero",
+          "id": "Captain Cosmic",
+          "icon": "card_captain_cosmic",
+          "name": "card_captain_cosmic"
+        },
+        {
+          "type": "hero",
+          "id": "Sky-Scraper",
+          "icon": "card_sky_scraper",
+          "name": "card_sky_scraper"
+        },
+        {
+          "type": "villain",
+          "id": "Deadline",
+          "icon": "card_deadline",
+          "name": "card_deadline"
+        },
+        {
+          "type": "villain",
+          "id": "Infinitor",
+          "icon": "card_infinitor",
+          "name": "card_infinitor"
+        },
+        {
+          "type": "villain",
+          "id": "Kaargra Warfang",
+          "icon": "card_kaargra_warfang",
+          "name": "card_kaargra_warfang"
+        },
+        {
+          "type": "villain",
+          "id": "Progeny",
+          "icon": "card_progeny",
+          "name": "card_progeny"
+        },
+        {
+          "type": "environment",
+          "id": "Dok'Thorath Capital",
+          "icon": "card_dok_thorath_capital",
+          "name": "card_dok_thorath_capital"
+        },
+        {
+          "type": "environment",
+          "id": "The Enclave of the Endlings",
+          "icon": "card_the_enclave_of_the_endlings",
+          "name": "card_the_enclave_of_the_endlings"
+        }
+      ]
+    },
+    {
       "id": "Mini-Expansions",
       "name": "set_mini_expansions",
       "cards": [
@@ -387,6 +442,12 @@
           "name": "card_the_scholar"
         },
         {
+          "type": "hero",
+          "id": "Guise",
+          "icon": "card_guise",
+          "name": "card_guise"
+        },
+        {
           "type": "villain",
           "id": "Ambuscade",
           "icon": "card_ambuscade",
@@ -399,6 +460,12 @@
           "name": "card_miss_information"
         },
         {
+          "type": "villain",
+          "id": "Wager Master",
+          "icon": "card_wager_master",
+          "name": "card_wager_master"
+        },
+        {
           "type": "environment",
           "id": "Silver Gulch 1883",
           "icon": "card_silver_gulch_1883",
@@ -409,6 +476,12 @@
           "id": "The Final Wasteland",
           "icon": "card_the_final_wasteland",
           "name": "card_the_final_wasteland"
+        },
+        {
+          "type": "environment",
+          "id": "Omnitron IV",
+          "icon": "card_omnitron_iv",
+          "name": "card_omnitron_iv"
         }
       ]
     },
@@ -531,6 +604,48 @@
           "name": "card_the_super_scientific_tachyon"
         },
         {
+          "type": "hero",
+          "id": "Kvothe Six-String",
+          "icon": "card_kvothe_six_string",
+          "name": "card_kvothe_six_string"
+        },
+        {
+          "type": "hero",
+          "id": "Prime Wardens Argent Adept",
+          "icon": "card_prime_wardens_argent_adept",
+          "name": "card_prime_wardens_argent_adept"
+        },
+        {
+          "type": "hero",
+          "id": "Prime Wardens Haka",
+          "icon": "card_prime_wardens_haka",
+          "name": "card_prime_wardens_haka"
+        },
+        {
+          "type": "hero",
+          "id": "Prime Wardens Fanatic",
+          "icon": "card_prime_wardens_fanatic",
+          "name": "card_prime_wardens_fanatic"
+        },
+        {
+          "type": "hero",
+          "id": "Prime Wardens Tempest",
+          "icon": "card_prime_wardens_tempest",
+          "name": "card_prime_wardens_tempest"
+        },
+        {
+          "type": "hero",
+          "id": "Prime Wardens Captain Cosmic",
+          "icon": "card_prime_wardens_captain_cosmic",
+          "name": "card_prime_wardens_captain_cosmic"
+        },
+        {
+          "type": "hero",
+          "id": "K.N.Y.F.E. - Rogue Agent",
+          "icon": "card_knyfe_rogue_agent",
+          "name": "card_knyfe_rogue_agent"
+        },
+        {
           "type": "villain",
           "id": "Cosmic Omnitron",
           "icon": "card_cosmic_omnitron",
@@ -573,11 +688,13 @@
     ],
     [
       "Fanatic",
-      "Redeemer Fanatic"
+      "Redeemer Fanatic",
+      "Prime Wardens Fanatic"
     ],
     [
       "Haka",
-      "The Eternal Haka"
+      "The Eternal Haka",
+      "Prime Wardens Haka"
     ],
     [
       "Legacy",
@@ -607,7 +724,8 @@
     ],
     [
       "Tempest",
-      "Freedom Six Tempest"
+      "Freedom Six Tempest",
+      "Prime Wardens Tempest"
     ],
     [
       "The Visionary",
@@ -619,8 +737,21 @@
       "Freedom Six Wraith: Price of Freedom"
     ],
     [
+      "The Argent Adept",
+      "Prime Wardens Argent Adept",
+      "Kvothe Six-String"
+    ],
+    [
       "Unity",
       "Freedom Six Unity"
+    ],
+    [
+      "K.N.Y.F.E.",
+      "K.N.Y.F.E. - Rogue Agent"
+    ],
+    [
+      "Captain Cosmic",
+      "Prime Wardens Captain Cosmic"
     ],
     [
       "Baron Blade",

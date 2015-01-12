@@ -141,12 +141,25 @@
     <string name="card_mobile_defense_platform">Mobile Defense Platform</string>
     <string name="card_freedom_tower">Freedom Tower</string>
 
+    <!-- Wrath of the Cosmos -->
+    <string name="card_captain_cosmic">Captain Cosmic</string>
+    <string name="card_sky_scraper">Sky-Scraper</string>
+    <string name="card_deadline">Deadline</string>
+    <string name="card_infinitor">Infinitor</string>
+    <string name="card_kaargra_warfang">Kaargra Warfang</string>
+    <string name="card_progeny">Progeny</string>
+    <string name="card_dok_thorath_capital">Dok\'Thorath Capital</string>
+    <string name="card_the_enclave_of_the_endlings">The Enclave of the Endlings</string>
+
     <!-- Mini-expansions -->
     <string name="card_the_scholar">The Scholar</string>
+    <string name="card_guise">Guise</string>
     <string name="card_ambuscade">Ambuscade</string>
     <string name="card_miss_information">Miss Information</string>
+    <string name="card_wager_master">Wager Master</string>
     <string name="card_silver_gulch_1883">Silver Gulch 1883</string>
     <string name="card_the_final_wasteland">The Final Wasteland</string>
+    <string name="card_omnitron_iv">Omnitron IV</string>
 
     <!-- Promos -->
     <string name="card_young_legacy">Young Legacy</string>
@@ -168,6 +181,13 @@
     <string name="card_americas_greatest_legacy">America\'s Greatest Legacy</string>
     <string name="card_gi_bunker">G.I. Bunker</string>
     <string name="card_the_super_scientific_tachyon">The Super-Scientific Tachyon</string>
+    <string name="card_kvothe_six_string">Kvothe Six-String</string>
+    <string name="card_prime_wardens_argent_adept">Prime Wardens Argent Adept</string>
+    <string name="card_prime_wardens_haka">Prime Wardens Haka</string>
+    <string name="card_prime_wardens_fanatic">Prime Wardens Fanatic</string>
+    <string name="card_prime_wardens_tempest">Prime Wardens Tempest</string>
+    <string name="card_prime_wardens_captain_cosmic">Prime Wardens Captain Cosmic</string>
+    <string name="card_knyfe_rogue_agent">K.N.Y.F.E. - Rogue Agent</string>
     <string name="card_cosmic_omnitron">Cosmic Omnitron</string>
     <string name="card_mad_bomber_blade">Mad Bomber Blade</string>
     <string name="card_skinwalker_gloomweaver">Skinwalker Gloomweaver</string>
@@ -179,6 +199,7 @@
     <string name="set_infernal_relics">Infernal Relics</string>
     <string name="set_shattered_timelines">Shattered Timelines</string>
     <string name="set_vengeance">Vengeance</string>
+    <string name="set_wrath_of_the_cosmos">Wrath of the Cosmos</string>
     <string name="set_mini_expansions">Mini-Expansions</string>
     <string name="set_promos">Promos</string>
 
