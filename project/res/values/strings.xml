@@ -66,7 +66,7 @@
     <string name="title_villain">Pick a Villain</string>
     <string name="title_environment">Pick an Environment</string>
 
-    <!-- Cards -->
+    <!-- Cards (General) -->
     <string name="symbol_random">\?</string>
     <string name="symbol_advanced">A</string>
     <string name="advanced_TEMPLATE">%s (Advanced)</string>
@@ -74,6 +74,8 @@
     <string name="card_random_hero">Random Hero</string>
     <string name="card_random_villain">Random Villain</string>
     <string name="card_random_environment">Random Environment</string>
+
+    <!-- Base set -->
     <string name="card_absolute_zero">Absolute Zero</string>
     <string name="card_bunker">Bunker</string>
     <string name="card_fanatic">Fanatic</string>
@@ -92,6 +94,8 @@
     <string name="card_megalopolis">Megalopolis</string>
     <string name="card_ruins_of_atlantis">Ruins of Atlantis</string>
     <string name="card_wagner_mars_base">Wagner Mars Base</string>
+
+    <!-- Rook City -->
     <string name="card_expatriette">Expatriette</string>
     <string name="card_mister_fixer">Mister Fixer</string>
     <string name="card_plague_rat">Plague Rat</string>
@@ -100,6 +104,8 @@
     <string name="card_the_matriarch">The Matriarch</string>
     <string name="card_pike_industrial_complex">Pike Industrial Complex</string>
     <string name="card_rook_city">Rook City</string>
+
+    <!-- Infernal Relics -->
     <string name="card_the_argent_adept">The Argent Adept</string>
     <string name="card_nightmist">Nightmist</string>
     <string name="card_akashbhuta">Akash\'bhuta</string>
@@ -108,6 +114,8 @@
     <string name="card_the_ennead">The Ennead</string>
     <string name="card_realm_of_discord">Realm of Discord</string>
     <string name="card_tomb_of_anubis">Tomb of Anubis</string>
+
+    <!-- Shattered Timelines -->
     <string name="card_chrono_ranger">Chrono Ranger</string>
     <string name="card_omnitron_x">Omnitron-X</string>
     <string name="card_the_dreamer">The Dreamer</string>
@@ -116,6 +124,8 @@
     <string name="card_iron_legacy">Iron Legacy</string>
     <string name="card_time_cataclysm">Time Cataclysm</string>
     <string name="card_the_block">The Block</string>
+
+    <!-- Vengeance -->
     <string name="card_unity">Unity</string>
     <string name="card_knyfe">K.N.Y.F.E.</string>
     <string name="card_the_naturalist">The Naturalist</string>
@@ -130,11 +140,15 @@
     <string name="card_proletariat">Vengeance Five - Proletariat</string>
     <string name="card_mobile_defense_platform">Mobile Defense Platform</string>
     <string name="card_freedom_tower">Freedom Tower</string>
+
+    <!-- Mini-expansions -->
     <string name="card_the_scholar">The Scholar</string>
     <string name="card_ambuscade">Ambuscade</string>
     <string name="card_miss_information">Miss Information</string>
     <string name="card_silver_gulch_1883">Silver Gulch 1883</string>
     <string name="card_the_final_wasteland">The Final Wasteland</string>
+
+    <!-- Promos -->
     <string name="card_young_legacy">Young Legacy</string>
     <string name="card_rook_city_wraith">Rook City Wraith</string>
     <string name="card_ra_horus_of_two_horizons">Ra: Horus of Two Horizons</string>
