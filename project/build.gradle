@@ -45,7 +45,7 @@ android {
 
     defaultConfig {
         versionCode 9
-        versionName "1.4.2-SNAPSHOT"
+        versionName "1.4.2"
         minSdkVersion 14
         targetSdkVersion 21
     }
@@ -60,6 +60,9 @@ android {
     }
 
     buildTypes {
+        debug {
+            versionNameSuffix "-SNAPSHOT"
+        }
         release {
             signingConfig signingConfigs.release
         }
