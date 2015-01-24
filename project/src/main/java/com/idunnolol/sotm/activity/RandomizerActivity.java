@@ -113,7 +113,12 @@ public class RandomizerActivity extends Activity implements RandomizerListFragme
         public void onChange(boolean selfChange, Uri uri) {
             Log.i("Points info updated, re-binding data");
 
-            mStatsFragment.bind(mRandomizerListFragment.getGameSetup());
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    mStatsFragment.bind(mRandomizerListFragment.getGameSetup());
+                }
+            });
         }
     };
 
