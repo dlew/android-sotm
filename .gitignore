@@ -22,3 +22,6 @@ local.properties
 .classpath
 .project
 .settings/
+
+# Crashlytics
+com_crashlytics_export_strings.xml
