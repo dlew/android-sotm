@@ -6,6 +6,7 @@
     android:background="@android:color/holo_blue_light"
     android:divider="?android:dividerVertical"
     android:dividerPadding="@dimen/divider_padding"
+    android:elevation="@dimen/header_elevation"
     android:orientation="horizontal"
     android:showDividers="middle">
 
