@@ -1,0 +1,9 @@
+<resources>
+
+    <style name="AppTheme" parent="android:Theme.Material.Light">
+        <item name="font">@string/font_rsbs</item>
+
+        <item name="android:colorPrimary">#DDDDDD</item>
+    </style>
+
+</resources>

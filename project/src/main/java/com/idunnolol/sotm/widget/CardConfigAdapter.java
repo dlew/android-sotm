@@ -2,6 +2,7 @@ package com.idunnolol.sotm.widget;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.support.v4.view.ViewCompat;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -138,6 +139,9 @@ public class CardConfigAdapter extends BaseAdapter implements StickyListHeadersA
         CardSet cardSet = getHeaderItem(position);
         holder.mLabel.setText(cardSet.getNameResId());
         holder.mCheckBox.setChecked(cardSet.areAllCardsEnabled());
+
+        // So that changing checked state doesn't cause an animation
+        ViewCompat.jumpDrawablesToCurrentState(holder.mCheckBox);
 
         return convertView;
     }
