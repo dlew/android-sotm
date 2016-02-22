@@ -151,15 +151,34 @@
     <string name="card_dok_thorath_capital">Dok\'Thorath Capital</string>
     <string name="card_the_enclave_of_the_endlings">The Enclave of the Endlings</string>
 
+    <!-- Villains of the Multiverse -->
+    <string name="card_villains_of_the_multiverse">Villains of the Multiverse</string>
+    <string name="card_villains_ambuscade">Ambuscade</string>
+    <string name="card_biomancer">Biomancer</string>
+    <string name="card_bugbear">Bugbear</string>
+    <string name="card_citizens_hammer_and_anvil">Citizens Hammer &amp; Anvil</string>
+    <string name="card_greazer">Greazer</string>
+    <string name="card_villains_la_capitan">La Capitan</string>
+    <string name="card_villains_miss_information">Miss Information</string>
+    <string name="card_the_operative">The Operative</string>
+    <string name="card_villains_plague_rat">Plague Rat</string>
+    <string name="card_sergeant_steel">Sergeant Steel</string>
+    <string name="card_the_court_of_blood">The Court of Blood</string>
+    <string name="card_madame_mittermeiers">Madame Mittermeier\'s Fantastical Festival of Conundrums &amp; Curiosities</string>
+    <string name="card_magmaria">Magmaria</string>
+    <string name="card_temple_of_zhu_long">Temple of Zhu Long</string>
+
     <!-- Mini-expansions -->
     <string name="card_the_scholar">The Scholar</string>
     <string name="card_guise">Guise</string>
     <string name="card_ambuscade">Ambuscade</string>
     <string name="card_miss_information">Miss Information</string>
     <string name="card_wager_master">Wager Master</string>
+    <string name="card_chokepoint">Chokepoint</string>
     <string name="card_silver_gulch_1883">Silver Gulch 1883</string>
     <string name="card_the_final_wasteland">The Final Wasteland</string>
     <string name="card_omnitron_iv">Omnitron IV</string>
+    <string name="card_celestial_tribunal">Celestial Tribunal</string>
 
     <!-- Promos -->
     <string name="card_young_legacy">Young Legacy</string>
@@ -188,6 +207,14 @@
     <string name="card_prime_wardens_tempest">Prime Wardens Tempest</string>
     <string name="card_prime_wardens_captain_cosmic">Prime Wardens Captain Cosmic</string>
     <string name="card_knyfe_rogue_agent">K.N.Y.F.E. - Rogue Agent</string>
+    <string name="card_termi_nation_absolute_zero">Termi-Nation Absolute Zero</string>
+    <string name="card_termi_nation_bunker">Termi-Nation Bunker</string>
+    <string name="card_termi_nation_unity">Termi-Nation Unity</string>
+    <string name="card_santa_guise">Santa Guise</string>
+    <string name="card_the_adamant_sentinels">The Adamant Sentinels</string>
+    <string name="card_the_hunted_naturalist">The Hunted Naturalist</string>
+    <string name="card_chrono_ranger_the_best_of_times">Chrono Ranger: The Best of Times</string>
+    <string name="card_the_scholar_of_the_infinite">The Scholar of the Infinite</string>
     <string name="card_cosmic_omnitron">Cosmic Omnitron</string>
     <string name="card_mad_bomber_blade">Mad Bomber Blade</string>
     <string name="card_skinwalker_gloomweaver">Skinwalker Gloomweaver</string>
@@ -200,6 +227,7 @@
     <string name="set_shattered_timelines">Shattered Timelines</string>
     <string name="set_vengeance">Vengeance</string>
     <string name="set_wrath_of_the_cosmos">Wrath of the Cosmos</string>
+    <string name="set_villains_of_the_multiverse">Villains of the Multiverse</string>
     <string name="set_mini_expansions">Mini-Expansions</string>
     <string name="set_promos">Promos</string>
 

@@ -426,6 +426,113 @@
       ]
     },
     {
+      "id": "Villains of the Multiverse",
+      "name": "set_villains_of_the_multiverse",
+      "enabledByDefault": true,
+      "cards": [
+        {
+          "type": "villain",
+          "id": "Villains of the Multiverse",
+          "icon": "card_villains_of_the_multiverse",
+          "name": "card_villains_of_the_multiverse"
+        },
+        {
+          "type": "villain",
+          "id": "Villains Ambuscade",
+          "icon": "card_villains_ambuscade",
+          "name": "card_villains_ambuscade",
+          "team": "Villains of the Multiverse"
+        },
+        {
+          "type": "villain",
+          "id": "Biomancer",
+          "icon": "card_biomancer",
+          "name": "card_biomancer",
+          "team": "Villains of the Multiverse"
+        },
+        {
+          "type": "villain",
+          "id": "Bugbear",
+          "icon": "card_bugbear",
+          "name": "card_bugbear",
+          "team": "Villains of the Multiverse"
+        },
+        {
+          "type": "villain",
+          "id": "Citizens Hammer & Anvil",
+          "icon": "card_citizens_hammer_and_anvil",
+          "name": "card_citizens_hammer_and_anvil",
+          "team": "Villains of the Multiverse"
+        },
+        {
+          "type": "villain",
+          "id": "Greazer",
+          "icon": "card_greazer",
+          "name": "card_greazer",
+          "team": "Villains of the Multiverse"
+        },
+        {
+          "type": "villain",
+          "id": "Villains La Capitan",
+          "icon": "card_villains_la_capitan",
+          "name": "card_villains_la_capitan",
+          "team": "Villains of the Multiverse"
+        },
+        {
+          "type": "villain",
+          "id": "Villains Miss Information",
+          "icon": "card_villains_miss_information",
+          "name": "card_villains_miss_information",
+          "team": "Villains of the Multiverse"
+        },
+        {
+          "type": "villain",
+          "id": "The Operative",
+          "icon": "card_the_operative",
+          "name": "card_the_operative",
+          "team": "Villains of the Multiverse"
+        },
+        {
+          "type": "villain",
+          "id": "Villains Plague Rat",
+          "icon": "card_villains_plague_rat",
+          "name": "card_villains_plague_rat",
+          "team": "Villains of the Multiverse"
+        },
+        {
+          "type": "villain",
+          "id": "Sergeant Steel",
+          "icon": "card_sergeant_steel",
+          "name": "card_sergeant_steel",
+          "team": "Villains of the Multiverse"
+        },
+        {
+          "type": "environment",
+          "id": "The Court of Blood",
+          "icon": "card_the_court_of_blood",
+          "name": "card_the_court_of_blood"
+        },
+        {
+          "type": "environment",
+          "id": "Madame Mittermeier's Fantastical Festival of Conundrums & Curiosities",
+          "icon": "card_madame_mittermeiers",
+          "name": "card_madame_mittermeiers"
+        },
+        {
+          "type": "environment",
+          "id": "Magmaria",
+          "icon": "card_magmaria",
+          "name": "card_magmaria"
+        },
+        {
+          "type": "environment",
+          "id": "Temple of Zhu Long",
+          "icon": "card_temple_of_zhu_long",
+          "name": "card_temple_of_zhu_long"
+        }
+      ]
+    },
+    {
       "id": "Mini-Expansions",
       "name": "set_mini_expansions",
       "cards": [
@@ -466,6 +573,12 @@
           "name": "card_wager_master"
         },
         {
+          "type": "villain",
+          "id": "Chokepoint",
+          "icon": "card_chokepoint",
+          "name": "card_chokepoint"
+        },
+        {
           "type": "environment",
           "id": "Silver Gulch 1883",
           "icon": "card_silver_gulch_1883",
@@ -482,6 +595,12 @@
           "id": "Omnitron IV",
           "icon": "card_omnitron_iv",
           "name": "card_omnitron_iv"
+        },
+        {
+          "type": "environment",
+          "id": "Celestial Tribunal",
+          "icon": "card_celestial_tribunal",
+          "name": "card_celestial_tribunal"
         }
       ]
     },
@@ -646,6 +765,54 @@
           "name": "card_knyfe_rogue_agent"
         },
         {
+          "type": "hero",
+          "id": "Termi-Nation Absolute Zero",
+          "icon": "card_termi_nation_absolute_zero",
+          "name": "card_termi_nation_absolute_zero"
+        },
+        {
+          "type": "hero",
+          "id": "Termi-Nation Bunker",
+          "icon": "card_termi_nation_bunker",
+          "name": "card_termi_nation_bunker"
+        },
+        {
+          "type": "hero",
+          "id": "Termi-Nation Unity",
+          "icon": "card_termi_nation_unity",
+          "name": "card_termi_nation_unity"
+        },
+        {
+          "type": "hero",
+          "id": "Santa Guise",
+          "icon": "card_santa_guise",
+          "name": "card_santa_guise"
+        },
+        {
+          "type": "hero",
+          "id": "The Adamant Sentinels",
+          "icon": "card_the_adamant_sentinels",
+          "name": "card_the_adamant_sentinels"
+        },
+        {
+          "type": "hero",
+          "id": "The Hunted Naturalist",
+          "icon": "card_the_hunted_naturalist",
+          "name": "card_the_hunted_naturalist"
+        },
+        {
+          "type": "hero",
+          "id": "Chrono Ranger: The Best of Times",
+          "icon": "card_chrono_ranger_the_best_of_times",
+          "name": "card_chrono_ranger_the_best_of_times"
+        },
+        {
+          "type": "hero",
+          "id": "The Scholar of the Infinite",
+          "icon": "card_the_scholar_of_the_infinite",
+          "name": "card_the_scholar_of_the_infinite"
+        },
+        {
           "type": "villain",
           "id": "Cosmic Omnitron",
           "icon": "card_cosmic_omnitron",
@@ -675,12 +842,14 @@
   "alternates": [
     [
       "Absolute Zero",
-      "Freedom Six Absolute Zero"
+      "Freedom Six Absolute Zero",
+      "Termi-Nation Absolute Zero"
     ],
     [
       "Bunker",
       "Freedom Six Bunker: Engine of War",
-      "G.I. Bunker"
+      "G.I. Bunker",
+      "Termi-Nation Bunker"
     ],
     [
       "Expatriette",
@@ -699,7 +868,8 @@
     [
       "Legacy",
       "Young Legacy",
-      "America's Greatest Legacy"
+      "America's Greatest Legacy",
+      "America's Cleverest Legacy"
     ],
     [
       "Mister Fixer",
@@ -743,7 +913,8 @@
     ],
     [
       "Unity",
-      "Freedom Six Unity"
+      "Freedom Six Unity",
+      "Termi-Nation Unity"
     ],
     [
       "K.N.Y.F.E.",
@@ -752,6 +923,26 @@
     [
       "Captain Cosmic",
       "Prime Wardens Captain Cosmic"
+    ],
+    [
+      "Guise",
+      "Santa Guise"
+    ],
+    [
+      "The Sentinels",
+      "The Adamant Sentinels"
+    ],
+    [
+      "The Naturalist",
+      "The Hunted Naturalist"
+    ],
+    [
+      "Chrono Ranger",
+      "Chrono Ranger: The Best of Times"
+    ],
+    [
+      "The Scholar",
+      "The Scholar of the Infinite"
     ],
     [
       "Baron Blade",
