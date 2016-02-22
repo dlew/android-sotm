@@ -93,7 +93,8 @@ public class Randomizer {
             // If we randomly selected a team, make sure to randomize the team as well
             if (villain.isTeam()) {
                 int teamSize = 0;
-                if (villain.getId().equals("Vengeance Five")) {
+                if (villain.getId().equals("Vengeance Five")
+                    || villain.getId().equals("Villains of the Multiverse")) {
                     teamSize = gameSetup.getHeroCount();
                 }
                 else {
